@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyProcessor.cs" />
-    <Compile Include="TypeNameParser.cs" />
     <Compile Include="OfFieldHandler.cs" />
     <Compile Include="OfTypeHandler.cs" />
     <Compile Include="OfMethodHandler.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="ModuleWeaver.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
     <Compile Include="ReferenceCleaner.cs" />
-    <Compile Include="TypeNameWrapper.cs" />
     <Compile Include="WeavingException.cs" />
   </ItemGroup>
   <ItemGroup>
