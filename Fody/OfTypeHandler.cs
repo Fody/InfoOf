@@ -1,4 +1,3 @@
-using System.Linq;
 using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
@@ -15,10 +14,10 @@ public partial class ModuleWeaver
         var assemblyName = GetLdString(assemblyNameInstruction);
 
         var typeDefinition = GetTypeDefinition(assemblyName, typeName);
-
+        var typeReference = ModuleDefinition.Import(typeDefinition);
         ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, typeDefinition));
-        instruction.Operand = getMethodFromHandle;
+        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+        instruction.Operand = getTypeFromHandle;
     }
 
 }

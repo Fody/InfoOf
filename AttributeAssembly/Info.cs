@@ -13,10 +13,10 @@ public static class Info
         return null;
     }
 
-    public static EventInfo OfEvent(string assemblyName,string typeName,string eventName)
-    {
-        return null;
-    }
+    //public static EventInfo OfEvent(string assemblyName,string typeName,string eventName)
+    //{
+    //    return null;
+    //}
 
     public static FieldInfo OfField(string assemblyName,string typeName,string fieldName)
     {

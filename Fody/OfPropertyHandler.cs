@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -8,49 +9,47 @@ public partial class ModuleWeaver
 
     void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor)
     {
-        var previous = instruction.Previous;
-        var ldString = GetLdString(previous);
-        var property = GetPropertyDefinition(ldString);
-        if (property.GetMethod == null)
-        {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", ldString));
-        }
-        previous.OpCode = OpCodes.Ldtoken;
-        previous.Operand = property.GetMethod;
-        instruction.Operand = getMethodFromHandle;
-        ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
-    }    
+        HandleOfProperty(instruction, ilProcessor, x => x.GetMethod);
+    }
 
     void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor)
     {
-        var previous = instruction.Previous;
-        var ldString = GetLdString(previous);
-        var property = GetPropertyDefinition(ldString);
-        if (property.SetMethod == null)
-        {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", ldString));
-        }
-        previous.OpCode = OpCodes.Ldtoken;
-        previous.Operand = property.SetMethod;
-        instruction.Operand = getMethodFromHandle;
-        ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
+        HandleOfProperty(instruction, ilProcessor, x => x.SetMethod);
     }
 
-    PropertyDefinition GetPropertyDefinition(string ldString)
+    void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, Func<PropertyDefinition, MethodDefinition> func)
     {
-        var strings = ldString.Split('.');
-        var typeName = string.Join(".", strings.Take(strings.Length - 1));
-        var propertyName = strings.Last();
 
-        var typeDefinition = GetTypeDefinition(typeName);
+        var properyNameInstruction = instruction.Previous;
+        var propertyName = GetLdString(properyNameInstruction);
+
+        var typeNameInstruction = properyNameInstruction.Previous;
+        var typeName = GetLdString(typeNameInstruction);
+
+        var assemblyNameInstruction = typeNameInstruction.Previous;
+        var assemblyName = GetLdString(assemblyNameInstruction);
+
+        var typeDefinition = GetTypeDefinition(assemblyName, typeName);
 
         var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName);
 
         if (property == null)
         {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", ldString));
+            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName));
         }
-        return property;
+        var methodDefinition = func(property);
+        if (methodDefinition == null)
+        {
+            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName));
+        }
+        ilProcessor.Remove(typeNameInstruction);
+        ilProcessor.Remove(properyNameInstruction);
+        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodDefinition));
+
+        instruction.Operand = getMethodFromHandle;
+
+        ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
     }
+
 
 }

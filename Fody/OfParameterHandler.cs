@@ -4,11 +4,10 @@ using Mono.Cecil.Cil;
 public partial class ModuleWeaver
 {
 
-    void HandleOfMethod(Instruction instruction, ILProcessor ilProcessor)
+    void HandleOfParameter(Instruction instruction, ILProcessor ilProcessor)
     {
         //Info.OfMethod("AssemblyToProcess","MethodClass","InstanceMethod");
-        //"System.Reflection.MethodInfo MethodClass::WithGenericParamMethod(System.Action`1<System.Int32>)"
-        //"System.Reflection.MethodInfo MethodClass::WithGenericParamMethod(System.Action`1<T>)"
+
         var methodNameInstruction = instruction.Previous;
         var methodName = GetLdString(methodNameInstruction);
 
@@ -29,7 +28,6 @@ public partial class ModuleWeaver
         var methodReference = ModuleDefinition.Import(methodDefinition);
 
         ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Remove(methodNameInstruction);
         ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodReference));
 
         instruction.Operand = getMethodFromHandle;

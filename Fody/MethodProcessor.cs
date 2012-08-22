@@ -24,34 +24,30 @@ public partial class ModuleWeaver
                 {
                     continue;
                 }
+                var copy = instruction;
                 if (methodReference.Name == "OfMethod")
                 {
-                    var copy = instruction;
-                    actions.Add((x) => HandleOfMethod(copy,x));
+                    actions.Add(x => HandleOfMethod(copy,x));
                     continue;
                 }
                 if (methodReference.Name == "OfField")
                 {
-                    var copy = instruction;
-                    actions.Add((x) => HandleOfField(copy));
+                    actions.Add(x => HandleOfField(copy,x));
                     continue;
                 }
                 if (methodReference.Name == "OfType")
                 {
-                    var copy = instruction;
-                    actions.Add((x) => HandleOfType(copy,x));
+                    actions.Add(x => HandleOfType(copy,x));
                     continue;
                 }
                 if (methodReference.Name == "OfPropertyGet")
                 {
-                    var copy = instruction;
-                    actions.Add((x) => HandleOfPropertyGet(copy,x));
+                    actions.Add(x => HandleOfPropertyGet(copy,x));
                     continue;
                 }
                 if (methodReference.Name == "OfPropertySet")
                 {
-                    var copy = instruction;
-                    actions.Add((x) => HandleOfPropertySet(copy,x));
+                    actions.Add(x => HandleOfPropertySet(copy,x));
                     continue;
                 }
             }

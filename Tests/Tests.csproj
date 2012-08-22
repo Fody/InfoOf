@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Foo.cs" />
+    <Compile Include="MethodNameGenerator\MethodNameGeneratorTests.cs" />
+    <Compile Include="MethodNameGenerator\SimpleClass.cs" />
     <Compile Include="MockAssemblyResolver.cs" />
     <Compile Include="TypeNameParserTests.cs" />
     <Compile Include="Verifier.cs" />
@@ -85,6 +87,7 @@
       <Name>Fody</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
   <Target Name="BeforeBuild">

@@ -11,6 +11,7 @@ public class PropertyClass
     {
         return Info.OfPropertySet("AssemblyToProcess", "PropertyClass", "InstanceProperty");
     }
+
     static string StaticProperty { get; set; }
     public MethodInfo GetStaticGetProperty()
     {

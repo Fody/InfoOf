@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 public class WeavingException : Exception
 {
@@ -8,15 +7,4 @@ public class WeavingException : Exception
     {
 
     }
-}
-
-public class TypeSpec
-{
-    public string AssemblyName;
-
-    public List<TypeSpec> Nested;
-
-    public List<TypeSpec> GenericParameters;
-
-    public string Name;
 }

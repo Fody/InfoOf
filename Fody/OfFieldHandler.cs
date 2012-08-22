@@ -7,7 +7,6 @@ public partial class ModuleWeaver
     void HandleOfField(Instruction instruction, ILProcessor ilProcessor)
     {
         //Info.OfField("AssemblyToProcess","MethodClass","Field");
-
         var fieldNameInstruction = instruction.Previous;
         var fieldName = GetLdString(fieldNameInstruction);
 
@@ -28,11 +27,10 @@ public partial class ModuleWeaver
         var fieldReference = ModuleDefinition.Import(fieldDefinition);
 
         ilProcessor.Remove(typeNameInstruction);
+        ilProcessor.Remove(fieldNameInstruction);
         ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, fieldReference));
 
-        instruction.Operand = getMethodFromHandle;
-        
-        ilProcessor.InsertAfter(instruction,Instruction.Create(OpCodes.Castclass,methodInfoType));
+        instruction.Operand = getFieldFromHandle;
     }
 
 }
