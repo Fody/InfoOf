@@ -66,8 +66,7 @@ public partial class ModuleWeaver
 
     TypeDefinition GetTypeDefinition(string typeName)
     {
-        var typeDefinition = ModuleDefinition.GetTypes()
-            .FirstOrDefault(x => x.FullName == typeName);
+        var typeDefinition = allTypes.FirstOrDefault(x => x.FullName == typeName);
         if (typeDefinition == null)
         {
             throw new WeavingException(string.Format("Could not find type named '{0}'.", typeName));
@@ -83,7 +82,6 @@ public partial class ModuleWeaver
         }
         else
         {
-
             moduleDefinition = AssemblyResolver.Resolve(assemblyName).MainModule;   
         }
 

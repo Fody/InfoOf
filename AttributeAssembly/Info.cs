@@ -23,15 +23,15 @@ public static class Info
         return null;
     }
 
-    public static MethodInfo OfConstructor(string constructorName)
-    {
-        return null;
-    }
+    //public static MethodInfo OfConstructor(string constructorName)
+    //{
+    //    return null;
+    //}
 
-    public static ParameterInfo OfParameter(string parameterName)
-    {
-        return null;
-    }
+    //public static ParameterInfo OfParameter(string parameterName)
+    //{
+    //    return null;
+    //}
 
     public static MethodInfo OfPropertyGet(string assemblyName,string typeName,string propertyName)
     {

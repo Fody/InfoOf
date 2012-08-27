@@ -45,8 +45,16 @@ public partial class ModuleWeaver
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(properyNameInstruction);
         ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodDefinition));
-
-        instruction.Operand = getMethodFromHandle;
+        if (typeDefinition.HasGenericParameters)
+        {
+            var typeReference = ModuleDefinition.Import(typeDefinition);
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+            instruction.Operand = getMethodFromHandleGeneric;
+        }
+        else
+        {
+            instruction.Operand = getMethodFromHandle;
+        }
 
         ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
     }

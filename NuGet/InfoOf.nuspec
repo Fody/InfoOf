@@ -9,9 +9,9 @@
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
     <projectUrl>http://github.com/SimonCropp/InfoOf</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Exposes 'methodof', 'propertyof' and 'parameterof' to any .net language.</description>
+    <description>Exposes 'methodof' and 'propertyof' to any .net language.</description>
     <summary />
     <language>en-AU</language>
-    <tags>typeof, methodof, propertyof, parameterof, ILWeaving, Fody, Cecil</tags>
+    <tags>typeof, methodof, propertyof ILWeaving, Fody, Cecil</tags>
   </metadata>
 </package>

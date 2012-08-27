@@ -45,10 +45,97 @@ public class IntegrationTests
     }
 
     [Test]
+    public void GenericPropertyGet()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceGetProperty();
+        Assert.IsNotNull(methodInfo);
+    }
+
+    [Test]
+    public void GenericPropertySet()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceSetProperty();
+        Assert.IsNotNull(methodInfo);
+    }
+    [Test]
+    public void GenericStaticPropertyGet()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticGetProperty();
+        Assert.IsNotNull(methodInfo);
+    }
+
+    [Test]
+    public void GenericStaticPropertySet()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticSetProperty();
+        Assert.IsNotNull(methodInfo);
+    }
+
+    [Test]
+    public void GenericField()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof (int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        FieldInfo fieldInfo = instance.GetInstanceField();
+        Assert.IsNotNull(fieldInfo);
+    }
+
+    [Test]
+    public void GenericStaticField()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        FieldInfo fieldInfo = instance.GetStaticField();
+        Assert.IsNotNull(fieldInfo);
+    }
+
+
+    [Test]
+    public void GenericMethod()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceMethod();
+        Assert.IsNotNull(methodInfo);
+    }
+    [Test]
+    public void GenericStaticMethod()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticMethod();
+        Assert.IsNotNull(methodInfo);
+    }
+    [Test]
+    public void GenericTypeInfo()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        Type typeinfo = instance.GetTypeInfo();
+        Assert.IsNotNull(typeinfo);
+    }
+   [Test]
     public void InstancePropertyGet()
     {
-        var type = assembly.GetType("PropertyClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetInstanceGetProperty();
         Assert.IsNotNull(methodInfo);
     }
@@ -56,16 +143,16 @@ public class IntegrationTests
     [Test]
     public void InstancePropertySet()
     {
-        var type = assembly.GetType("PropertyClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetInstanceSetProperty();
         Assert.IsNotNull(methodInfo);
     }
     [Test]
     public void StaticPropertyGet()
     {
-        var type = assembly.GetType("PropertyClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetStaticGetProperty();
         Assert.IsNotNull(methodInfo);
     }
@@ -73,16 +160,16 @@ public class IntegrationTests
     [Test]
     public void StaticPropertySet()
     {
-        var type = assembly.GetType("PropertyClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetStaticSetProperty();
         Assert.IsNotNull(methodInfo);
     }
     [Test]
     public void PropertyGetWithNamespace()
     {
-        var type = assembly.GetType("MyNamespace.PropertyClassWithNamespace");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("MyNamespace.InstanceClassWithNameSpace");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetGetProperty();
         Assert.IsNotNull(methodInfo);
     }
@@ -90,8 +177,8 @@ public class IntegrationTests
     [Test]
     public void PropertySetWithNamespace()
     {
-        var type = assembly.GetType("MyNamespace.PropertyClassWithNamespace");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("MyNamespace.InstanceClassWithNameSpace");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetSetProperty();
         Assert.IsNotNull(methodInfo);
     }
@@ -99,8 +186,8 @@ public class IntegrationTests
     [Test]
     public void InstanceField()
     {
-        var type = assembly.GetType("FieldClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         FieldInfo fieldInfo = instance.GetInstanceField();
         Assert.IsNotNull(fieldInfo);
     }
@@ -108,8 +195,8 @@ public class IntegrationTests
     [Test]
     public void StaticField()
     {
-        var type = assembly.GetType("FieldClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         FieldInfo fieldInfo = instance.GetStaticField();
         Assert.IsNotNull(fieldInfo);
     }
@@ -117,8 +204,8 @@ public class IntegrationTests
     [Test]
     public void FieldClassWithNameSpace()
     {
-        var type = assembly.GetType("MyNamespace.FieldClassWithNameSpace");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("MyNamespace.InstanceClassWithNameSpace");
+        var instance = (dynamic)Activator.CreateInstance(type);
         FieldInfo fieldInfo = instance.GetField();
         Assert.IsNotNull(fieldInfo);
     }
@@ -126,24 +213,24 @@ public class IntegrationTests
     [Test]
     public void InstanceMethod()
     {
-        var type = assembly.GetType("MethodClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetInstanceMethod();
         Assert.IsNotNull(methodInfo);
     }
     [Test]
     public void StaticMethod()
     {
-        var type = assembly.GetType("MethodClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetStaticMethod();
         Assert.IsNotNull(methodInfo);
     }
     [Test]
     public void MethodWithNameSpace()
     {
-        var type = assembly.GetType("MyNamespace.MethodClassWithNameSpace");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("MyNamespace.InstanceClassWithNameSpace");
+        var instance = (dynamic)Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetInstanceMethod();
         Assert.IsNotNull(methodInfo);
     }
@@ -151,16 +238,16 @@ public class IntegrationTests
     [Test]
     public void TypeInfo()
     {
-        var type = assembly.GetType("TypeClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         Type typeinfo = instance.GetTypeInfo();
         Assert.IsNotNull(typeinfo);
     }
     [Test]
     public void TypeInfoFromInternal()
     {
-        var type = assembly.GetType("TypeClass");
-        var instance = (dynamic) Activator.CreateInstance(type);
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
         Type typeinfo = instance.GetTypeInfoFromInternal();
         Assert.IsNotNull(typeinfo);
     }

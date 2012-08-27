@@ -93,4 +93,12 @@
   <Target Name="BeforeBuild">
     <PepitaGet.RestorePackagesTask />
   </Target>
-</Project>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>AssemblyToProcess</Name>
+    </ProjectReference>
+
+  </ItemGroup>
+	</Project>

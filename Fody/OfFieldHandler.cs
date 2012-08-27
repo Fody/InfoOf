@@ -29,8 +29,16 @@ public partial class ModuleWeaver
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(fieldNameInstruction);
         ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, fieldReference));
-
-        instruction.Operand = getFieldFromHandle;
+        if (typeDefinition.HasGenericParameters)
+        {
+            var typeReference = ModuleDefinition.Import(typeDefinition);
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken,typeReference));
+            instruction.Operand = getFieldFromHandleGeneric;
+        }
+        else
+        {
+            instruction.Operand = getFieldFromHandle;   
+        }
     }
 
 }

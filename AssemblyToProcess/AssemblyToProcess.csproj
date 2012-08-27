@@ -42,13 +42,9 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ChildPublicClassToForceReference.cs" />
-    <Compile Include="FieldClass.cs" />
-    <Compile Include="FieldClassWithNameSpace.cs" />
-    <Compile Include="MethodClass.cs" />
-    <Compile Include="MethodClassWithNameSpace.cs" />
-    <Compile Include="PropertyClass.cs" />
-    <Compile Include="PropertyClassWithNamespace.cs" />
-    <Compile Include="TypeClass.cs" />
+    <Compile Include="GenericClass.cs" />
+    <Compile Include="InstanceClass.cs" />
+    <Compile Include="InstanceClassWithNameSpace.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssemblyToReference\AssemblyToReference.csproj">
