@@ -14,8 +14,6 @@ public class InstanceClass
         return Info.OfField("AssemblyToProcess", "InstanceClass", "staticField");
     }
 
-
-
     string InstanceProperty { get; set; }
     public MethodInfo GetInstanceGetProperty()
     {

@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyProcessor.cs" />
-    <Compile Include="MethodNameGenerator.cs" />
     <Compile Include="OfParameterHandler.cs" />
     <Compile Include="OfFieldHandler.cs" />
     <Compile Include="OfTypeHandler.cs" />

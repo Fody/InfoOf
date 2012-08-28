@@ -61,8 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Foo.cs" />
-    <Compile Include="MethodNameGenerator\MethodNameGeneratorTests.cs" />
-    <Compile Include="MethodNameGenerator\SimpleClass.cs" />
     <Compile Include="MockAssemblyResolver.cs" />
     <Compile Include="TypeNameParserTests.cs" />
     <Compile Include="Verifier.cs" />
@@ -93,12 +91,10 @@
   <Target Name="BeforeBuild">
     <PepitaGet.RestorePackagesTask />
   </Target>
-  
   <ItemGroup>
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Name>AssemblyToProcess</Name>
     </ProjectReference>
-
   </ItemGroup>
-	</Project>
+</Project>
