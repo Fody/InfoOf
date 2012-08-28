@@ -22,8 +22,17 @@ Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http:/
 	var setProperty = methodof(MyClass.set_MyProperty)
 	var field = fieldof(MyClass.myField);
 
+## Why not use Expressions
 
+It would also be possible to define members and types using a combination of generics and expressions. This would allow for intellisense at code time. The problem with expressions are as  follows
 
+1. The conversion of expression to "infoof"s is significantly more complex. Making the solution more complex and having a negative impact on compile performance.
+2. Expressions cannot represent non public types or members.
+3. It is difficult to represent all combinations of members using expressions.
+
+## But it is not strong typed
+
+**Actually it is strong type**, it just does not have intellisense. If any of the strings passed into `Info` do not map to a type or members it will log a build error and stop the build.
 
  
 
