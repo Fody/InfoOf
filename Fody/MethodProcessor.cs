@@ -27,7 +27,7 @@ public partial class ModuleWeaver
                 var copy = instruction;
                 if (methodReference.Name == "OfMethod")
                 {
-                    actions.Add(x => HandleOfMethod(copy,x));
+                    actions.Add(x => HandleOfMethod(copy,x,methodReference));
                     continue;
                 }
                 if (methodReference.Name == "OfField")

@@ -4,41 +4,53 @@ using System.Reflection;
 public static class Info
 {
 
+    static Exception BuildException()
+    {
+        return new Exception();
+    }
+
+    public static MethodInfo OfMethod(string assemblyName,string typeName,string methodName,string parameters)
+    {
+        throw BuildException();
+    }
+
     public static MethodInfo OfMethod(string assemblyName,string typeName,string methodName)
     {
-        return null;
+        throw BuildException();
     }
+
     public static Type OfType(string assemblyName,string typeName)
     {
-        return null;
+        throw BuildException();
     }
 
     //public static EventInfo OfEvent(string assemblyName,string typeName,string eventName)
     //{
-    //    return null;
+    //    throw BuildException();
     //}
 
     public static FieldInfo OfField(string assemblyName,string typeName,string fieldName)
     {
-        return null;
+        throw BuildException();
     }
 
     //public static MethodInfo OfConstructor(string constructorName)
     //{
-    //    return null;
+    //    throw BuildException();
     //}
 
     //public static ParameterInfo OfParameter(string parameterName)
     //{
-    //    return null;
+    //    throw BuildException();
     //}
 
     public static MethodInfo OfPropertyGet(string assemblyName,string typeName,string propertyName)
     {
-        return null;
+        throw BuildException();
     }
+    
     public static MethodInfo OfPropertySet(string assemblyName,string typeName, string propertyName)
     {
-        return null;
+        throw BuildException();
     }
 }

@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="ChildPublicClassToForceReference.cs" />
+    <Compile Include="ChildClassToForceReference.cs" />
     <Compile Include="GenericClass.cs" />
     <Compile Include="InstanceClass.cs" />
     <Compile Include="InstanceClassWithNameSpace.cs" />

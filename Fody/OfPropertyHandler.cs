@@ -35,12 +35,18 @@ public partial class ModuleWeaver
 
         if (property == null)
         {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName));
+            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName))
+            {
+                SequencePoint = instruction.SequencePoint
+            };
         }
         var methodDefinition = func(property);
         if (methodDefinition == null)
         {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName));
+            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName))
+            {
+                SequencePoint = instruction.SequencePoint
+            };
         }
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(properyNameInstruction);

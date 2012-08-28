@@ -38,21 +38,21 @@ public class InstanceClass
 
 
 
+    static void MethodWithParams(string param1,int param2) { }
+    public MethodInfo GetMethodWithParams()
+    {
+        return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams","String, Int32");
+    }
+
+
     void InstanceMethod() { }
-    static void StaticMethod() { }
     public MethodInfo GetInstanceMethod()
     {
         return Info.OfMethod("AssemblyToProcess", "InstanceClass", "InstanceMethod");
     }
+
+    static void StaticMethod() { }
     public MethodInfo GetStaticMethod()
-    {
-        return Info.OfMethod("AssemblyToProcess", "InstanceClass", "StaticMethod");
-    }
-    public MethodInfo WithGenericParamMethod<T, K>(Action<T> action)
-    {
-        return Info.OfMethod("AssemblyToProcess", "InstanceClass", "StaticMethod");
-    }
-    public MethodInfo WithGenericParamMethod<T>(Action<T> action)
     {
         return Info.OfMethod("AssemblyToProcess", "InstanceClass", "StaticMethod");
     }

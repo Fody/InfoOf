@@ -218,6 +218,16 @@ public class IntegrationTests
         MethodInfo methodInfo = instance.GetInstanceMethod();
         Assert.IsNotNull(methodInfo);
     }
+
+    [Test]
+    public void InstanceMethodWithParams()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetMethodWithParams();
+        Assert.IsNotNull(methodInfo);
+    }
+
     [Test]
     public void StaticMethod()
     {
