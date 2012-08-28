@@ -12,6 +12,6 @@
     <description>Exposes 'methodof' and 'propertyof' to any .net language.</description>
     <summary />
     <language>en-AU</language>
-    <tags>typeof, methodof, propertyof ILWeaving, Fody, Cecil</tags>
+    <tags>typeof, methodof, propertyof, ILWeaving, Fody, Cecil</tags>
   </metadata>
 </package>
