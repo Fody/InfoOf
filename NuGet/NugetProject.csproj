@@ -25,16 +25,16 @@
   <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\PepitaPackage.dll" />
   <Target Name="NuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET40" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET40" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\WinRT45" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\WinRT45" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP71" />
-    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)_PCL\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP71" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET40" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\NET40" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\WinRT45" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\WinRT45" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP71" />
+    <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\SL40-WP71" />
     <Copy SourceFiles="$(SolutionDir)NuGet\InfoOf.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\InfoOf.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\InfoOf.Fody.dll" />
