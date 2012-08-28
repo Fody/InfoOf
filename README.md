@@ -18,8 +18,8 @@ Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http:/
 
 	var type = typeof(MyClass);
 	var method = methodof(MyClass.MyMethod);
-	var getPropertyMethod = methodof(MyClass.get_MyProperty)
-	var setPropertyMethod = methodof(MyClass.set_MyProperty)
+	var getProperty = methodof(MyClass.get_MyProperty)
+	var setProperty = methodof(MyClass.set_MyProperty)
 	var field = fieldof(MyClass.myField);
 
 
