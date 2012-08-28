@@ -32,7 +32,7 @@ It would also be possible to define members and types using a combination of gen
 
 ## But it is not strong typed
 
-**Actually it is strong type**, it just does not have intellisense. If any of the strings passed into `Info` do not map to a type or members it will log a build error and stop the build.
+**Actually it is strong type**, it just does not have intellisense. If any of the strings passed into `Info` do not map to a type or member it will log a build error and stop the build.
 
  
 

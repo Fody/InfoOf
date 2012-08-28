@@ -27,6 +27,6 @@ public partial class ModuleWeaver
         allTypes = ModuleDefinition.GetTypes().ToList();
         FindReferences();
         ProcessMethods();
-       // CleanReferences();
+        CleanReferences();
     }
 }
