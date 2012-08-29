@@ -31,7 +31,10 @@ public partial class ModuleWeaver
 
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(fieldNameInstruction);
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, fieldReference));
+
+        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
+        assemblyNameInstruction.Operand = fieldReference;
+
         if (typeDefinition.HasGenericParameters)
         {
             var typeReference = ModuleDefinition.Import(typeDefinition);

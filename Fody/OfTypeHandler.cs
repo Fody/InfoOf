@@ -16,7 +16,11 @@ public partial class ModuleWeaver
         var typeDefinition = GetTypeDefinition(assemblyName, typeName);
         var typeReference = ModuleDefinition.Import(typeDefinition);
         ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+
+
+        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
+        assemblyNameInstruction.Operand = typeReference;
+
         instruction.Operand = getTypeFromHandle;
     }
 

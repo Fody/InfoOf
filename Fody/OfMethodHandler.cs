@@ -69,8 +69,8 @@ public partial class ModuleWeaver
             ilProcessor.Remove(parametersInstruction);
         }
 
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodReference));
-
+        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
+        assemblyNameInstruction.Operand = methodReference;
 
         if (typeDefinition.HasGenericParameters)
         {

@@ -50,7 +50,11 @@ public partial class ModuleWeaver
         }
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(properyNameInstruction);
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodDefinition));
+
+
+        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
+        assemblyNameInstruction.Operand = methodDefinition;
+
         if (typeDefinition.HasGenericParameters)
         {
             var typeReference = ModuleDefinition.Import(typeDefinition);

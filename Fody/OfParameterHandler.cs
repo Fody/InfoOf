@@ -28,7 +28,10 @@ public partial class ModuleWeaver
         var methodReference = ModuleDefinition.Import(methodDefinition);
 
         ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Replace(assemblyNameInstruction, Instruction.Create(OpCodes.Ldtoken, methodReference));
+
+
+        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
+        assemblyNameInstruction.Operand = methodReference;
 
         instruction.Operand = getMethodFromHandle;
         
