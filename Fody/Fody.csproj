@@ -67,6 +67,7 @@
     <Compile Include="OfTypeHandler.cs" />
     <Compile Include="OfMethodHandler.cs" />
     <Compile Include="OfPropertyHandler.cs" />
+    <Compile Include="ParamChecker.cs" />
     <Compile Include="ReferenceFinder.cs" />
     <Compile Include="MethodProcessor.cs" />
     <Compile Include="ModuleWeaver.cs" />

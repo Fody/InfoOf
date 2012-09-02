@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Foo.cs" />
     <Compile Include="MockAssemblyResolver.cs" />
+    <Compile Include="ParamCheckerTests.cs" />
     <Compile Include="TypeNameParserTests.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="IntegrationTests.cs" />
