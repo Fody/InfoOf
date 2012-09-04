@@ -62,7 +62,11 @@
   <ItemGroup>
     <Compile Include="Foo.cs" />
     <Compile Include="MockAssemblyResolver.cs" />
-    <Compile Include="ParamCheckerTests.cs" />
+    <Compile Include="ParamCheckerTests\GenericMethod.cs" />
+    <Compile Include="ParamCheckerTests\MultiLayerNestedClass.cs" />
+    <Compile Include="ParamCheckerTests\NestedClass.cs" />
+    <Compile Include="ParamCheckerTests\SimpleMethod.cs" />
+    <Compile Include="ParamCheckerTests\TypeFinder.cs" />
     <Compile Include="TypeNameParserTests.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="IntegrationTests.cs" />

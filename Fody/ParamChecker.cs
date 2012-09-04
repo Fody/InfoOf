@@ -29,20 +29,11 @@ public static class ParamChecker
         for (var index = 0; index < method.Parameters.Count; index++)
         {
             var parameterDefinition = method.Parameters[index];
+            var parameterType = parameterDefinition.ParameterType;
             var parameterName = parameters[index];
-            if (parameterName.Contains('.'))
+            if (!parameterType.IsNamed(parameterName))
             {
-                if (parameterName != parameterDefinition.ParameterType.FullName)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (parameterName != parameterDefinition.ParameterType.Name)
-                {
-                    return false;
-                }
+                return false;
             }
         }
         return true;

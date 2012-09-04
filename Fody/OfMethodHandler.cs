@@ -39,11 +39,7 @@ public partial class ModuleWeaver
 
         var typeDefinition = GetTypeDefinition(assemblyName, typeName);
 
-        var methodDefinitions = typeDefinition
-            .Methods
-            .Where(x => x.Name == methodName &&
-                HasSameParams(x, parameters))
-            .ToList();
+        var methodDefinitions = typeDefinition.FindMethodDefinitions(methodName, parameters);
 
         if (methodDefinitions.Count == 0)
         {
@@ -83,12 +79,8 @@ public partial class ModuleWeaver
             instruction.Operand = getMethodFromHandle;
         }
         
-        ilProcessor.InsertAfter(instruction,Instruction.Create(OpCodes.Castclass,methodInfoType));
+        ilProcessor.InsertAfter(instruction,Instruction.Create(OpCodes.Castclass, methodInfoType));
     }
 
-    static bool HasSameParams(MethodDefinition x, List<string> parameters)
-    {
-        return x.Parameters.Select(param => param.ParameterType.Name).SequenceEqual(parameters);
-    }
 }
 
