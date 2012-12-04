@@ -11,6 +11,7 @@
 *.sln.docstates
 *.pidb
 *.ncrunchproject
+*.DotSettings
 *.ncrunchsolution
 
 # Build results

@@ -42,9 +42,13 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ChildClassToForceReference.cs" />
+    <Compile Include="ClassWithAbstract.cs" />
     <Compile Include="GenericClass.cs" />
     <Compile Include="InstanceClass.cs" />
     <Compile Include="InstanceClassWithNameSpace.cs" />
+    <Compile Include="MyDelegate.cs" />
+    <Compile Include="MyEnum.cs" />
+    <Compile Include="MyInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssemblyToReference\AssemblyToReference.csproj">
