@@ -40,7 +40,6 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ChildClassToForceReference.cs" />
     <Compile Include="ClassWithAbstract.cs" />
     <Compile Include="GenericClass.cs" />
