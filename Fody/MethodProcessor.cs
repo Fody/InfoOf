@@ -64,15 +64,6 @@ public partial class ModuleWeaver
         method.Body.OptimizeMacros();
     }
 
-    TypeDefinition GetTypeDefinition(string typeName)
-    {
-        var typeDefinition = allTypes.FirstOrDefault(x => x.FullName == typeName);
-        if (typeDefinition == null)
-        {
-            throw new WeavingException(string.Format("Could not find type named '{0}'.", typeName));
-        }
-        return typeDefinition;
-    }
     TypeDefinition GetTypeDefinition(string assemblyName, string typeName)
     {
         ModuleDefinition moduleDefinition;
