@@ -69,7 +69,6 @@
     <Compile Include="Verifier.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="AssemblyExtensions.cs" />
-    <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
