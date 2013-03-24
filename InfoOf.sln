@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToProcess", "Assemb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOf", "AttributeAssembly\InfoOf.csproj", "{40235741-D750-45B1-8DC5-49576025ABA9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AF3B9586-2244-486A-90F1-AF2512922C0E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToReference", "AssemblyToReference\AssemblyToReference.csproj", "{2E1F9913-4AA2-47A5-BC77-A76587F400C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuget", "NuGet\Nuget.csproj", "{63786CE5-D899-43DF-AD4E-C2CA3BAC3FC2}"
