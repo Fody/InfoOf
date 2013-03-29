@@ -4,7 +4,13 @@ Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http:/
 
 [Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
 
-## Nuget package http://nuget.org/packages/InfoOf.Fody 
+## Nuget
+
+Nuget package http://nuget.org/packages/InfoOf.Fody 
+
+To Install from the Nuget Package Manager Console 
+    
+    PM> Install-Package InfoOf.Fody
 
 ### Your Code
 
