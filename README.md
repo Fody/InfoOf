@@ -42,4 +42,10 @@ It would also be possible to define members and types using a combination of gen
 
  
 
+## Icon
+
+Icon courtesy of [The Noun Project](http://thenounproject.com)
+
+
+
  
