@@ -44,7 +44,7 @@ It would also be possible to define members and types using a combination of gen
 
 ## Icon
 
-Icon courtesy of [The Noun Project](http://thenounproject.com)
+<a href="http://thenounproject.com/noun/information/#icon-No9867" target="_blank">Information</a> designed by <a href="http://thenounproject.com/Fhlcreative" target="_blank">Phil Goodwin</a> from The Noun Project
 
 
 
