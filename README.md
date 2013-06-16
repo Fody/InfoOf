@@ -1,5 +1,7 @@
 ## This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
+![Icon](https://raw.github.com/Fody/InfoOf/master/Icons/package_icon.png)
+
 Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx) .
 
 [Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
