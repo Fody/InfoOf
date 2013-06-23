@@ -277,7 +277,7 @@ public class IntegrationTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
+        Verifier.Verify( afterAssemblyPath);
     }
 #endif
 

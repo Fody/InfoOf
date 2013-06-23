@@ -78,9 +78,9 @@
       <Project>{2e1f9913-4aa2-47a5-bc77-a76587f400c5}</Project>
       <Name>AssemblyToReference</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AttributeAssembly\InfoOf.csproj">
+    <ProjectReference Include="..\AttributeAssembly\AttributeAssembly.csproj">
       <Project>{40235741-d750-45b1-8dc5-49576025aba9}</Project>
-      <Name>InfoOf</Name>
+      <Name>AttributeAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fody\Fody.csproj">
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>

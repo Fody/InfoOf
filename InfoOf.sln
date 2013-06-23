@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToProcess", "AssemblyToProcess\AssemblyToProcess.csproj", "{40939411-32F0-48DD-B17B-FA46DD5D9B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOf", "AttributeAssembly\InfoOf.csproj", "{40235741-D750-45B1-8DC5-49576025ABA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttributeAssembly", "AttributeAssembly\AttributeAssembly.csproj", "{40235741-D750-45B1-8DC5-49576025ABA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToReference", "AssemblyToReference\AssemblyToReference.csproj", "{2E1F9913-4AA2-47A5-BC77-A76587F400C5}"
 EndProject

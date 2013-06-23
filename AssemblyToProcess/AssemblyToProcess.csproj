@@ -54,9 +54,9 @@
       <Project>{2E1F9913-4AA2-47A5-BC77-A76587F400C5}</Project>
       <Name>AssemblyToReference</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AttributeAssembly\InfoOf.csproj">
+    <ProjectReference Include="..\AttributeAssembly\AttributeAssembly.csproj">
       <Project>{40235741-D750-45B1-8DC5-49576025ABA9}</Project>
-      <Name>InfoOf</Name>
+      <Name>AttributeAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

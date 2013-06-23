@@ -29,9 +29,8 @@
     <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40" />
     <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40" />
     <Copy SourceFiles="$(SolutionDir)NuGet\InfoOf.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-      <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
+    <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
-   
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\InfoOf.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\InfoOf.Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\InfoOf.Fody.dll" />
@@ -41,10 +40,10 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Name>Fody</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AttributeAssembly\InfoOf.csproj">
+    <ProjectReference Include="..\AttributeAssembly\AttributeAssembly.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Project>{40235741-D750-45B1-8DC5-49576025ABA9}</Project>
-      <Name>InfoOf</Name>
+      <Name>AttributeAssembly</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

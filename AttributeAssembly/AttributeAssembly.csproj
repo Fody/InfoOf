@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\InfoOf.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <None Include="Fody.targets" />
     <None Include="packages.config" />
