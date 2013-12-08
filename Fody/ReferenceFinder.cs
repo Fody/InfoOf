@@ -60,6 +60,7 @@ public partial class ModuleWeaver
             coreTypes.AddRange(definition.MainModule.Types);
         }
     }
+
     MethodReference getMethodFromHandle;
     MethodReference getTypeFromHandle;
     TypeReference methodInfoType;
