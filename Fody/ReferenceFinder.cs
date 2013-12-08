@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
 
@@ -6,10 +7,12 @@ public partial class ModuleWeaver
 
     public void FindReferences()
     {
-        var mscorlib = AssemblyResolver.Resolve("mscorlib");
-        var mscorlibTypes = mscorlib.MainModule.Types;
+        var coreTypes = new List<TypeDefinition>();
+        AppendTypes("mscorlib", coreTypes);
+        AppendTypes("System.Reflection", coreTypes);
+        AppendTypes("System.Runtime", coreTypes);
 
-        var methodBaseType = mscorlibTypes.First(x => x.Name == "MethodBase");
+        var methodBaseType = coreTypes.First(x => x.Name == "MethodBase");
         getMethodFromHandle = methodBaseType.Methods
             .First(x => x.Name == "GetMethodFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -22,7 +25,7 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getMethodFromHandleGeneric = ModuleDefinition.Import(getMethodFromHandleGeneric);
 
-        var fieldInfoType = mscorlibTypes.First(x => x.Name == "FieldInfo");
+        var fieldInfoType = coreTypes.First(x => x.Name == "FieldInfo");
         getFieldFromHandle = fieldInfoType.Methods
             .First(x => x.Name == "GetFieldFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -35,13 +38,13 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getFieldFromHandleGeneric = ModuleDefinition.Import(getFieldFromHandleGeneric);
 
-        methodInfoType = mscorlibTypes.First(x => x.Name == "MethodInfo");
+        methodInfoType = coreTypes.First(x => x.Name == "MethodInfo");
         methodInfoType = ModuleDefinition.Import(methodInfoType);
 
-        propertyInfoType = mscorlibTypes.First(x => x.Name == "PropertyInfo");
+        propertyInfoType = coreTypes.First(x => x.Name == "PropertyInfo");
         propertyInfoType = ModuleDefinition.Import(propertyInfoType);
 
-        var typeType = mscorlibTypes.First(x => x.Name == "Type");
+        var typeType = coreTypes.First(x => x.Name == "Type");
         getTypeFromHandle = typeType.Methods
             .First(x => x.Name == "GetTypeFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -49,6 +52,14 @@ public partial class ModuleWeaver
         getTypeFromHandle = ModuleDefinition.Import(getTypeFromHandle);
     }
 
+    void AppendTypes(string name, List<TypeDefinition> coreTypes)
+    {
+        var definition = AssemblyResolver.Resolve(name);
+        if (definition != null)
+        {
+            coreTypes.AddRange(definition.MainModule.Types);
+        }
+    }
     MethodReference getMethodFromHandle;
     MethodReference getTypeFromHandle;
     TypeReference methodInfoType;
