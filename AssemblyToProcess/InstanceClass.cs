@@ -37,6 +37,7 @@ public class InstanceClass
 
 
     static void MethodWithParams(string param1,int param2) { }
+
     public MethodInfo GetMethodWithParams()
     {
         return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams","String, Int32");
