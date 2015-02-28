@@ -72,7 +72,12 @@ public partial class ModuleWeaver
         }
         else
         {
-            moduleDefinition = AssemblyResolver.Resolve(assemblyName).MainModule;   
+            var assemblyDefinition = AssemblyResolver.Resolve(assemblyName);
+            if (assemblyDefinition == null)
+            {
+                throw new WeavingException(string.Format("Could not find assembly named '{0}'.", assemblyName));
+            }
+            moduleDefinition = assemblyDefinition.MainModule;
         }
 
         var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
