@@ -37,6 +37,7 @@ public class MultiLayerNestedClass
         }
     }
 
+    // ReSharper disable once UnusedParameter.Local
     void Method(Nested.Nested2 param)
     {
 

@@ -43,6 +43,7 @@ public class SimpleMethod
         Assert.AreEqual(1, methodDefinitions.Count);
     }
 
+    // ReSharper disable once UnusedParameter.Local
     void MethodWithParam(int param)
     {
 

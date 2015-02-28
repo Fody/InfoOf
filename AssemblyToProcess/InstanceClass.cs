@@ -36,7 +36,9 @@ public class InstanceClass
 
 
 
+    // ReSharper disable UnusedParameter.Local
     static void MethodWithParams(string param1,int param2) { }
+    // ReSharper restore UnusedParameter.Local
 
     public MethodInfo GetMethodWithParams()
     {

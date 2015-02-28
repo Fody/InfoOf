@@ -48,7 +48,6 @@ public partial class ModuleWeaver
                 if (methodReference.Name == "OfPropertySet")
                 {
                     actions.Add(x => HandleOfPropertySet(copy,x));
-                    continue;
                 }
             }
         }

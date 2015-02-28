@@ -38,6 +38,7 @@ public class NestedClass
         Assert.AreEqual(1, methodDefinitions.Count);
     }
 
+    // ReSharper disable once UnusedParameter.Local
     void Method(Root.Nested param)
     {
 
