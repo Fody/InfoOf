@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MyNamespace;
 using NUnit.Framework;
+// ReSharper disable UnusedMember.Local
 
 [TestFixture]
 public class NestedClass

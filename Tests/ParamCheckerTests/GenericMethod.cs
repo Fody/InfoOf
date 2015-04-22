@@ -1,4 +1,5 @@
 using NUnit.Framework;
+// ReSharper disable UnusedMember.Local
 
 [TestFixture]
 public class GenericMethod

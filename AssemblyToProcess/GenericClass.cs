@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+// ReSharper disable UnusedMember.Local
 
 public class GenericClass<T>
 {
@@ -17,8 +18,6 @@ public class GenericClass<T>
     {
         return Info.OfField("AssemblyToProcess", "GenericClass`1", "staticField");
     }
-
-
 
     string InstanceProperty { get; set; }
 
