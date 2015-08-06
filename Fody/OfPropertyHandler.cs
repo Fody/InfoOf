@@ -57,7 +57,7 @@ public partial class ModuleWeaver
 
         if (typeDefinition.HasGenericParameters)
         {
-            var typeReference = ModuleDefinition.Import(typeDefinition);
+            var typeReference = ModuleDefinition.ImportReference(typeDefinition);
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
             instruction.Operand = getMethodFromHandleGeneric;
         }

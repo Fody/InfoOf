@@ -44,19 +44,19 @@ public partial class ModuleWeaver
         if (methodDefinitions.Count == 0)
         {
             throw new WeavingException(string.Format("Could not find method named '{0}'.", methodName))
-                {
-                    SequencePoint = instruction.SequencePoint
-                };
+            {
+                SequencePoint = instruction.SequencePoint
+            };
         }
-        if (methodDefinitions.Count >1)
+        if (methodDefinitions.Count > 1)
         {
             throw new WeavingException(string.Format("More than one method named '{0}' found.", methodName))
-                {
-                    SequencePoint = instruction.SequencePoint
-                };
+            {
+                SequencePoint = instruction.SequencePoint
+            };
         }
 
-        var methodReference = ModuleDefinition.Import(methodDefinitions[0]);
+        var methodReference = ModuleDefinition.ImportReference(methodDefinitions[0]);
 
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(methodNameInstruction);
@@ -70,7 +70,7 @@ public partial class ModuleWeaver
 
         if (typeDefinition.HasGenericParameters)
         {
-            var typeReference = ModuleDefinition.Import(typeDefinition);
+            var typeReference = ModuleDefinition.ImportReference(typeDefinition);
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
             instruction.Operand = getMethodFromHandleGeneric;
         }
@@ -78,9 +78,7 @@ public partial class ModuleWeaver
         {
             instruction.Operand = getMethodFromHandle;
         }
-        
-        ilProcessor.InsertAfter(instruction,Instruction.Create(OpCodes.Castclass, methodInfoType));
+
+        ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
     }
-
 }
-

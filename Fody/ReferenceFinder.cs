@@ -17,39 +17,39 @@ public partial class ModuleWeaver
             .First(x => x.Name == "GetMethodFromHandle" &&
                         x.Parameters.Count == 1 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeMethodHandle");
-        getMethodFromHandle = ModuleDefinition.Import(getMethodFromHandle);
+        getMethodFromHandle = ModuleDefinition.ImportReference(getMethodFromHandle);
         getMethodFromHandleGeneric = methodBaseType.Methods
             .First(x => x.Name == "GetMethodFromHandle" &&
                         x.Parameters.Count == 2 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeMethodHandle" &&
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
-        getMethodFromHandleGeneric = ModuleDefinition.Import(getMethodFromHandleGeneric);
+        getMethodFromHandleGeneric = ModuleDefinition.ImportReference(getMethodFromHandleGeneric);
 
         var fieldInfoType = coreTypes.First(x => x.Name == "FieldInfo");
         getFieldFromHandle = fieldInfoType.Methods
             .First(x => x.Name == "GetFieldFromHandle" &&
                         x.Parameters.Count == 1 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeFieldHandle");
-        getFieldFromHandle = ModuleDefinition.Import(getFieldFromHandle);
+        getFieldFromHandle = ModuleDefinition.ImportReference(getFieldFromHandle);
         getFieldFromHandleGeneric = fieldInfoType.Methods
             .First(x => x.Name == "GetFieldFromHandle" &&
                         x.Parameters.Count == 2 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeFieldHandle" &&
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
-        getFieldFromHandleGeneric = ModuleDefinition.Import(getFieldFromHandleGeneric);
+        getFieldFromHandleGeneric = ModuleDefinition.ImportReference(getFieldFromHandleGeneric);
 
         methodInfoType = coreTypes.First(x => x.Name == "MethodInfo");
-        methodInfoType = ModuleDefinition.Import(methodInfoType);
+        methodInfoType = ModuleDefinition.ImportReference(methodInfoType);
 
         propertyInfoType = coreTypes.First(x => x.Name == "PropertyInfo");
-        propertyInfoType = ModuleDefinition.Import(propertyInfoType);
+        propertyInfoType = ModuleDefinition.ImportReference(propertyInfoType);
 
         var typeType = coreTypes.First(x => x.Name == "Type");
         getTypeFromHandle = typeType.Methods
             .First(x => x.Name == "GetTypeFromHandle" &&
                         x.Parameters.Count == 1 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeTypeHandle");
-        getTypeFromHandle = ModuleDefinition.Import(getTypeFromHandle);
+        getTypeFromHandle = ModuleDefinition.ImportReference(getTypeFromHandle);
     }
 
     void AppendTypes(string name, List<TypeDefinition> coreTypes)

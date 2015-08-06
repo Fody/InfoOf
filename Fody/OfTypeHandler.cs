@@ -14,7 +14,7 @@ public partial class ModuleWeaver
         var assemblyName = GetLdString(assemblyNameInstruction);
 
         var typeDefinition = GetTypeDefinition(assemblyName, typeName);
-        var typeReference = ModuleDefinition.Import(typeDefinition);
+        var typeReference = ModuleDefinition.ImportReference(typeDefinition);
         ilProcessor.Remove(typeNameInstruction);
 
 

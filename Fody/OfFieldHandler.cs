@@ -27,7 +27,7 @@ public partial class ModuleWeaver
                 };
         }
 
-        var fieldReference = ModuleDefinition.Import(fieldDefinition);
+        var fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
 
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(fieldNameInstruction);
@@ -37,7 +37,7 @@ public partial class ModuleWeaver
 
         if (typeDefinition.HasGenericParameters)
         {
-            var typeReference = ModuleDefinition.Import(typeDefinition);
+            var typeReference = ModuleDefinition.ImportReference(typeDefinition);
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken,typeReference));
             instruction.Operand = getFieldFromHandleGeneric;
         }

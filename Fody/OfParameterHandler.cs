@@ -25,7 +25,7 @@ public partial class ModuleWeaver
             throw new WeavingException(string.Format("Could not find method named '{0}'.", methodName));
         }
 
-        var methodReference = ModuleDefinition.Import(methodDefinition);
+        var methodReference = ModuleDefinition.ImportReference(methodDefinition);
 
         ilProcessor.Remove(typeNameInstruction);
 
