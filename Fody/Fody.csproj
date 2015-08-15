@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="NugetAssets\dotnet.targets" />
-    <None Include="NugetAssets\InfoOf.nuspec">
+    <None Include="NugetAssets\InfoOf.Fody.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="NugetAssets\install.ps" />
@@ -107,7 +107,7 @@
     <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\portable-net4+sl5+wp8+win8+wpa81+MonoAndroid16+MonoTouch40" />
     <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\dotnet" />
     <Copy SourceFiles="$(SolutionDir)AttributeAssembly\bin\$(ConfigurationName)\InfoOf.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Lib\dotnet" />
-    <Copy SourceFiles="$(ProjectDir)NugetAssets\InfoOf.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)NugetAssets\InfoOf.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(ProjectDir)NugetAssets\install.ps" DestinationFiles="$(SolutionDir)NuGetBuild\Tools\install.ps1" />
     <Copy SourceFiles="$(ProjectDir)NugetAssets\uninstall.ps" DestinationFiles="$(SolutionDir)NuGetBuild\Tools\uninstall.ps1" />
     <Copy SourceFiles="$(ProjectDir)NugetAssets\dotnet.targets" DestinationFiles="$(SolutionDir)NuGetBuild\build\dotnet\InfoOf.Fody.targets" />
