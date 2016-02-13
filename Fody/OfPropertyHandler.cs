@@ -35,7 +35,7 @@ public partial class ModuleWeaver
 
         if (property == null)
         {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName))
+            throw new WeavingException($"Could not find property named '{propertyName}'.")
             {
                 SequencePoint = instruction.SequencePoint
             };
@@ -43,7 +43,7 @@ public partial class ModuleWeaver
         var methodDefinition = func(property);
         if (methodDefinition == null)
         {
-            throw new WeavingException(string.Format("Could not find property named '{0}'.", propertyName))
+            throw new WeavingException($"Could not find property named '{propertyName}'.")
             {
                 SequencePoint = instruction.SequencePoint
             };

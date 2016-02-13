@@ -75,7 +75,7 @@ public partial class ModuleWeaver
             var assemblyDefinition = AssemblyResolver.Resolve(assemblyName);
             if (assemblyDefinition == null)
             {
-                throw new WeavingException(string.Format("Could not find assembly named '{0}'.", assemblyName));
+                throw new WeavingException($"Could not find assembly named '{assemblyName}'.");
             }
             moduleDefinition = assemblyDefinition.MainModule;
         }
@@ -83,7 +83,7 @@ public partial class ModuleWeaver
         var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
         if (typeDefinition == null)
         {
-            throw new WeavingException(string.Format("Could not find type named '{0}'.", typeName));
+            throw new WeavingException($"Could not find type named '{typeName}'.");
         }
         return typeDefinition;
     }

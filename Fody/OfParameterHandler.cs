@@ -22,7 +22,7 @@ public partial class ModuleWeaver
         var methodDefinition = typeDefinition.Methods.FirstOrDefault(x => x.Name == methodName);
         if (methodDefinition == null)
         {
-            throw new WeavingException(string.Format("Could not find method named '{0}'.", methodName));
+            throw new WeavingException($"Could not find method named '{methodName}'.");
         }
 
         var methodReference = ModuleDefinition.ImportReference(methodDefinition);

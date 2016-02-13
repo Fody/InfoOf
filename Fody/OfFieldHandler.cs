@@ -21,7 +21,7 @@ public partial class ModuleWeaver
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
         if (fieldDefinition == null)
         {
-            throw new WeavingException(string.Format("Could not find field named '{0}'.", fieldName))
+            throw new WeavingException($"Could not find field named '{fieldName}'.")
                 {
                     SequencePoint = instruction.SequencePoint
                 };
