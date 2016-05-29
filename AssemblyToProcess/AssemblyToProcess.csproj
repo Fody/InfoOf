@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="ChildClassToForceReference.cs" />
     <Compile Include="ClassWithAbstract.cs" />
+    <Compile Include="WithStaticConstructor.cs" />
+    <Compile Include="Extra.cs" />
     <Compile Include="GenericClass.cs" />
     <Compile Include="InstanceClass.cs" />
     <Compile Include="InstanceClassWithNameSpace.cs" />

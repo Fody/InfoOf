@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Foo.cs" />
     <Compile Include="MockAssemblyResolver.cs" />
     <Compile Include="ParamCheckerTests\GenericMethod.cs" />
     <Compile Include="ParamCheckerTests\MultiLayerNestedClass.cs" />

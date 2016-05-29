@@ -6,7 +6,6 @@ using Mono.Cecil.Cil;
 public partial class ModuleWeaver
 {
 
-
     void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor)
     {
         HandleOfProperty(instruction, ilProcessor, x => x.GetMethod);
@@ -19,11 +18,10 @@ public partial class ModuleWeaver
 
     void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, Func<PropertyDefinition, MethodDefinition> func)
     {
+        var propertyNameInstruction = instruction.Previous;
+        var propertyName = GetLdString(propertyNameInstruction);
 
-        var properyNameInstruction = instruction.Previous;
-        var propertyName = GetLdString(properyNameInstruction);
-
-        var typeNameInstruction = properyNameInstruction.Previous;
+        var typeNameInstruction = propertyNameInstruction.Previous;
         var typeName = GetLdString(typeNameInstruction);
 
         var assemblyNameInstruction = typeNameInstruction.Previous;
@@ -49,7 +47,7 @@ public partial class ModuleWeaver
             };
         }
         ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Remove(properyNameInstruction);
+        ilProcessor.Remove(propertyNameInstruction);
 
 
         assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
