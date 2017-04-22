@@ -21,10 +21,7 @@ public partial class ModuleWeaver
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
         if (fieldDefinition == null)
         {
-            throw new WeavingException($"Could not find field named '{fieldName}'.")
-                {
-                    SequencePoint = instruction.SequencePoint
-                };
+            throw new WeavingException($"Could not find field named '{fieldName}'.");
         }
 
         var fieldReference = ModuleDefinition.ImportReference(fieldDefinition);

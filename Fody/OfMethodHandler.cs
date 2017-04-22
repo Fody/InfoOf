@@ -43,17 +43,11 @@ public partial class ModuleWeaver
 
         if (methodDefinitions.Count == 0)
         {
-            throw new WeavingException($"Could not find method named '{methodName}'.")
-            {
-                SequencePoint = instruction.SequencePoint
-            };
+            throw new WeavingException($"Could not find method named '{methodName}'.");
         }
         if (methodDefinitions.Count > 1)
         {
-            throw new WeavingException($"More than one method named '{methodName}' found.")
-            {
-                SequencePoint = instruction.SequencePoint
-            };
+            throw new WeavingException($"More than one method named '{methodName}' found.");
         }
 
         var methodReference = ModuleDefinition.ImportReference(methodDefinitions[0]);

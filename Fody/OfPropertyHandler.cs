@@ -33,18 +33,12 @@ public partial class ModuleWeaver
 
         if (property == null)
         {
-            throw new WeavingException($"Could not find property named '{propertyName}'.")
-            {
-                SequencePoint = instruction.SequencePoint
-            };
+            throw new WeavingException($"Could not find property named '{propertyName}'.");
         }
         var methodDefinition = func(property);
         if (methodDefinition == null)
         {
-            throw new WeavingException($"Could not find property named '{propertyName}'.")
-            {
-                SequencePoint = instruction.SequencePoint
-            };
+            throw new WeavingException($"Could not find property named '{propertyName}'.");
         }
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(propertyNameInstruction);

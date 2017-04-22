@@ -72,7 +72,7 @@ public partial class ModuleWeaver
         }
         else
         {
-            var assemblyDefinition = AssemblyResolver.Resolve(assemblyName);
+            var assemblyDefinition = AssemblyResolver.Resolve(new AssemblyNameReference(assemblyName, null));
             if (assemblyDefinition == null)
             {
                 throw new WeavingException($"Could not find assembly named '{assemblyName}'.");
@@ -93,7 +93,7 @@ public partial class ModuleWeaver
     {
         if (previous.OpCode != OpCodes.Ldstr)
         {
-            LogErrorPoint("Expected a string", previous.SequencePoint);
+            LogError("Expected a string");
         }
         return (string) previous.Operand;
     }

@@ -6,19 +6,15 @@ using Mono.Cecil;
 
 public class MockAssemblyResolver : IAssemblyResolver
 {
-    public AssemblyDefinition Resolve(AssemblyNameReference name)
-    {
-        throw new NotImplementedException();
-    }
 
     public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
     {
-        throw new NotImplementedException();
+        return Resolve(name);
     }
 
-    public AssemblyDefinition Resolve(string fullName)
+    public AssemblyDefinition Resolve(AssemblyNameReference name)
     {
-        var firstOrDefault = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.GetName().Name == fullName);
+        var firstOrDefault = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.GetName().Name == name.Name);
         if (firstOrDefault != null)
         {
             return AssemblyDefinition.ReadAssembly(firstOrDefault.CodeBase.Replace("file:///", ""));
@@ -26,7 +22,7 @@ public class MockAssemblyResolver : IAssemblyResolver
         Assembly assembly;
         try
         {
-            assembly = Assembly.Load(fullName);
+            assembly = Assembly.Load(name.FullName);
         }
         catch (FileLoadException)
         {
@@ -37,8 +33,7 @@ public class MockAssemblyResolver : IAssemblyResolver
         return AssemblyDefinition.ReadAssembly(codeBase);
     }
 
-    public AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
+    public void Dispose()
     {
-        throw new NotImplementedException();
     }
 }

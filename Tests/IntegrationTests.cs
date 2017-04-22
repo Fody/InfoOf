@@ -27,16 +27,18 @@ public class IntegrationTests
         afterAssemblyPath = beforeAssemblyPath.Replace(".dll", "2.dll");
         File.Copy(beforeAssemblyPath, afterAssemblyPath, true);
 
-        var moduleDefinition = ModuleDefinition.ReadModule(afterAssemblyPath);
-        var weavingTask = new ModuleWeaver
+        using (var moduleDefinition = ModuleDefinition.ReadModule(beforeAssemblyPath))
         {
-            ModuleDefinition = moduleDefinition,
-            AssemblyResolver = new MockAssemblyResolver(),
-            LogWarning = s => warnings.Add(s)
-        };
+            var weavingTask = new ModuleWeaver
+            {
+                ModuleDefinition = moduleDefinition,
+                AssemblyResolver = new MockAssemblyResolver(),
+                LogWarning = s => warnings.Add(s)
+            };
 
-        weavingTask.Execute();
-        moduleDefinition.Write(afterAssemblyPath);
+            weavingTask.Execute();
+            moduleDefinition.Write(afterAssemblyPath);
+        }
 
         assembly = Assembly.LoadFile(afterAssemblyPath);
     }
