@@ -10,7 +10,6 @@ Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http:/
 
 [Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
 
-[![NuGet Status](https://img.shields.io/gitter/room/fody/fody.svg?style=flat)](https://gitter.im/Fody/Fody)
 
 ## The nuget package
 
