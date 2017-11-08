@@ -283,6 +283,15 @@ public class IntegrationTests
         Assert.IsNotNull(typeinfo);
     }
 
+    [Test]
+    public void UriLocalPathPropertyGet()
+    {
+        var type = assembly.GetType("Extra");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetUriLocalPathPropertyGet();
+        Assert.IsNotNull(methodInfo);
+    }
+
 #if(DEBUG)
     [Test]
     public void PeVerify()

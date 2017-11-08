@@ -40,12 +40,14 @@ public partial class ModuleWeaver
         {
             throw new WeavingException($"Could not find property named '{propertyName}'.");
         }
+
+        var methodReference = ModuleDefinition.ImportReference(methodDefinition);
+
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(propertyNameInstruction);
 
-
         assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
-        assemblyNameInstruction.Operand = methodDefinition;
+        assemblyNameInstruction.Operand = methodReference;
 
         if (typeDefinition.HasGenericParameters)
         {
