@@ -12,4 +12,8 @@ public class Extra
             "T1");
     }
 
+    public MethodInfo GetUriLocalPathPropertyGet()
+    {
+        return Info.OfPropertyGet("System", "System.Uri", "LocalPath");
+    }
 }
