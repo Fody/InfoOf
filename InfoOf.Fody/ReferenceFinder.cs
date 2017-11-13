@@ -11,6 +11,9 @@ public partial class ModuleWeaver
         AppendTypes("mscorlib", coreTypes);
         AppendTypes("System.Reflection", coreTypes);
         AppendTypes("System.Runtime", coreTypes);
+        AppendTypes("System.Core", coreTypes);
+        AppendTypes("netstandard", coreTypes);
+        AppendTypes("System.Private.CoreLib", coreTypes);
 
         var methodBaseType = coreTypes.First(x => x.Name == "MethodBase");
         getMethodFromHandle = methodBaseType.Methods

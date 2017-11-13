@@ -1,19 +1,21 @@
+using System;
 using System.Reflection;
 // ReSharper disable UnusedMember.Local
 
 public class Extra
 {
-
     public MethodInfo GetSystemGeneric()
     {
+#if (NET452)
         return Info.OfMethod("mscorlib",
             "System.Tuple",
             "Create",
             "T1");
-    }
-
-    public MethodInfo GetUriLocalPathPropertyGet()
-    {
-        return Info.OfPropertyGet("System", "System.Uri", "LocalPath");
+#else
+        return Info.OfMethod("System.Runtime",
+            "System.Tuple",
+            "Create",
+            "T1");
+#endif
     }
 }

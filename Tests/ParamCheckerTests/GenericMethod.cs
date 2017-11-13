@@ -4,7 +4,6 @@ using NUnit.Framework;
 [TestFixture]
 public class GenericMethod
 {
-
     [Test]
     public void Simple()
     {
@@ -15,7 +14,6 @@ public class GenericMethod
 
     void Method<T>()
     {
-        
-    }
 
+    }
 }

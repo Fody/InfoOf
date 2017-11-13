@@ -21,15 +21,16 @@ public static class Verifier
         {
             return string.Empty;
         }
-        var process = Process.Start(new ProcessStartInfo(exePath, "\"" + assemblyPath2 + "\"")
+        using (var process = Process.Start(new ProcessStartInfo(exePath, "\"" + assemblyPath2 + "\"")
         {
             RedirectStandardOutput = true,
             UseShellExecute = false,
             CreateNoWindow = true
-        });
-
-        process.WaitForExit(10000);
-        return process.StandardOutput.ReadToEnd().Trim().Replace(assemblyPath2, "");
+        }))
+        {
+            process.WaitForExit(10000);
+            return process.StandardOutput.ReadToEnd().Trim().Replace(assemblyPath2, "");
+        }
     }
 
     static string GetPathToPeVerify()
@@ -45,6 +46,6 @@ public static class Verifier
 
     static string TrimLineNumbers(string foo)
     {
-        return Regex.Replace(foo, @"0x.*]", "");
+        return Regex.Replace(foo, "0x.*]", "");
     }
 }

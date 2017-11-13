@@ -5,7 +5,6 @@ using NUnit.Framework;
 [TestFixture]
 public class MultiLayerNestedClass
 {
-
     [Test]
     public void Simple()
     {
@@ -44,5 +43,3 @@ public class MultiLayerNestedClass
 
     }
 }
-
-

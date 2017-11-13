@@ -81,11 +81,18 @@ public partial class ModuleWeaver
         }
 
         var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
-        if (typeDefinition == null)
+        if (typeDefinition != null)
         {
-            throw new WeavingException($"Could not find type named '{typeName}'.");
+            return typeDefinition;
         }
-        return typeDefinition;
+
+        var exportedType = moduleDefinition.ExportedTypes
+            .FirstOrDefault(x => x.FullName == typeName);
+        if (exportedType != null)
+        {
+            return exportedType.Resolve();
+        }
+        throw new WeavingException($"Could not find type named '{typeName}'.");
     }
 
 

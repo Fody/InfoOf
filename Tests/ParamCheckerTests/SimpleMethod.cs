@@ -5,9 +5,6 @@ using NUnit.Framework;
 [TestFixture]
 public class SimpleMethod
 {
- 
-  
-
     [Test]
     public void Simple()
     {
@@ -34,7 +31,7 @@ public class SimpleMethod
 
     void Method()
     {
-        
+
     }
 
     [Test]
