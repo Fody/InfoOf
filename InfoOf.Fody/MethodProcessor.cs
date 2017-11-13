@@ -80,13 +80,19 @@ public partial class ModuleWeaver
             moduleDefinition = assemblyDefinition.MainModule;
         }
 
-        var typeDefinitions = moduleDefinition.GetTypes().ToList();
-        var typeDefinition = typeDefinitions.FirstOrDefault(x => x.FullName == typeName);
-        if (typeDefinition == null)
+        var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
+        if (typeDefinition != null)
         {
-            throw new WeavingException($"Could not find type named '{typeName}'.");
+            return typeDefinition;
         }
-        return typeDefinition;
+
+        var exportedType = moduleDefinition.ExportedTypes
+            .FirstOrDefault(x => x.FullName == typeName);
+        if (exportedType != null)
+        {
+            return exportedType.Resolve();
+        }
+        throw new WeavingException($"Could not find type named '{typeName}'.");
     }
 
 
