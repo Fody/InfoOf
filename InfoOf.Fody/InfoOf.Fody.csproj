@@ -13,15 +13,15 @@
   </ItemGroup>
   <Target Name="BuildNugets" AfterTargets="CopyFilesToOutputDirectory">
     <ItemGroup>
-      <FilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
+      <FilesToDelete Include="$(SolutionDir)nugets\**\*.*" />
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
-    <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\net452\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\net452" />
-    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\netstandard1.4\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\netstandard1.4" />
-    <Copy SourceFiles="$(ProjectDir)InfoOf.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(OutputPath)InfoOf.Fody.dll" />
+    <MakeDir Directories="$(SolutionDir)nugets" />
+    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\net452\InfoOf.dll" DestinationFolder="$(SolutionDir)nugets\lib\net452" />
+    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\netstandard1.4\InfoOf.dll" DestinationFolder="$(SolutionDir)nugets\lib\netstandard1.4" />
+    <Copy SourceFiles="$(ProjectDir)InfoOf.Fody.nuspec" DestinationFolder="$(SolutionDir)nugets" />
+    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.dll" DestinationFolder="$(SolutionDir)nugets" />
+    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.pdb" DestinationFolder="$(SolutionDir)nugets" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)nugets" MetadataAssembly="$(OutputPath)InfoOf.Fody.dll" />
   </Target>
 </Project>
