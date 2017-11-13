@@ -80,7 +80,8 @@ public partial class ModuleWeaver
             moduleDefinition = assemblyDefinition.MainModule;
         }
 
-        var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
+        var typeDefinitions = moduleDefinition.GetTypes().ToList();
+        var typeDefinition = typeDefinitions.FirstOrDefault(x => x.FullName == typeName);
         if (typeDefinition == null)
         {
             throw new WeavingException($"Could not find type named '{typeName}'.");

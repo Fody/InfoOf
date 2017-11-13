@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="FodyCecil" Version="2.*" />
+    <PackageReference Include="PepitaPackage" Version="*" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Compile Include="..\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <Target Name="BuildNugets" AfterTargets="CopyFilesToOutputDirectory">
+    <ItemGroup>
+      <FilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+    <MakeDir Directories="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\net452\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\net452" />
+    <Copy SourceFiles="$(SolutionDir)InfoOf\bin\$(ConfigurationName)\netstandard1.4\InfoOf.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\netstandard1.4" />
+    <Copy SourceFiles="$(ProjectDir)InfoOf.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)bin\$(ConfigurationName)\net452\InfoOf.Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(OutputPath)InfoOf.Fody.dll" />
+  </Target>
+</Project>

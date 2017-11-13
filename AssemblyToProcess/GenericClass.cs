@@ -1,10 +1,8 @@
 using System;
 using System.Reflection;
-// ReSharper disable UnusedMember.Local
 
 public class GenericClass<T>
 {
-
     string instanceField;
 
     public FieldInfo GetInstanceField()

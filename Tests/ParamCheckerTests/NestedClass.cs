@@ -6,8 +6,6 @@ using NUnit.Framework;
 [TestFixture]
 public class NestedClass
 {
-
-
     [Test]
     public void Simple()
     {
@@ -45,6 +43,7 @@ public class NestedClass
 
     }
 }
+
 namespace MyNamespace
 {
     public class Root
@@ -54,5 +53,4 @@ namespace MyNamespace
 
         }
     }
-
 }

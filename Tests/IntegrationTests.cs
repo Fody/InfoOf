@@ -18,9 +18,8 @@ public class IntegrationTests
     public IntegrationTests()
     {
         AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\AssemblyToProcess\bin\Debug\AssemblyToProcess.dll"));
+        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"AssemblyToProcess.dll"));
 #if (!DEBUG)
-
         beforeAssemblyPath = beforeAssemblyPath.Replace("Debug", "Release");
 #endif
 
@@ -281,15 +280,6 @@ public class IntegrationTests
         var instance = (dynamic) Activator.CreateInstance(type);
         Type typeinfo = instance.GetTypeInfoFromInternal();
         Assert.IsNotNull(typeinfo);
-    }
-
-    [Test]
-    public void UriLocalPathPropertyGet()
-    {
-        var type = assembly.GetType("Extra");
-        var instance = (dynamic) Activator.CreateInstance(type);
-        MethodInfo methodInfo = instance.GetUriLocalPathPropertyGet();
-        Assert.IsNotNull(methodInfo);
     }
 
 #if(DEBUG)
