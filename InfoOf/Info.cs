@@ -18,6 +18,16 @@ public static class Info
         throw BuildException();
     }
 
+    public static ConstructorInfo OfConstructor(string assemblyName, string typeName, string parameters)
+    {
+        throw BuildException();
+    }
+
+    public static ConstructorInfo OfConstructor(string assemblyName, string typeName)
+    {
+        throw BuildException();
+    }
+
     public static Type OfType(string assemblyName, string typeName)
     {
         throw BuildException();

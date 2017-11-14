@@ -4,6 +4,14 @@ using System.Reflection;
 
 public class InstanceClass
 {
+    public InstanceClass()
+    {
+    }
+
+    public InstanceClass(string _)
+    {
+    }
+
     string instanceField;
     public FieldInfo GetInstanceField()
     {
@@ -38,12 +46,12 @@ public class InstanceClass
 
 
     // ReSharper disable UnusedParameter.Local
-    static void MethodWithParams(string param1,int param2) { }
+    static void MethodWithParams(string param1, int param2) { }
     // ReSharper restore UnusedParameter.Local
 
     public MethodInfo GetMethodWithParams()
     {
-        return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams","String, Int32");
+        return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams", "String, Int32");
     }
 
 
@@ -66,5 +74,15 @@ public class InstanceClass
     public Type GetTypeInfoFromInternal()
     {
         return Info.OfType("AssemblyToReference", "InternalClass");
+    }
+
+    public ConstructorInfo GetConstructorInfo()
+    {
+        return Info.OfConstructor("AssemblyToProcess", "InstanceClass");
+    }
+
+    public ConstructorInfo GetConstructorInfoWithParam()
+    {
+        return Info.OfConstructor("AssemblyToProcess", "InstanceClass", "String");
     }
 }
