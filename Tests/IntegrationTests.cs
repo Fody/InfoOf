@@ -300,6 +300,16 @@ public class IntegrationTests
         Assert.IsNotNull(constructorInfo);
     }
 
+    [Test]
+    public void GenericConstructor()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfo();
+        Assert.IsNotNull(constructorInfo);
+    }
+
 #if(DEBUG)
     [Test]
     public void PeVerify()
