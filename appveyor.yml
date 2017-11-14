@@ -12,6 +12,6 @@ test_script:
 - ps: >-
     nunit3-console Tests\bin\Release\net452\Tests.dll
 
-    dotnet test "Tests\Tests.csproj" --framework netcoreapp2.0 --configuration Release --no-build
+    dotnet test "Tests\Tests.csproj" --framework netcoreapp2.0 --configuration Release --no-build --output Tests\bin\Release\netcoreapp2.0\Tests.dll
 artifacts:
 - path: nugets\**\*.nupkg
