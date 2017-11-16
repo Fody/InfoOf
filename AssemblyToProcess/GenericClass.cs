@@ -41,8 +41,6 @@ public class GenericClass<T>
         return Info.OfPropertySet("AssemblyToProcess", "GenericClass`1", "StaticProperty");
     }
 
-
-
     void InstanceMethod()
     {
     }
@@ -64,5 +62,13 @@ public class GenericClass<T>
     public Type GetTypeInfo()
     {
         return Info.OfType("AssemblyToProcess", "GenericClass`1");
+    }
+
+    public Type GetGenericTypeInfo()
+    {
+        return Info.OfType("AssemblyToProcess", "GenericClass`1<" +
+            "mscorlib|System.Collections.Generic.IDictionary`2<" +
+                "mscorlib|System.String," +
+                "mscorlib|System.Int32>>");
     }
 }

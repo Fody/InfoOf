@@ -7,7 +7,6 @@ using Mono.Cecil.Rocks;
 
 public partial class ModuleWeaver
 {
-
     void ProcessMethod(MethodDefinition method)
     {
         var actions = new List<Action<ILProcessor>>();
@@ -27,27 +26,27 @@ public partial class ModuleWeaver
                 var copy = instruction;
                 if (methodReference.Name == "OfMethod")
                 {
-                    actions.Add(x => HandleOfMethod(copy,x,methodReference));
+                    actions.Add(x => HandleOfMethod(copy, x, methodReference));
                     continue;
                 }
                 if (methodReference.Name == "OfField")
                 {
-                    actions.Add(x => HandleOfField(copy,x));
+                    actions.Add(x => HandleOfField(copy, x));
                     continue;
                 }
                 if (methodReference.Name == "OfType")
                 {
-                    actions.Add(x => HandleOfType(copy,x));
+                    actions.Add(x => HandleOfType(copy, x));
                     continue;
                 }
                 if (methodReference.Name == "OfPropertyGet")
                 {
-                    actions.Add(x => HandleOfPropertyGet(copy,x));
+                    actions.Add(x => HandleOfPropertyGet(copy, x));
                     continue;
                 }
                 if (methodReference.Name == "OfPropertySet")
                 {
-                    actions.Add(x => HandleOfPropertySet(copy,x));
+                    actions.Add(x => HandleOfPropertySet(copy, x));
                 }
             }
         }
@@ -63,9 +62,20 @@ public partial class ModuleWeaver
         method.Body.OptimizeMacros();
     }
 
-    TypeDefinition GetTypeDefinition(string assemblyName, string typeName)
+    TypeReference GetTypeReference(string assemblyName, string typeName)
+    {
+        var parsedTypeName = TypeNameParser.Parse(typeName);
+        parsedTypeName.Assembly = assemblyName;
+        return GetTypeReference(parsedTypeName);
+    }
+
+    TypeReference GetTypeReference(ParsedTypeName parsedTypeName)
     {
         ModuleDefinition moduleDefinition;
+
+        var assemblyName = parsedTypeName.Assembly;
+        var typeName = parsedTypeName.TypeName;
+
         if (assemblyName == ModuleDefinition.Assembly.Name.Name)
         {
             moduleDefinition = ModuleDefinition;
@@ -83,18 +93,36 @@ public partial class ModuleWeaver
         var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
         if (typeDefinition != null)
         {
-            return typeDefinition;
+            return MakeGeneric(typeDefinition);
         }
 
         var exportedType = moduleDefinition.ExportedTypes
-            .FirstOrDefault(x => x.FullName == typeName);
+            .FirstOrDefault(x => x.FullName == typeName)?.Resolve();
         if (exportedType != null)
         {
-            return exportedType.Resolve();
+            return MakeGeneric(exportedType);
         }
         throw new WeavingException($"Could not find type named '{typeName}'.");
-    }
 
+        TypeReference MakeGeneric(TypeReference typeReference)
+        {
+            if (typeReference.HasGenericParameters && parsedTypeName.GenericParameters != null)
+            {
+                if (typeReference.GenericParameters.Count != parsedTypeName.GenericParameters.Count)
+                {
+                    throw new WeavingException($"Supplied generic parameter arity of {parsedTypeName.GenericParameters.Count} does not match expected arity of {typeReference.GenericParameters.Count} for {parsedTypeName.TypeName}");
+                }
+
+                return ModuleDefinition.ImportReference(
+                    typeReference.MakeGenericInstanceType(
+                        parsedTypeName.GenericParameters
+                            .Select(GetTypeReference)
+                            .ToArray()));
+            }
+
+            return ModuleDefinition.ImportReference(typeReference);
+        }
+    }
 
     string GetLdString(Instruction previous)
     {
@@ -102,6 +130,6 @@ public partial class ModuleWeaver
         {
             LogError("Expected a string");
         }
-        return (string) previous.Operand;
+        return (string)previous.Operand;
     }
 }
