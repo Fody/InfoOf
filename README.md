@@ -19,21 +19,25 @@ https://nuget.org/packages/InfoOf.Fody/
 
 ### Your Code
 
-	var type = Info.OfType("AssemblyName", "MyClass");
-	var method = Info.OfMethod("AssemblyName", "MyClass", "MyMethod");
-	var getProperty = Info.OfPropertyGet("AssemblyName", "MyClass", "MyProperty");
-	var setProperty = Info.OfPropertySet("AssemblyName", "MyClass", "MyProperty");
-	var field = Info.OfField("AssemblyName", "MyClass", "myField");
-
+``` c#
+var type = Info.OfType("AssemblyName", "MyClass");
+var method = Info.OfMethod("AssemblyName", "MyClass", "MyMethod");
+var constructor = Info.OfConstructor("AssemblyName", "MyClass");
+var getProperty = Info.OfPropertyGet("AssemblyName", "MyClass", "MyProperty");
+var setProperty = Info.OfPropertySet("AssemblyName", "MyClass", "MyProperty");
+var field = Info.OfField("AssemblyName", "MyClass", "myField");
+```
 
 ### What gets compiled
 
-	var type = typeof(MyClass);
-	var method = methodof(MyClass.MyMethod);
-	var getProperty = methodof(MyClass.get_MyProperty)
-	var setProperty = methodof(MyClass.set_MyProperty)
-	var field = fieldof(MyClass.myField);
-
+``` c#
+var type = typeof(MyClass);
+var method = methodof(MyClass.MyMethod);
+var constructor = methodof(MyClass..ctor);
+var getProperty = methodof(MyClass.get_MyProperty);
+var setProperty = methodof(MyClass.set_MyProperty);
+var field = fieldof(MyClass.myField);
+```
 
 ## Why not use Expressions
 

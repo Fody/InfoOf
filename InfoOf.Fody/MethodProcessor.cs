@@ -7,48 +7,42 @@ using Mono.Cecil.Rocks;
 
 public partial class ModuleWeaver
 {
-
     void ProcessMethod(MethodDefinition method)
     {
         var actions = new List<Action<ILProcessor>>();
-        foreach (var instruction in method.Body.Instructions)
+        foreach (var instruction in method.Body.Instructions
+            .Where(i => i.OpCode == OpCodes.Call))
         {
-            if (instruction.OpCode == OpCodes.Call)
+            var methodReference = instruction.Operand as MethodReference;
+            if (methodReference == null)
             {
-                var methodReference = instruction.Operand as MethodReference;
-                if (methodReference == null)
-                {
-                    continue;
-                }
-                if (methodReference.DeclaringType.Name != "Info")
-                {
-                    continue;
-                }
-                var copy = instruction;
-                if (methodReference.Name == "OfMethod")
-                {
-                    actions.Add(x => HandleOfMethod(copy,x,methodReference));
-                    continue;
-                }
-                if (methodReference.Name == "OfField")
-                {
-                    actions.Add(x => HandleOfField(copy,x));
-                    continue;
-                }
-                if (methodReference.Name == "OfType")
-                {
-                    actions.Add(x => HandleOfType(copy,x));
-                    continue;
-                }
-                if (methodReference.Name == "OfPropertyGet")
-                {
-                    actions.Add(x => HandleOfPropertyGet(copy,x));
-                    continue;
-                }
-                if (methodReference.Name == "OfPropertySet")
-                {
-                    actions.Add(x => HandleOfPropertySet(copy,x));
-                }
+                continue;
+            }
+            if (methodReference.DeclaringType.FullName != "Info")
+            {
+                continue;
+            }
+            var copy = instruction;
+            switch (methodReference.Name)
+            {
+            case "OfMethod":
+                actions.Add(x => HandleOfMethod(copy, x, methodReference));
+                break;
+            case "OfField":
+                actions.Add(x => HandleOfField(copy, x));
+                break;
+            case "OfType":
+                actions.Add(x => HandleOfType(copy, x));
+                break;
+            case "OfPropertyGet":
+                actions.Add(x => HandleOfPropertyGet(copy, x));
+                break;
+            case "OfPropertySet":
+                actions.Add(x => HandleOfPropertySet(copy, x));
+                break;
+            case "OfConstructor":
+                actions.Add(x => HandleOfConstructor(copy, x, methodReference));
+                break;
             }
         }
         if (actions.Count == 0)
@@ -95,13 +89,12 @@ public partial class ModuleWeaver
         throw new WeavingException($"Could not find type named '{typeName}'.");
     }
 
-
     string GetLdString(Instruction previous)
     {
         if (previous.OpCode != OpCodes.Ldstr)
         {
             LogError("Expected a string");
         }
-        return (string) previous.Operand;
+        return (string)previous.Operand;
     }
 }

@@ -44,6 +44,9 @@ public partial class ModuleWeaver
         methodInfoType = coreTypes.First(x => x.Name == "MethodInfo");
         methodInfoType = ModuleDefinition.ImportReference(methodInfoType);
 
+        constructorInfoType = coreTypes.First(x => x.Name == "ConstructorInfo");
+        constructorInfoType = ModuleDefinition.ImportReference(constructorInfoType);
+
         propertyInfoType = coreTypes.First(x => x.Name == "PropertyInfo");
         propertyInfoType = ModuleDefinition.ImportReference(propertyInfoType);
 
@@ -67,6 +70,7 @@ public partial class ModuleWeaver
     MethodReference getMethodFromHandle;
     MethodReference getTypeFromHandle;
     TypeReference methodInfoType;
+    TypeReference constructorInfoType;
     TypeReference propertyInfoType;
     MethodReference getFieldFromHandle;
     MethodReference getFieldFromHandleGeneric;
