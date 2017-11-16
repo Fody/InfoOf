@@ -180,4 +180,13 @@ public class TypeNameParserTests
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected assembly name separator, got <"));
     }
+
+    [Test]
+    public void UnexpectedNameToken()
+    {
+        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>d");
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Unexpected name token"));
+    }
 }

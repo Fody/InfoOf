@@ -115,7 +115,7 @@ public static class TypeNameParser
         }
 
         public IState OnReadToken(string token) =>
-            throw new InvalidOperationException();
+            throw new WeavingException("Unexpected name token");
 
         public string Token { get; set; }
 
