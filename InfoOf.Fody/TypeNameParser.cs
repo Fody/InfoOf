@@ -48,14 +48,28 @@ public static class TypeNameParser
         public IState OnGenericTypeStart() =>
             new GenericParameterState(this).OnGenericTypeStart();
 
-        public IState OnGenericTypeEnd(IState currentState) =>
-            _parentState.OnGenericTypeEnd(currentState);
+        public IState OnGenericTypeEnd(IState currentState)
+        {
+            if (_parentState == null)
+            {
+                throw new WeavingException("Unexpected generic type end");
+            }
+
+            return _parentState.OnGenericTypeEnd(currentState);
+        }
 
         public IState OnAssemblyNameSeparator() =>
             throw new WeavingException("Unexpected assembly name separator");
 
-        public IState OnGenericParamSeparator(IState currentState) =>
-            _parentState.OnGenericParamSeparator(currentState);
+        public IState OnGenericParamSeparator(IState currentState)
+        {
+            if (_parentState == null)
+            {
+                throw new WeavingException("Unexpected generic param separator");
+            }
+
+            return _parentState.OnGenericParamSeparator(currentState);
+        }
 
         public IState OnReadToken(string token) =>
             throw new InvalidOperationException();

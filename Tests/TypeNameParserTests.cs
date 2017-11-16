@@ -210,4 +210,22 @@ public class TypeNameParserTests
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Unexpected name token"));
     }
+
+    [Test]
+    public void UnexpectedGenericTypeSeparator()
+    {
+        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>,");
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Unexpected generic param separator"));
+    }
+
+    [Test]
+    public void UnexpectedGenericTypeEnd()
+    {
+        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>>");
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Unexpected generic type end"));
+    }
 }
