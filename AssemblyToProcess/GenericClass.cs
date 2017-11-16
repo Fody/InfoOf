@@ -64,6 +64,11 @@ public class GenericClass<T>
         return Info.OfType("AssemblyToProcess", "GenericClass`1");
     }
 
+    public ConstructorInfo GetConstructorInfo()
+    {
+        return Info.OfConstructor("AssemblyToProcess", "GenericClass`1");
+    }
+
     public Type GetGenericTypeInfo()
     {
         return Info.OfType("AssemblyToProcess", "GenericClass`1<" +

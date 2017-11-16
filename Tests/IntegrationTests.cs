@@ -283,6 +283,34 @@ public class IntegrationTests
     }
 
     [Test]
+    public void InstanceConstructor()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfo();
+        Assert.IsNotNull(constructorInfo);
+    }
+
+    [Test]
+    public void InstanceConstructorWithParam()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic)Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfoWithParam();
+        Assert.IsNotNull(constructorInfo);
+    }
+
+    [Test]
+    public void GenericConstructor()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic)Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfo();
+        Assert.IsNotNull(constructorInfo);
+    }
+
+    [Test]
     public void GenericTypeInfo_Generic()
     {
         var type = assembly.GetType("GenericClass`1");
