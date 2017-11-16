@@ -83,6 +83,27 @@ public class TypeNameParserTests
     }
 
     [Test]
+    public void DoubleGeneric()
+    {
+        var parsedTypeName = TypeNameParser.Parse("a<b|c<d|e>,f|g>");
+
+        Assert.That(parsedTypeName.TypeName, Is.EqualTo("a"));
+        Assert.That(parsedTypeName.Assembly, Is.Null);
+        Assert.That(parsedTypeName.GenericParameters, Is.Not.Null.Or.Empty);
+        Assert.That(parsedTypeName.GenericParameters, Has.Count.EqualTo(2));
+        Assert.That(parsedTypeName.GenericParameters[0].Assembly, Is.EqualTo("b"));
+        Assert.That(parsedTypeName.GenericParameters[0].TypeName, Is.EqualTo("c"));
+        Assert.That(parsedTypeName.GenericParameters[0].GenericParameters, Is.Not.Null.Or.Empty);
+        Assert.That(parsedTypeName.GenericParameters[0].GenericParameters, Has.Count.EqualTo(1));
+        Assert.That(parsedTypeName.GenericParameters[0].GenericParameters[0].Assembly, Is.EqualTo("d"));
+        Assert.That(parsedTypeName.GenericParameters[0].GenericParameters[0].TypeName, Is.EqualTo("e"));
+        Assert.That(parsedTypeName.GenericParameters[0].GenericParameters[0].GenericParameters, Is.Null);
+        Assert.That(parsedTypeName.GenericParameters[1].Assembly, Is.EqualTo("f"));
+        Assert.That(parsedTypeName.GenericParameters[1].TypeName, Is.EqualTo("g"));
+        Assert.That(parsedTypeName.GenericParameters[1].GenericParameters, Is.Null);
+    }
+
+    [Test]
     public void GenericStartWithoutTypeName()
     {
         TestDelegate handler = () => TypeNameParser.Parse("<");

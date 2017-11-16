@@ -110,6 +110,11 @@ public static class TypeNameParser
 
         public IState OnGenericParamSeparator(IState currentState)
         {
+            if (currentState is GenericParameterState)
+            {
+                return _parentState.OnGenericParamSeparator(currentState);
+            }
+
             _genericParameters.Add((AssemblyNameState)currentState);
             return new TokenReadState(new AssemblyNameState(this));
         }
