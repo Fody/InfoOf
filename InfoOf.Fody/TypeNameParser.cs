@@ -105,8 +105,15 @@ public static class TypeNameParser
             _genericParameters = new List<AssemblyNameState>();
         }
 
-        public IState OnGenericTypeStart() =>
-            new TokenReadState(new AssemblyNameState(this));
+        public IState OnGenericTypeStart()
+        {
+            if (_genericParameters.Count != 0)
+            {
+                throw new WeavingException("Unexpected generic type start");
+            }
+
+            return new TokenReadState(new AssemblyNameState(this));
+        }
 
         public IState OnGenericTypeEnd(IState currentState)
         {
@@ -166,6 +173,12 @@ public static class TypeNameParser
 
         public IState OnGenericTypeEnd(IState currentState)
         {
+            if (currentState is AssemblyNameState assemblyNameState &&
+                assemblyNameState._childState == null)
+            {
+                throw new WeavingException("Expected assembly name separator, got " + GenericTypeEnd);
+            }
+
             _childState = currentState;
             return _parentState.OnGenericTypeEnd(this);
         }
@@ -175,6 +188,12 @@ public static class TypeNameParser
 
         public IState OnGenericParamSeparator(IState currentState)
         {
+            if (currentState is AssemblyNameState assemblyNameState &&
+                assemblyNameState._childState == null)
+            {
+                throw new WeavingException("Expected assembly name separator, got " + GenericParamSeparator);
+            }
+
             _childState = currentState;
             return _parentState.OnGenericParamSeparator(this);
         }

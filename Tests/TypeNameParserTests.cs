@@ -103,37 +103,49 @@ public class TypeNameParserTests
         Assert.That(parsedTypeName.GenericParameters[1].GenericParameters, Is.Null);
     }
 
-    [Test]
-    public void GenericStartWithoutTypeName()
+    [TestCase("<")]
+    [TestCase("a<<")]
+    [TestCase("a<b|<")]
+    [TestCase("a<b|c,<")]
+    public void GenericStartWithoutTypeName(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("<");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected a name, got <"));
     }
 
-    [Test]
-    public void GenericEndWithoutTypeName()
+    [TestCase(">")]
+    [TestCase("a<>")]
+    [TestCase("a<b|>")]
+    [TestCase("a<b|c,>")]
+    public void GenericEndWithoutTypeName(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse(">");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected a name, got >"));
     }
 
-    [Test]
-    public void AssemblySeparatorWithoutTypeName()
+    [TestCase("|")]
+    [TestCase("a<|")]
+    [TestCase("a<b||")]
+    [TestCase("a<b|c,|")]
+    public void AssemblySeparatorWithoutTypeName(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("|");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected a name, got |"));
     }
 
-    [Test]
-    public void GenericParamSeparatorWithoutTypeName()
+    [TestCase(",")]
+    [TestCase("a<,")]
+    [TestCase("a<b|,")]
+    [TestCase("a<b|c,,")]
+    public void GenericParamSeparatorWithoutTypeName(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse(",");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected a name, got ,"));
@@ -148,10 +160,12 @@ public class TypeNameParserTests
             .With.Message.EqualTo("Unrecognized escape sequence '\\a'"));
     }
 
-    [Test]
-    public void EmptyTypeName()
+    [TestCase("")]
+    [TestCase("a<")]
+    [TestCase("a<b|")]
+    public void EmptyTypeName(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Expected a name, got <end of type>"));
@@ -175,26 +189,19 @@ public class TypeNameParserTests
             .With.Message.EqualTo("Unbalanced type specification, are you missing a >?"));
     }
 
-    [Test]
-    public void UnexpectedAssemblyNameSeparator_TypeName()
+    [TestCase("a|b")]
+    [TestCase("a<b|c>|")]
+    [TestCase("a<b|c<d|e>|")]
+    public void UnexpectedAssemblyNameSeparator(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("a|b");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Unexpected assembly name separator"));
     }
 
     [Test]
-    public void UnexpectedAssemblyNameSeparator_GenericParameter()
-    {
-        TestDelegate handler = () => TypeNameParser.Parse("a<b|c<d|e>|");
-
-        Assert.That(handler, Throws.InstanceOf<WeavingException>()
-            .With.Message.EqualTo("Unexpected assembly name separator"));
-    }
-
-    [Test]
-    public void GenericTypeMissingAssemblyNameSeparator()
+    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeStart()
     {
         TestDelegate handler = () => TypeNameParser.Parse("a<b<");
 
@@ -203,29 +210,60 @@ public class TypeNameParserTests
     }
 
     [Test]
-    public void UnexpectedNameToken()
+    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeEnd()
     {
-        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>d");
+        TestDelegate handler = () => TypeNameParser.Parse("a<b>");
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Expected assembly name separator, got >"));
+    }
+
+    [Test]
+    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeSeparator()
+    {
+        TestDelegate handler = () => TypeNameParser.Parse("a<b,");
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Expected assembly name separator, got ,"));
+    }
+
+    [TestCase("a<b|c>d")]
+    [TestCase("a<b|c<d|e>f")]
+    public void UnexpectedNameToken(string typeName)
+    {
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Unexpected name token"));
     }
 
-    [Test]
-    public void UnexpectedGenericTypeSeparator()
+    [TestCase("a<b|c>,")]
+    [TestCase("a<b|c<d|e>>,")]
+    public void UnexpectedGenericTypeSeparator(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>,");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Unexpected generic param separator"));
     }
 
-    [Test]
-    public void UnexpectedGenericTypeEnd()
+    [TestCase("a<b|c>>")]
+    [TestCase("a<b|c<d|e>>>")]
+    public void UnexpectedGenericTypeEnd(string typeName)
     {
-        TestDelegate handler = () => TypeNameParser.Parse("a<b|c>>");
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
 
         Assert.That(handler, Throws.InstanceOf<WeavingException>()
             .With.Message.EqualTo("Unexpected generic type end"));
+    }
+
+    [TestCase("a<b|c><")]
+    [TestCase("a<b|c<d|e><")]
+    public void UnexpectedGenericTypeStart(string typeName)
+    {
+        TestDelegate handler = () => TypeNameParser.Parse(typeName);
+
+        Assert.That(handler, Throws.InstanceOf<WeavingException>()
+            .With.Message.EqualTo("Unexpected generic type start"));
     }
 }
