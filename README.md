@@ -39,6 +39,30 @@ var setProperty = methodof(MyClass.set_MyProperty);
 var field = fieldof(MyClass.myField);
 ```
 
+## Specifying Generic Types
+The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
+```
+<fullTypeSpec> ::= <typeName> [<genericSpec>]
+<genericSpec>  ::= "<" <assemblyName> "|" (<typeName> | <genericSpec>) ">"
+<name>         ::= <identifier> { <identifier> }
+<typeName>     ::= <name>
+<assemblyName> ::= <name>
+<identifier>   ::= <letter> | <digit> | <specialChar>
+<letter>       ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" |
+                   "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" |
+                   "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" |
+                   "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+<digit>        ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<specialChar>  ::= "." | "`"
+```
+
+So, if you want to specify a `Dictionary<int, string>`, your typeName would be ``System.Collections.Generic.Dictionary`2<mscorlib|System.Int32,mscorlib|System.String>``.
+
+### Escape Sequences
+If the following chars are part of your typeName, they will need to be escaped with a "\\": `\, <, >, |`.
+
+Also, whitespace is ignored by default, so they also need to be escaped with "\\" if they are part of your typeName.
+
 ## Why not use Expressions
 
 It would also be possible to define members and types using a combination of generics and expressions. This would allow for intellisense at code time. The problem with expressions are as  follows
