@@ -43,7 +43,9 @@ var field = fieldof(MyClass.myField);
 The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 ```
 <fullTypeSpec> ::= <typeName> [<genericSpec>]
-<genericSpec>  ::= "<" <assemblyName> "|" <fullTypeSpec> ">"
+<genericSpec>  ::= "<" <genericTypes> ">"
+<genericTypes> ::= <genericType> ["," <genericTypes>]
+<genericType>  ::= <assemblyName> "|" <fullTypeSpec>
 <name>         ::= <identifier> [<name>]
 <typeName>     ::= <name>
 <assemblyName> ::= <name>
