@@ -43,8 +43,8 @@ var field = fieldof(MyClass.myField);
 The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 ```
 <fullTypeSpec> ::= <typeName> [<genericSpec>]
-<genericSpec>  ::= "<" <assemblyName> "|" (<typeName> | <genericSpec>) ">"
-<name>         ::= <identifier> { <identifier> }
+<genericSpec>  ::= "<" <assemblyName> "|" <fullTypeSpec> ">"
+<name>         ::= <identifier> [<name>]
 <typeName>     ::= <name>
 <assemblyName> ::= <name>
 <identifier>   ::= <letter> | <digit> | <specialChar>
@@ -59,7 +59,7 @@ The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 So, if you want to specify a `Dictionary<int, string>`, your typeName would be ``System.Collections.Generic.Dictionary`2<mscorlib|System.Int32,mscorlib|System.String>``.
 
 ### Escape Sequences
-If the following chars are part of your typeName, they will need to be escaped with a "\\": `\, <, >, |`.
+If the following chars are part of your typeName, they will need to be escaped with a "\\": `"\", "<", ">", "|", ","`.
 
 Also, whitespace is ignored by default, so they also need to be escaped with "\\" if they are part of your typeName.
 
