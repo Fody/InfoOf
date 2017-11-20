@@ -1,4 +1,5 @@
 using System.Linq;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
@@ -24,7 +25,21 @@ public partial class ModuleWeaver
             throw new WeavingException($"Could not find field named '{fieldName}'.");
         }
 
-        var fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
+        FieldReference fieldReference;
+        if (fieldDefinition.DeclaringType.HasGenericParameters &&
+            !typeReference.HasGenericParameters)
+        {
+            var declaringType = new GenericInstanceType(fieldDefinition.DeclaringType);
+            foreach (var parameter in fieldDefinition.DeclaringType.GenericParameters)
+            {
+                declaringType.GenericArguments.Add(parameter);
+            }
+            fieldReference = new FieldReference(fieldDefinition.Name, fieldDefinition.FieldType, declaringType);
+        }
+        else
+        {
+            fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
+        }
 
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(fieldNameInstruction);
