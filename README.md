@@ -5,21 +5,43 @@
 
 ![Icon](https://raw.github.com/Fody/InfoOf/master/Icons/package_icon.png)
 
-Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx) .
+Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
 
 [Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
 
 
-## The nuget package
+## Usage
 
-https://nuget.org/packages/InfoOf.Fody/
+See also [Fody usage](https://github.com/Fody/Fody#usage).
 
-    PM> Install-Package InfoOf.Fody
+
+### NuGet installation
+
+Install the [InfoOf.Fody NuGet package](https://nuget.org/packages/InfoOf.Fody/) and update the [Fody NuGet package](https://nuget.org/packages/Fody/):
+
+```
+PM> Install-Package InfoOf.Fody
+PM> Update-Package Fody
+```
+
+The `Update-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.
+
+
+### Add to FodyWeavers.xml
+
+Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaversxml)
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Weavers>
+  <InfoOf/>
+</Weavers>
+```
 
 
 ### Your Code
 
-``` c#
+```c#
 var type = Info.OfType("AssemblyName", "MyClass");
 var method = Info.OfMethod("AssemblyName", "MyClass", "MyMethod");
 var constructor = Info.OfConstructor("AssemblyName", "MyClass");
@@ -28,9 +50,10 @@ var setProperty = Info.OfPropertySet("AssemblyName", "MyClass", "MyProperty");
 var field = Info.OfField("AssemblyName", "MyClass", "myField");
 ```
 
+
 ### What gets compiled
 
-``` c#
+```c#
 var type = typeof(MyClass);
 var method = methodof(MyClass.MyMethod);
 var constructor = methodof(MyClass..ctor);
@@ -39,8 +62,11 @@ var setProperty = methodof(MyClass.set_MyProperty);
 var field = fieldof(MyClass.myField);
 ```
 
+
 ## Specifying Generic Types
+
 The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
+
 ```
 <fullTypeSpec> ::= <typeName> [<genericSpec>]
 <genericSpec>  ::= "<" <genericTypes> ">"
@@ -58,20 +84,23 @@ The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 <specialChar>  ::= "." | "`"
 ```
 
-So, if you want to specify a `Dictionary<int, string>`, your typeName would be ``System.Collections.Generic.Dictionary`2<mscorlib|System.Int32,mscorlib|System.String>``.
+To specify a `Dictionary<int, string>`, the typeName would be `System.Collections.Generic.Dictionary``2<mscorlib|System.Int32,mscorlib|System.String>`.
+
 
 ### Escape Sequences
+
 If the following chars are part of your typeName, they will need to be escaped with a "\\": `"\", "<", ">", "|", ","`.
 
 Also, whitespace is ignored by default, so they also need to be escaped with "\\" if they are part of your typeName.
+
 
 ## Why not use Expressions
 
 It would also be possible to define members and types using a combination of generics and expressions. This would allow for intellisense at code time. The problem with expressions are as  follows
 
-1. The conversion of expression to "infoof"s is significantly more complex. Making the solution more complex and having a negative impact on compile performance.
-2. Expressions cannot represent non public types or members.
-3. It is difficult to represent all combinations of members using expressions.
+ 1. The conversion of expression to "infoof"s is significantly more complex. Making the solution more complex and having a negative impact on compile performance.
+ 1. Expressions cannot represent non public types or members.
+ 1. It is difficult to represent all combinations of members using expressions.
 
 
 ## But it is not strong typed
