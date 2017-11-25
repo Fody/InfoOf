@@ -18,42 +18,47 @@ public partial class ModuleWeaver
             {
                 continue;
             }
+
             if (methodReference.DeclaringType.FullName != "Info")
             {
                 continue;
             }
+
             var copy = instruction;
             switch (methodReference.Name)
             {
-            case "OfMethod":
-                actions.Add(x => HandleOfMethod(copy, x, methodReference));
-                break;
-            case "OfField":
-                actions.Add(x => HandleOfField(copy, x));
-                break;
-            case "OfType":
-                actions.Add(x => HandleOfType(copy, x));
-                break;
-            case "OfPropertyGet":
-                actions.Add(x => HandleOfPropertyGet(copy, x));
-                break;
-            case "OfPropertySet":
-                actions.Add(x => HandleOfPropertySet(copy, x));
-                break;
-            case "OfConstructor":
-                actions.Add(x => HandleOfConstructor(copy, x, methodReference));
-                break;
+                case "OfMethod":
+                    actions.Add(x => HandleOfMethod(copy, x, methodReference));
+                    break;
+                case "OfField":
+                    actions.Add(x => HandleOfField(copy, x));
+                    break;
+                case "OfType":
+                    actions.Add(x => HandleOfType(copy, x));
+                    break;
+                case "OfPropertyGet":
+                    actions.Add(x => HandleOfPropertyGet(copy, x));
+                    break;
+                case "OfPropertySet":
+                    actions.Add(x => HandleOfPropertySet(copy, x));
+                    break;
+                case "OfConstructor":
+                    actions.Add(x => HandleOfConstructor(copy, x, methodReference));
+                    break;
             }
         }
+
         if (actions.Count == 0)
         {
             return;
         }
+
         method.Body.SimplifyMacros();
         foreach (var action in actions)
         {
             action(method.Body.GetILProcessor());
         }
+
         method.Body.OptimizeMacros();
     }
 
@@ -82,6 +87,7 @@ public partial class ModuleWeaver
             {
                 throw new WeavingException($"Could not find assembly named '{assemblyName}'.");
             }
+
             moduleDefinition = assemblyDefinition.MainModule;
         }
 
@@ -97,6 +103,7 @@ public partial class ModuleWeaver
         {
             return MakeGeneric(exportedType);
         }
+
         throw new WeavingException($"Could not find type named '{typeName}'.");
 
         TypeReference MakeGeneric(TypeReference typeReference)
@@ -118,12 +125,14 @@ public partial class ModuleWeaver
             return ModuleDefinition.ImportReference(typeReference);
         }
     }
+
     string GetLdString(Instruction previous)
     {
         if (previous.OpCode != OpCodes.Ldstr)
         {
             LogError("Expected a string");
         }
-        return (string)previous.Operand;
+
+        return (string) previous.Operand;
     }
 }

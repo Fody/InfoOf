@@ -6,7 +6,6 @@ using Mono.Cecil;
 
 public class MockAssemblyResolver : IAssemblyResolver
 {
-
     public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
     {
         return Resolve(name);

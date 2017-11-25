@@ -25,6 +25,4 @@ public static class TypeReferenceExtensions
         }
         return false;
     }
-
-    
 }

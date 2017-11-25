@@ -17,10 +17,7 @@ public class IntegrationTests
     public IntegrationTests()
     {
         AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"AssemblyToProcess.dll"));
-#if (!DEBUG)
-        beforeAssemblyPath = beforeAssemblyPath.Replace("Debug", "Release");
-#endif
+        beforeAssemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "AssemblyToProcess.dll");
 
         afterAssemblyPath = beforeAssemblyPath.Replace(".dll", "2.dll");
         File.Copy(beforeAssemblyPath, afterAssemblyPath, true);
@@ -412,12 +409,9 @@ public class IntegrationTests
         Assert.IsNotNull(constructorInfo);
     }
 
-#if(DEBUG)
     [Test]
     public void PeVerify()
     {
         Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
     }
-#endif
-
 }

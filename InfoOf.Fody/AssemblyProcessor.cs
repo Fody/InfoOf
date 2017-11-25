@@ -2,7 +2,6 @@ using System.Linq;
 
 public partial class ModuleWeaver
 {
-
     public void ProcessMethods()
     {
         foreach (var type in allTypes)
@@ -13,5 +12,4 @@ public partial class ModuleWeaver
             }
         }
     }
-
 }
