@@ -57,9 +57,20 @@ public partial class ModuleWeaver
         method.Body.OptimizeMacros();
     }
 
-    TypeDefinition GetTypeDefinition(string assemblyName, string typeName)
+    TypeReference GetTypeReference(string assemblyName, string typeName)
+    {
+        var parsedTypeName = TypeNameParser.Parse(typeName);
+        parsedTypeName.Assembly = assemblyName;
+        return GetTypeReference(parsedTypeName);
+    }
+
+    TypeReference GetTypeReference(ParsedTypeName parsedTypeName)
     {
         ModuleDefinition moduleDefinition;
+
+        var assemblyName = parsedTypeName.Assembly;
+        var typeName = parsedTypeName.TypeName;
+
         if (assemblyName == ModuleDefinition.Assembly.Name.Name)
         {
             moduleDefinition = ModuleDefinition;
@@ -77,18 +88,36 @@ public partial class ModuleWeaver
         var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
         if (typeDefinition != null)
         {
-            return typeDefinition;
+            return MakeGeneric(typeDefinition);
         }
 
         var exportedType = moduleDefinition.ExportedTypes
-            .FirstOrDefault(x => x.FullName == typeName);
+            .FirstOrDefault(x => x.FullName == typeName)?.Resolve();
         if (exportedType != null)
         {
-            return exportedType.Resolve();
+            return MakeGeneric(exportedType);
         }
         throw new WeavingException($"Could not find type named '{typeName}'.");
-    }
 
+        TypeReference MakeGeneric(TypeReference typeReference)
+        {
+            if (typeReference.HasGenericParameters && parsedTypeName.GenericParameters != null)
+            {
+                if (typeReference.GenericParameters.Count != parsedTypeName.GenericParameters.Count)
+                {
+                    throw new WeavingException($"Supplied generic parameter arity of {parsedTypeName.GenericParameters.Count} does not match expected arity of {typeReference.GenericParameters.Count} for {parsedTypeName.TypeName}");
+                }
+
+                return ModuleDefinition.ImportReference(
+                    typeReference.MakeGenericInstanceType(
+                        parsedTypeName.GenericParameters
+                            .Select(GetTypeReference)
+                            .ToArray()));
+            }
+
+            return ModuleDefinition.ImportReference(typeReference);
+        }
+    }
     string GetLdString(Instruction previous)
     {
         if (previous.OpCode != OpCodes.Ldstr)

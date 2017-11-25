@@ -1,9 +1,9 @@
 using System.Linq;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
 {
-
     void HandleOfField(Instruction instruction, ILProcessor ilProcessor)
     {
         //Info.OfField("AssemblyToProcess","MethodClass","Field");
@@ -16,7 +16,8 @@ public partial class ModuleWeaver
         var assemblyNameInstruction = typeNameInstruction.Previous;
         var assemblyName = GetLdString(assemblyNameInstruction);
 
-        var typeDefinition = GetTypeDefinition(assemblyName, typeName);
+        var typeReference = GetTypeReference(assemblyName, typeName);
+        var typeDefinition = typeReference.Resolve();
 
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
         if (fieldDefinition == null)
@@ -24,7 +25,21 @@ public partial class ModuleWeaver
             throw new WeavingException($"Could not find field named '{fieldName}'.");
         }
 
-        var fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
+        FieldReference fieldReference;
+        if (fieldDefinition.DeclaringType.HasGenericParameters &&
+            !typeReference.HasGenericParameters)
+        {
+            var declaringType = new GenericInstanceType(fieldDefinition.DeclaringType);
+            foreach (var parameter in fieldDefinition.DeclaringType.GenericParameters)
+            {
+                declaringType.GenericArguments.Add(parameter);
+            }
+            fieldReference = new FieldReference(fieldDefinition.Name, fieldDefinition.FieldType, declaringType);
+        }
+        else
+        {
+            fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
+        }
 
         ilProcessor.Remove(typeNameInstruction);
         ilProcessor.Remove(fieldNameInstruction);
@@ -34,15 +49,13 @@ public partial class ModuleWeaver
 
         if (typeDefinition.HasGenericParameters)
         {
-            var typeReference = ModuleDefinition.ImportReference(typeDefinition);
-            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken,typeReference));
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
             instruction.Operand = getFieldFromHandleGeneric;
         }
         else
         {
-            instruction.Operand = getFieldFromHandle;   
+            instruction.Operand = getFieldFromHandle;
         }
     }
 
 }
-

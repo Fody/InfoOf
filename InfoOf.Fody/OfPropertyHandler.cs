@@ -5,7 +5,6 @@ using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
 {
-
     void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor)
     {
         HandleOfProperty(instruction, ilProcessor, x => x.GetMethod);
@@ -27,7 +26,8 @@ public partial class ModuleWeaver
         var assemblyNameInstruction = typeNameInstruction.Previous;
         var assemblyName = GetLdString(assemblyNameInstruction);
 
-        var typeDefinition = GetTypeDefinition(assemblyName, typeName);
+        var typeReference = GetTypeReference(assemblyName, typeName);
+        var typeDefinition = typeReference.Resolve();
 
         var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName);
 
@@ -51,7 +51,6 @@ public partial class ModuleWeaver
 
         if (typeDefinition.HasGenericParameters)
         {
-            var typeReference = ModuleDefinition.ImportReference(typeDefinition);
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
             instruction.Operand = getMethodFromHandleGeneric;
         }
@@ -62,6 +61,4 @@ public partial class ModuleWeaver
 
         ilProcessor.InsertAfter(instruction, Instruction.Create(OpCodes.Castclass, methodInfoType));
     }
-
-
 }
