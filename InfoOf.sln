@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 15.0.27004.2008
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoOf.Fody", "InfoOf.Fody\InfoOf.Fody.csproj", "{C3578A7B-09A6-4444-9383-0DEAFA4958BD}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoOf", "InfoOf\InfoOf.csproj", "{40235741-D750-45B1-8DC5-49576025ABA9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToReference", "AssemblyToReference\AssemblyToReference.csproj", "{2E1F9913-4AA2-47A5-BC77-A76587F400C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D16BC4B8-BDFB-442F-87DD-DA34230BF490}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
