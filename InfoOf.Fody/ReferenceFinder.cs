@@ -4,18 +4,19 @@ using Mono.Cecil;
 
 public partial class ModuleWeaver
 {
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        yield return "mscorlib";
+        yield return "System.Reflection";
+        yield return "System.Runtime";
+        yield return "System.Core";
+        yield return "netstandard";
+        yield return "System.Private.CoreLib";
+    }
 
     public void FindReferences()
     {
-        var coreTypes = new List<TypeDefinition>();
-        AppendTypes("mscorlib", coreTypes);
-        AppendTypes("System.Reflection", coreTypes);
-        AppendTypes("System.Runtime", coreTypes);
-        AppendTypes("System.Core", coreTypes);
-        AppendTypes("netstandard", coreTypes);
-        AppendTypes("System.Private.CoreLib", coreTypes);
-
-        var methodBaseType = coreTypes.First(x => x.Name == "MethodBase");
+        var methodBaseType = FindType("MethodBase");
         getMethodFromHandle = methodBaseType.Methods
             .First(x => x.Name == "GetMethodFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -28,7 +29,7 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getMethodFromHandleGeneric = ModuleDefinition.ImportReference(getMethodFromHandleGeneric);
 
-        var fieldInfoType = coreTypes.First(x => x.Name == "FieldInfo");
+        var fieldInfoType = FindType("FieldInfo");
         getFieldFromHandle = fieldInfoType.Methods
             .First(x => x.Name == "GetFieldFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -41,30 +42,21 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getFieldFromHandleGeneric = ModuleDefinition.ImportReference(getFieldFromHandleGeneric);
 
-        methodInfoType = coreTypes.First(x => x.Name == "MethodInfo");
+        methodInfoType = FindType("MethodInfo");
         methodInfoType = ModuleDefinition.ImportReference(methodInfoType);
 
-        constructorInfoType = coreTypes.First(x => x.Name == "ConstructorInfo");
+        constructorInfoType = FindType("ConstructorInfo");
         constructorInfoType = ModuleDefinition.ImportReference(constructorInfoType);
 
-        propertyInfoType = coreTypes.First(x => x.Name == "PropertyInfo");
+        propertyInfoType = FindType("PropertyInfo");
         propertyInfoType = ModuleDefinition.ImportReference(propertyInfoType);
 
-        var typeType = coreTypes.First(x => x.Name == "Type");
+        var typeType = FindType("Type");
         getTypeFromHandle = typeType.Methods
             .First(x => x.Name == "GetTypeFromHandle" &&
                         x.Parameters.Count == 1 &&
                         x.Parameters[0].ParameterType.Name == "RuntimeTypeHandle");
         getTypeFromHandle = ModuleDefinition.ImportReference(getTypeFromHandle);
-    }
-
-    void AppendTypes(string name, List<TypeDefinition> coreTypes)
-    {
-        var definition = AssemblyResolver.Resolve(new AssemblyNameReference(name, null));
-        if (definition != null)
-        {
-            coreTypes.AddRange(definition.MainModule.Types);
-        }
     }
 
     MethodReference getMethodFromHandle;

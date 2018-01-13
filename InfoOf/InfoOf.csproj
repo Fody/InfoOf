@@ -5,8 +5,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <Authors>Simon Cropp</Authors>
+    <PackageTags>typeof, methodof, propertyof, ILWeaving, Fody, Cecil</PackageTags>
+    <Description>Exposes 'methodof' and 'propertyof' to any .net language.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs" />
+    <PackageReference Include="Fody" Version="2.3.19" PrivateAssets="None" />
+    <PackageReference Include="FodyPackaging" Version="2.3.19" PrivateAssets="All" />
   </ItemGroup>
 </Project>

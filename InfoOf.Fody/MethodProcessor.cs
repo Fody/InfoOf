@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
@@ -13,8 +14,7 @@ public partial class ModuleWeaver
         foreach (var instruction in method.Body.Instructions
             .Where(i => i.OpCode == OpCodes.Call))
         {
-            var methodReference = instruction.Operand as MethodReference;
-            if (methodReference == null)
+            if (!(instruction.Operand is MethodReference methodReference))
             {
                 continue;
             }
@@ -82,7 +82,7 @@ public partial class ModuleWeaver
         }
         else
         {
-            var assemblyDefinition = AssemblyResolver.Resolve(new AssemblyNameReference(assemblyName, null));
+            var assemblyDefinition = ModuleDefinition.AssemblyResolver.Resolve(new AssemblyNameReference(assemblyName, null));
             if (assemblyDefinition == null)
             {
                 throw new WeavingException($"Could not find assembly named '{assemblyName}'.");
