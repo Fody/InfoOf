@@ -196,8 +196,8 @@ public class IntegrationTests
         var type = assembly.GetType("GenericClass`1");
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
-        Type typeinfo = instance.GetTypeInfo();
-        Assert.NotNull(typeinfo);
+        Type typeInfo = instance.GetTypeInfo();
+        Assert.NotNull(typeInfo);
     }
 
     [Fact]
@@ -206,10 +206,10 @@ public class IntegrationTests
         var type = assembly.GetType("GenericClass`1");
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
-        Type typeinfo = instance.GetTypeInfoGeneric();
-        Assert.NotNull(typeinfo);
+        Type typeInfo = instance.GetTypeInfoGeneric();
+        Assert.NotNull(typeInfo);
 
-        var genericParams = typeinfo.GenericTypeArguments;
+        var genericParams = typeInfo.GenericTypeArguments;
         Assert.NotNull(genericParams);
         Assert.NotEmpty(genericParams);
         Assert.Equal(typeof(IDictionary<string, int>), genericParams[0]);
@@ -337,8 +337,8 @@ public class IntegrationTests
     {
         var type = assembly.GetType("InstanceClass");
         var instance = (dynamic) Activator.CreateInstance(type);
-        Type typeinfo = instance.GetTypeInfo();
-        Assert.NotNull(typeinfo);
+        Type typeInfo = instance.GetTypeInfo();
+        Assert.NotNull(typeInfo);
     }
 
     [Fact]
@@ -346,8 +346,8 @@ public class IntegrationTests
     {
         var type = assembly.GetType("InstanceClass");
         var instance = (dynamic) Activator.CreateInstance(type);
-        Type typeinfo = instance.GetTypeInfoFromInternal();
-        Assert.NotNull(typeinfo);
+        Type typeInfo = instance.GetTypeInfoFromInternal();
+        Assert.NotNull(typeInfo);
     }
 
     [Fact]

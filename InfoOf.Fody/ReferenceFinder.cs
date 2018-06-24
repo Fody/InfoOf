@@ -6,12 +6,7 @@ public partial class ModuleWeaver
 {
     public override IEnumerable<string> GetAssembliesForScanning()
     {
-        yield return "mscorlib";
         yield return "System.Reflection";
-        yield return "System.Runtime";
-        yield return "System.Core";
-        yield return "netstandard";
-        yield return "System.Private.CoreLib";
     }
 
     public void FindReferences()

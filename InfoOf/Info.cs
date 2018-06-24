@@ -60,7 +60,7 @@ public static class Info
     }
 
     /// <summary>
-    /// Inject a MethofOf for a property get.
+    /// Inject a MethodOf for a property get.
     /// </summary>
     public static MethodInfo OfPropertyGet(string assemblyName, string typeName, string propertyName)
     {
@@ -68,7 +68,7 @@ public static class Info
     }
 
     /// <summary>
-    /// Inject a MethofOf for a property set.
+    /// Inject a MethodOf for a property set.
     /// </summary>
     public static MethodInfo OfPropertySet(string assemblyName, string typeName, string propertyName)
     {
