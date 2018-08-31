@@ -10,7 +10,7 @@
     <Description>Exposes 'methodof' and 'propertyof' to any .net language.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="3.1.6" PrivateAssets="None" />
-    <PackageReference Include="FodyPackaging" Version="3.1.6" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="3.1.7" PrivateAssets="None" />
+    <PackageReference Include="FodyPackaging" Version="3.1.7" PrivateAssets="All" />
   </ItemGroup>
 </Project>
