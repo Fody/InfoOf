@@ -19,12 +19,12 @@ See also [Fody usage](https://github.com/Fody/Fody#usage).
 
 Install the [InfoOf.Fody NuGet package](https://nuget.org/packages/InfoOf.Fody/) and update the [Fody NuGet package](https://nuget.org/packages/Fody/):
 
-```
+```powershell
+PM> Install-Package Fody
 PM> Install-Package InfoOf.Fody
-PM> Update-Package Fody
 ```
 
-The `Update-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.
+The `Install-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.
 
 
 ### Add to FodyWeavers.xml
@@ -41,7 +41,7 @@ Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaver
 
 ### Your Code
 
-```c#
+```csharp
 var type = Info.OfType("AssemblyName", "MyClass");
 var method = Info.OfMethod("AssemblyName", "MyClass", "MyMethod");
 var constructor = Info.OfConstructor("AssemblyName", "MyClass");
