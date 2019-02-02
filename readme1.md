@@ -1,18 +1,16 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody) [![NuGet Status](http://img.shields.io/nuget/v/InfoOf.Fody.svg?style=flat&max-age=86400)](https://www.nuget.org/packages/InfoOf.Fody/)
 
 
-## This is an add-in for [Fody](https://github.com/Fody/Fody/) 
+## This is an add-in for [Fody](https://github.com/Fody/Home/)
 
 ![Icon](https://raw.githubusercontent.com/Fody/InfoOf/master/package_icon.png)
 
 Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
 
-[Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
-
 
 ## Usage
 
-See also [Fody usage](https://github.com/Fody/Fody#usage).
+See also [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md).
 
 
 ### NuGet installation
@@ -29,7 +27,7 @@ The `Install-Package Fody` is required since NuGet always defaults to the oldest
 
 ### Add to FodyWeavers.xml
 
-Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaversxml)
+Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pages/usage.md#add-fodyweaversxml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
