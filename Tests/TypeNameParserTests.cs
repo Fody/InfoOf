@@ -1,7 +1,9 @@
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class TypeNameParserTests
+public class TypeNameParserTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Simple()
@@ -253,5 +255,10 @@ public class TypeNameParserTests
     {
         var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
         Assert.Equal("Unexpected generic type start", exception.Message);
+    }
+
+    public TypeNameParserTests(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }

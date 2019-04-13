@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using Fody;
 using Xunit;
-#pragma warning disable 618
+using Xunit.Abstractions;
 
-public class IntegrationTests
+public class IntegrationTests :
+    XunitLoggingBase
 {
     static Assembly assembly;
     static TestResult testResult;
@@ -386,5 +387,10 @@ public class IntegrationTests
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo constructorInfo = instance.GetConstructorInfoGeneric();
         Assert.NotNull(constructorInfo);
+    }
+
+    public IntegrationTests(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }
