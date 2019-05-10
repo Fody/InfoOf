@@ -43,6 +43,16 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void GenericPropertyGetTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceGetPropertyTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void GenericPropertySet()
     {
         var type = assembly.GetType("GenericClass`1");
@@ -59,6 +69,16 @@ public class IntegrationTests :
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetInstanceSetPropertyGeneric();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GenericPropertySetTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceSetPropertyTyped();
         Assert.NotNull(methodInfo);
     }
 
@@ -83,6 +103,16 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void GenericStaticPropertyGetTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticGetPropertyTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void GenericStaticPropertySet()
     {
         var type = assembly.GetType("GenericClass`1");
@@ -99,6 +129,16 @@ public class IntegrationTests :
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetStaticSetPropertyGeneric();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GenericStaticPropertySetTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticSetPropertyTyped();
         Assert.NotNull(methodInfo);
     }
 
@@ -123,6 +163,16 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void GenericFieldTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo fieldInfo = instance.GetInstanceFieldTyped();
+        Assert.NotNull(fieldInfo);
+    }
+
+    [Fact]
     public void GenericStaticField()
     {
         var type = assembly.GetType("GenericClass`1");
@@ -139,6 +189,16 @@ public class IntegrationTests :
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         FieldInfo fieldInfo = instance.GetStaticFieldGeneric();
+        Assert.NotNull(fieldInfo);
+    }
+
+    [Fact]
+    public void GenericStaticFieldTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo fieldInfo = instance.GetStaticFieldTyped();
         Assert.NotNull(fieldInfo);
     }
 
@@ -172,6 +232,16 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void GenericMethodTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetInstanceMethodTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void GenericStaticMethod()
     {
         var type = assembly.GetType("GenericClass`1");
@@ -188,6 +258,16 @@ public class IntegrationTests :
         type = type.MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo methodInfo = instance.GetStaticMethodGeneric();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GenericStaticMethodTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStaticMethodTyped();
         Assert.NotNull(methodInfo);
     }
 
@@ -316,6 +396,15 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void InstanceMethodWithParamsTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetMethodWithParamsTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void StaticMethod()
     {
         var type = assembly.GetType("InstanceClass");
@@ -370,6 +459,15 @@ public class IntegrationTests :
     }
 
     [Fact]
+    public void InstanceConstructorWithParamTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfoWithParamTyped();
+        Assert.NotNull(constructorInfo);
+    }
+
+    [Fact]
     public void GenericConstructor()
     {
         var type = assembly.GetType("GenericClass`1");
@@ -389,7 +487,17 @@ public class IntegrationTests :
         Assert.NotNull(constructorInfo);
     }
 
-    public IntegrationTests(ITestOutputHelper output) : 
+    [Fact]
+    public void GenericConstructorTyped()
+    {
+        var type = assembly.GetType("GenericClass`1");
+        type = type.MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfoTyped();
+        Assert.NotNull(constructorInfo);
+    }
+
+    public IntegrationTests(ITestOutputHelper output) :
         base(output)
     {
     }

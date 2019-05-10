@@ -3,7 +3,7 @@ using System.Reflection;
 
 public class GenericClass<T>
 {
-    string instanceField;
+    string instanceField = string.Empty;
 
     public FieldInfo GetInstanceField()
     {
@@ -15,7 +15,12 @@ public class GenericClass<T>
         return Info.OfField("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "instanceField");
     }
 
-    static string staticField;
+    public FieldInfo GetInstanceFieldTyped()
+    {
+        return Info.OfField<GenericClass<int>>(nameof(instanceField));
+    }
+
+    static string staticField = string.Empty;
 
     public FieldInfo GetStaticField()
     {
@@ -25,6 +30,11 @@ public class GenericClass<T>
     public FieldInfo GetStaticFieldGeneric()
     {
         return Info.OfField("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "staticField");
+    }
+
+    public FieldInfo GetStaticFieldTyped()
+    {
+        return Info.OfField<GenericClass<int>>(nameof(staticField));
     }
 
     string InstanceProperty { get; set; }
@@ -39,6 +49,11 @@ public class GenericClass<T>
         return Info.OfPropertyGet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "InstanceProperty");
     }
 
+    public MethodInfo GetInstanceGetPropertyTyped()
+    {
+        return Info.OfPropertyGet<GenericClass<int>>(nameof(InstanceProperty));
+    }
+
     public MethodInfo GetInstanceSetProperty()
     {
         return Info.OfPropertySet("AssemblyToProcess", "GenericClass`1", "InstanceProperty");
@@ -47,6 +62,11 @@ public class GenericClass<T>
     public MethodInfo GetInstanceSetPropertyGeneric()
     {
         return Info.OfPropertySet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "InstanceProperty");
+    }
+
+    public MethodInfo GetInstanceSetPropertyTyped()
+    {
+        return Info.OfPropertySet<GenericClass<int>>(nameof(InstanceProperty));
     }
 
     static string StaticProperty { get; set; }
@@ -61,6 +81,11 @@ public class GenericClass<T>
         return Info.OfPropertyGet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "StaticProperty");
     }
 
+    public MethodInfo GetStaticGetPropertyTyped()
+    {
+        return Info.OfPropertyGet<GenericClass<int>>(nameof(StaticProperty));
+    }
+
     public MethodInfo GetStaticSetProperty()
     {
         return Info.OfPropertySet("AssemblyToProcess", "GenericClass`1", "StaticProperty");
@@ -69,6 +94,11 @@ public class GenericClass<T>
     public MethodInfo GetStaticSetPropertyGeneric()
     {
         return Info.OfPropertySet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "StaticProperty");
+    }
+
+    public MethodInfo GetStaticSetPropertyTyped()
+    {
+        return Info.OfPropertySet<GenericClass<int>>(nameof(StaticProperty));
     }
 
     void InstanceMethod()
@@ -89,6 +119,11 @@ public class GenericClass<T>
         return Info.OfMethod("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "InstanceMethod");
     }
 
+    public MethodInfo GetInstanceMethodTyped()
+    {
+        return Info.OfMethod<GenericClass<int>>(nameof(InstanceMethod));
+    }
+
     public MethodInfo GetStaticMethod()
     {
         return Info.OfMethod("AssemblyToProcess", "GenericClass`1", "StaticMethod");
@@ -97,6 +132,11 @@ public class GenericClass<T>
     public MethodInfo GetStaticMethodGeneric()
     {
         return Info.OfMethod("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "StaticMethod");
+    }
+
+    public MethodInfo GetStaticMethodTyped()
+    {
+        return Info.OfMethod<GenericClass<int>>(nameof(StaticMethod));
     }
 
     public Type GetTypeInfo()
@@ -120,5 +160,10 @@ public class GenericClass<T>
     public ConstructorInfo GetConstructorInfoGeneric()
     {
         return Info.OfConstructor("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>");
+    }
+
+    public ConstructorInfo GetConstructorInfoTyped()
+    {
+        return Info.OfConstructor<GenericClass<int>>();
     }
 }
