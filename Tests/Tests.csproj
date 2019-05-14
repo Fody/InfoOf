@@ -6,14 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="FodyHelpers" Version="5.0.6" />
+    <PackageReference Include="FodyHelpers" Version="5.0.5" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="XunitLogger" Version="2.0.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AssemblyToReference\AssemblyToReference.csproj" />
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
     <ProjectReference Include="..\InfoOf\InfoOf.csproj" />
