@@ -15,7 +15,8 @@ public partial class ModuleWeaver
         Instruction typeNameInstruction;
         List<string> parameters;
         Instruction parametersInstruction = null;
-        if (ofConstructorReference.Parameters.Count == 3)
+
+        if (ofConstructorReference.Parameters.Count == 1 || ofConstructorReference.Parameters.Count == 3)
         {
             parametersInstruction = instruction.Previous;
             parameters = GetLdString(parametersInstruction)
@@ -32,12 +33,7 @@ public partial class ModuleWeaver
 
         const string methodName = ".ctor";
 
-        var typeName = GetLdString(typeNameInstruction);
-
-        var assemblyNameInstruction = typeNameInstruction.Previous;
-        var assemblyName = GetLdString(assemblyNameInstruction);
-
-        var typeReference = GetTypeReference(assemblyName, typeName);
+        var typeReference = LoadTypeReference(ofConstructorReference, ilProcessor, typeNameInstruction);
         var typeDefinition = typeReference.Resolve();
 
         var methodDefinitions = typeDefinition.FindMethodDefinitions(methodName, parameters);
@@ -53,14 +49,13 @@ public partial class ModuleWeaver
 
         var methodReference = ModuleDefinition.ImportReference(methodDefinitions[0]);
 
-        ilProcessor.Remove(typeNameInstruction);
         if (parametersInstruction != null)
         {
             ilProcessor.Remove(parametersInstruction);
         }
 
-        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
-        assemblyNameInstruction.Operand = methodReference;
+        var tokenInstruction = Instruction.Create(OpCodes.Ldtoken, methodReference);
+        ilProcessor.InsertBefore(instruction, tokenInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {

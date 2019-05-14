@@ -5,19 +5,13 @@ using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
 {
-    void HandleOfField(Instruction instruction, ILProcessor ilProcessor)
+    void HandleOfField(Instruction instruction, ILProcessor ilProcessor, MethodReference ofFieldReference)
     {
         //Info.OfField("AssemblyToProcess","MethodClass","Field");
         var fieldNameInstruction = instruction.Previous;
         var fieldName = GetLdString(fieldNameInstruction);
 
-        var typeNameInstruction = fieldNameInstruction.Previous;
-        var typeName = GetLdString(typeNameInstruction);
-
-        var assemblyNameInstruction = typeNameInstruction.Previous;
-        var assemblyName = GetLdString(assemblyNameInstruction);
-
-        var typeReference = GetTypeReference(assemblyName, typeName);
+        var typeReference = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
         var typeDefinition = typeReference.Resolve();
 
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
@@ -42,11 +36,8 @@ public partial class ModuleWeaver
             fieldReference = ModuleDefinition.ImportReference(fieldDefinition);
         }
 
-        ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Remove(fieldNameInstruction);
-
-        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
-        assemblyNameInstruction.Operand = fieldReference;
+        fieldNameInstruction.OpCode = OpCodes.Ldtoken;
+        fieldNameInstruction.Operand = fieldReference;
 
         if (typeDefinition.HasGenericParameters)
         {

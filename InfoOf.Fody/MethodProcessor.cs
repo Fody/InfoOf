@@ -31,16 +31,16 @@ public partial class ModuleWeaver
                     actions.Add(x => HandleOfMethod(copy, x, methodReference));
                     break;
                 case "OfField":
-                    actions.Add(x => HandleOfField(copy, x));
+                    actions.Add(x => HandleOfField(copy, x, methodReference));
                     break;
                 case "OfType":
                     actions.Add(x => HandleOfType(copy, x));
                     break;
                 case "OfPropertyGet":
-                    actions.Add(x => HandleOfPropertyGet(copy, x));
+                    actions.Add(x => HandleOfPropertyGet(copy, x, methodReference));
                     break;
                 case "OfPropertySet":
-                    actions.Add(x => HandleOfPropertySet(copy, x));
+                    actions.Add(x => HandleOfPropertySet(copy, x, methodReference));
                     break;
                 case "OfConstructor":
                     actions.Add(x => HandleOfConstructor(copy, x, methodReference));

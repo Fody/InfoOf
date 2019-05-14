@@ -54,6 +54,10 @@ public class InstanceClass
         return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams", "String, Int32");
     }
 
+    public MethodInfo GetMethodWithParamsTyped()
+    {
+        return Info.OfMethod<InstanceClass>(nameof(MethodWithParams), "String, Int32");
+    }
 
     void InstanceMethod() { }
     public MethodInfo GetInstanceMethod()
@@ -84,5 +88,10 @@ public class InstanceClass
     public ConstructorInfo GetConstructorInfoWithParam()
     {
         return Info.OfConstructor("AssemblyToProcess", "InstanceClass", "String");
+    }
+
+    public ConstructorInfo GetConstructorInfoWithParamTyped()
+    {
+        return Info.OfConstructor<InstanceClass>("String");
     }
 }

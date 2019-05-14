@@ -6,28 +6,22 @@ using Mono.Cecil.Cil;
 
 public partial class ModuleWeaver
 {
-    void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor)
+    void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertyGetReference)
     {
-        HandleOfProperty(instruction, ilProcessor, x => x.GetMethod);
+        HandleOfProperty(instruction, ilProcessor, ofPropertyGetReference, x => x.GetMethod);
     }
 
-    void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor)
+    void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertySetReference)
     {
-        HandleOfProperty(instruction, ilProcessor, x => x.SetMethod);
+        HandleOfProperty(instruction, ilProcessor, ofPropertySetReference, x => x.SetMethod);
     }
 
-    void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, Func<PropertyDefinition, MethodDefinition> func)
+    void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, MethodReference propertyReference, Func<PropertyDefinition, MethodDefinition> func)
     {
         var propertyNameInstruction = instruction.Previous;
         var propertyName = GetLdString(propertyNameInstruction);
 
-        var typeNameInstruction = propertyNameInstruction.Previous;
-        var typeName = GetLdString(typeNameInstruction);
-
-        var assemblyNameInstruction = typeNameInstruction.Previous;
-        var assemblyName = GetLdString(assemblyNameInstruction);
-
-        var typeReference = GetTypeReference(assemblyName, typeName);
+        var typeReference = LoadTypeReference(propertyReference, ilProcessor, propertyNameInstruction.Previous);
         var typeDefinition = typeReference.Resolve();
 
         var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName);
@@ -44,11 +38,8 @@ public partial class ModuleWeaver
 
         var methodReference = ModuleDefinition.ImportReference(methodDefinition);
 
-        ilProcessor.Remove(typeNameInstruction);
-        ilProcessor.Remove(propertyNameInstruction);
-
-        assemblyNameInstruction.OpCode = OpCodes.Ldtoken;
-        assemblyNameInstruction.Operand = methodReference;
+        propertyNameInstruction.OpCode = OpCodes.Ldtoken;
+        propertyNameInstruction.Operand = methodReference;
 
         if (typeDefinition.HasGenericParameters)
         {
