@@ -10,7 +10,7 @@
     <Description>Exposes 'methodof' and 'propertyof' to any .net language.</Description>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <PackageIconUrl>https://raw.githubusercontent.com/Fody/InfoOf/master/package_icon.png</PackageIconUrl>
-    <PackageProjectUrl>http://github.com/Fody/InfoOf</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Fody/InfoOf</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="None" />
