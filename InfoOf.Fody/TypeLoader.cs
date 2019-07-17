@@ -3,11 +3,11 @@ using Mono.Cecil.Cil;
 
 partial class ModuleWeaver
 {
-    TypeReference LoadTypeReference(MethodReference methodReference, ILProcessor processor, Instruction instruction)
+    (TypeReference, Instruction) LoadTypeReference(MethodReference methodReference, ILProcessor processor, Instruction instruction)
     {
         if (methodReference is GenericInstanceMethod genericReference)
         {
-            return ModuleDefinition.ImportReference(genericReference.GenericArguments[0]);
+            return (ModuleDefinition.ImportReference(genericReference.GenericArguments[0]), instruction);
         }
 
         var typeNameInstruction = instruction;
@@ -19,6 +19,6 @@ partial class ModuleWeaver
         processor.Remove(typeNameInstruction);
         processor.Remove(assemblyNameInstruction);
 
-        return GetTypeReference(assemblyName, typeName);
+        return (GetTypeReference(assemblyName, typeName), assemblyNameInstruction);
     }
 }

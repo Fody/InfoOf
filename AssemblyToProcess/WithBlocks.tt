@@ -1,0 +1,92 @@
+﻿<#@ template debug="true" language="C#" #>
+<#@ output extension="Generated.cs" #>
+<#@ assembly name="System.Core" #>
+using System.Reflection;
+<#= GenerateClass("WithBlocks", "WithBlocks", "WithBlocks") #>
+<#= GenerateClass("WithBlocksGeneric<T>", "WithBlocksGeneric", "WithBlocksGeneric`1") #>
+<#+
+string GenerateClass(string classDefinition, string className, string classRef) => $@"
+public class {classDefinition}
+{{
+    public {className}() {{}}
+    public {className}(int _) {{}}
+
+    int instanceField = 0;
+
+    int InstanceMethod() => 0;
+    int InstanceMethodWithParam(int i) => i;
+
+    int InstanceProperty {{ get; set; }}
+
+    {GenerateBlocks("ConstructorInfo", "OfConstructor", classRef, "", false)}
+
+    {GenerateBlocks("ConstructorInfo", "OfConstructor", classRef, "", true)}
+
+    {GenerateBlocks("FieldInfo", "OfField", classRef, ", nameof(instanceField)", false)}
+
+    {GenerateBlocks("MethodInfo", "OfMethod", classRef, ", nameof(InstanceMethod)", false)}
+
+    {GenerateBlocks("MethodInfo", "OfMethod", classRef, ", nameof(InstanceMethodWithParam)", true)}
+
+    {GenerateBlocks("MethodInfo", "OfPropertyGet", classRef, ", nameof(InstanceProperty)", false)}
+
+    {GenerateBlocks("MethodInfo", "OfPropertySet", classRef, ", nameof(InstanceProperty)", false)}
+}}";
+
+string GenerateBlocks(string infoType, string infoOf, string className, string infoParams, bool withParam)
+{
+    var ofModifier = withParam ? ", \"Int32\"" : "";
+    var nameModifier = withParam ? "WithParam" : "";
+
+    var nonGenericCall = $"Info.{infoOf}(\"AssemblyToProcess\", \"{className}\"{infoParams}{ofModifier});";
+    var genericCall = $"Info.{infoOf}<{className.Replace("`1", "<int>")}>({infoParams}{ofModifier});";
+
+    return $@"{GenerateBlocksCore(infoType, infoOf + nameModifier, nonGenericCall)}
+
+    {GenerateBlocksCore(infoType, infoOf + "Typed" + nameModifier, genericCall)}".Replace("(, ", "(");
+}
+
+string GenerateBlocksCore(string infoType, string methodName, string infoCall) =>
+    $@"public {infoType} Get{methodName}_ForBlock()
+    {{
+        {infoType} info = null;
+
+        for (var i = 0; i < 1; ++i)
+        {{
+            info = {infoCall}
+        }}
+
+        return info;
+    }}
+
+    public {infoType} Get{methodName}_SwitchBlock()
+    {{
+        int i;
+        switch (InstanceMethod())
+        {{
+            case 0: i = 0; break;
+            case 1: i = 1; break;
+            default: i = -1; break;
+        }}
+
+        var info = {infoCall}
+
+        InstanceMethodWithParam(i);
+
+        return info;
+    }}
+
+    public {infoType} Get{methodName}_TryBlock()
+    {{
+        try
+        {{
+            InstanceMethod();
+        }}
+        catch
+        {{
+            throw;
+        }}
+
+        return {infoCall}
+    }}";
+#>

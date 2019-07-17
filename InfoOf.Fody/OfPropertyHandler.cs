@@ -21,7 +21,7 @@ public partial class ModuleWeaver
         var propertyNameInstruction = instruction.Previous;
         var propertyName = GetLdString(propertyNameInstruction);
 
-        var typeReference = LoadTypeReference(propertyReference, ilProcessor, propertyNameInstruction.Previous);
+        var (typeReference, toReplace) = LoadTypeReference(propertyReference, ilProcessor, propertyNameInstruction.Previous);
         var typeDefinition = typeReference.Resolve();
 
         var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName);
@@ -40,6 +40,8 @@ public partial class ModuleWeaver
 
         propertyNameInstruction.OpCode = OpCodes.Ldtoken;
         propertyNameInstruction.Operand = methodReference;
+
+        ilProcessor.Body.UpdateInstructions(toReplace, propertyNameInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {

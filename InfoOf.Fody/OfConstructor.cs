@@ -16,24 +16,30 @@ public partial class ModuleWeaver
         List<string> parameters;
         Instruction parametersInstruction = null;
 
-        if (ofConstructorReference.Parameters.Count == 1 || ofConstructorReference.Parameters.Count == 3)
+        switch (ofConstructorReference.Parameters.Count)
         {
-            parametersInstruction = instruction.Previous;
-            parameters = GetLdString(parametersInstruction)
-                .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim())
-                .ToList();
-            typeNameInstruction = parametersInstruction.Previous;
-        }
-        else
-        {
-            typeNameInstruction = instruction.Previous;
-            parameters = new List<string>();
+            case 0:
+                typeNameInstruction = instruction;
+                parameters = new List<string>();
+                break;
+            case 1:
+            case 3:
+                parametersInstruction = instruction.Previous;
+                parameters = GetLdString(parametersInstruction)
+                    .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => x.Trim())
+                    .ToList();
+                typeNameInstruction = parametersInstruction.Previous;
+                break;
+            default:
+                typeNameInstruction = instruction.Previous;
+                parameters = new List<string>();
+                break;
         }
 
         const string methodName = ".ctor";
 
-        var typeReference = LoadTypeReference(ofConstructorReference, ilProcessor, typeNameInstruction);
+        var (typeReference, toReplace) = LoadTypeReference(ofConstructorReference, ilProcessor, typeNameInstruction);
         var typeDefinition = typeReference.Resolve();
 
         var methodDefinitions = typeDefinition.FindMethodDefinitions(methodName, parameters);
@@ -56,6 +62,8 @@ public partial class ModuleWeaver
 
         var tokenInstruction = Instruction.Create(OpCodes.Ldtoken, methodReference);
         ilProcessor.InsertBefore(instruction, tokenInstruction);
+
+        ilProcessor.Body.UpdateInstructions(toReplace, tokenInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {

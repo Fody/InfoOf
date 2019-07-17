@@ -5,7 +5,7 @@ using Fody;
 using Xunit;
 using Xunit.Abstractions;
 
-public class IntegrationTests :
+public partial class IntegrationTests :
     XunitLoggingBase
 {
     static Assembly assembly;

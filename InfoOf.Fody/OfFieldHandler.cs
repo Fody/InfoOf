@@ -11,7 +11,7 @@ public partial class ModuleWeaver
         var fieldNameInstruction = instruction.Previous;
         var fieldName = GetLdString(fieldNameInstruction);
 
-        var typeReference = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
+        var (typeReference, toReplace) = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
         var typeDefinition = typeReference.Resolve();
 
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
@@ -39,6 +39,8 @@ public partial class ModuleWeaver
         fieldNameInstruction.OpCode = OpCodes.Ldtoken;
         fieldNameInstruction.Operand = fieldReference;
 
+        ilProcessor.Body.UpdateInstructions(toReplace, fieldNameInstruction);
+
         if (typeDefinition.HasGenericParameters)
         {
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
@@ -49,5 +51,4 @@ public partial class ModuleWeaver
             instruction.Operand = getFieldFromHandle;
         }
     }
-
 }
