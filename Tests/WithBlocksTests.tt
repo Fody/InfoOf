@@ -1,0 +1,67 @@
+﻿<#@ template debug="true" language="C#" #>
+<#@ output extension="Generated.cs" #>
+<#@ assembly name="System.Core" #>
+using System;
+using System.Reflection;
+using Xunit;
+
+partial class IntegrationTests
+{
+    <#= GenerateTests("ConstructorInfo", "OfConstructor") #>
+
+    <#= GenerateTests("ConstructorInfo", "OfConstructor", "WithParam") #>
+
+    <#= GenerateTests("FieldInfo", "OfField") #>
+
+    <#= GenerateTests("MethodInfo", "OfMethod") #>
+
+    <#= GenerateTests("MethodInfo", "OfMethod", "WithParam") #>
+
+    <#= GenerateTests("MethodInfo", "OfPropertyGet") #>
+
+    <#= GenerateTests("MethodInfo", "OfPropertySet") #>
+}
+<#+
+string GenerateTests(string infoType, string infoOf, string withModifier = "") =>
+    $@"{GenerateTestsCore(infoType, infoOf, withModifier, false)}
+
+    {GenerateTestsCore(infoType, infoOf, "Typed" + withModifier, false)}
+
+    {GenerateTestsCore(infoType, infoOf, withModifier, true)}
+
+    {GenerateTestsCore(infoType, infoOf, "Typed" + withModifier, true)}";
+
+string GenerateTestsCore(string infoType, string infoOf, string withModifier, bool generic)
+{
+    var classModifier = generic ? "Generic" : "";
+    var classRefModifier = generic ? "Generic`1" : "";
+    var typeModifier = generic ? ".MakeGenericType(typeof(int))" : "";
+
+    return $@"[Fact]
+    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_ForBlock()
+    {{
+        var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
+        var instance = (dynamic) Activator.CreateInstance(type);
+        {infoType} info = instance.Get{infoOf}{withModifier}_ForBlock();
+        Assert.NotNull(info);
+    }}
+
+    [Fact]
+    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_SwitchBlock()
+    {{
+        var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
+        var instance = (dynamic) Activator.CreateInstance(type);
+        {infoType} info = instance.Get{infoOf}{withModifier}_SwitchBlock();
+        Assert.NotNull(info);
+    }}
+
+    [Fact]
+    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_TryBlock()
+    {{
+        var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
+        var instance = (dynamic) Activator.CreateInstance(type);
+        {infoType} info = instance.Get{infoOf}{withModifier}_TryBlock();
+        Assert.NotNull(info);
+    }}";
+}
+#>

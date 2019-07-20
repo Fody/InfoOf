@@ -16,4 +16,20 @@
     <ProjectReference Include="..\InfoOf\InfoOf.csproj" />
     <ProjectReference Include="..\InfoOf.Fody\InfoOf.Fody.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="WithBlocksTests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WithBlocksTests.Generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="WithBlocksTests.Generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WithBlocksTests.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

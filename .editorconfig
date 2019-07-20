@@ -63,6 +63,9 @@ csharp_new_line_before_members_in_anonymous_types = true:error
 #braces
 #csharp_prefer_braces = true:error
 
+# Space preferences
+csharp_space_after_cast = true:error
+
 # msbuild
 [*.{csproj,targets,props}]
 indent_size = 2
