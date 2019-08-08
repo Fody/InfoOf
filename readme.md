@@ -127,4 +127,4 @@ It would also be possible to define members and types using a combination of gen
 
 ## Icon
 
-<a href="http://thenounproject.com/noun/information/#icon-No9867" target="_blank">Information</a> designed by <a href="http://thenounproject.com/Fhlcreative" target="_blank">Phil Goodwin</a> from The Noun Project
+[Information](https://thenounproject.com/noun/information/#icon-No9867) designed by [Phil Goodwin](https://thenounproject.com/Fhlcreative) from [The Noun Project](https://thenounproject.com).
