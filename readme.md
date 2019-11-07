@@ -65,7 +65,7 @@ var setPropertyTyped = Info.OfPropertySet<MyClass>("MyProperty");
 var field = Info.OfField("AssemblyName", "MyClass", "myField");
 var fieldTyped = Info.OfField<MyClass>("myField");
 ```
-<sup>[snippet source](/Tests/Snippets.cs#L10-L29) / [anchor](#snippet-usage)</sup>
+<sup>[snippet source](/Tests/Snippets.cs#L5-L24) / [anchor](#snippet-usage)</sup>
 <!-- endsnippet -->
 
 
@@ -91,7 +91,7 @@ var setPropertyTyped = methodof(MyClass.set_MyProperty);
 var field = fieldof(MyClass.myField);
 var fieldTyped = fieldof(MyClass.myField);
 ```
-<sup>[snippet source](/Tests/Snippets.cs#L32-L51) / [anchor](#snippet-usagecompiled)</sup>
+<sup>[snippet source](/Tests/Snippets.cs#L27-L46) / [anchor](#snippet-usagecompiled)</sup>
 <!-- endsnippet -->
 
 

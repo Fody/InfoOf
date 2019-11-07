@@ -1,11 +1,6 @@
-﻿using Xunit;
-using Xunit.Abstractions;
-
-public class Snippets :
-    XunitApprovalBase
+﻿public class Snippets
 {
-    [Fact]
-    public void Usage()
+    void Usage()
     {
         #region usage
 
@@ -50,11 +45,6 @@ var fieldTyped = fieldof(MyClass.myField);
 
 #endregion
 */
-    }
-
-    public Snippets(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }
 
