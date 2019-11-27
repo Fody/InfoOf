@@ -1,9 +1,10 @@
 using Fody;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class TypeNameParserTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void Simple()
@@ -257,7 +258,7 @@ public class TypeNameParserTests :
         Assert.Equal("Unexpected generic type start", exception.Message);
     }
 
-    public TypeNameParserTests(ITestOutputHelper output) : 
+    public TypeNameParserTests(ITestOutputHelper output) :
         base(output)
     {
     }
