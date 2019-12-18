@@ -5,7 +5,8 @@ Source File: /readme.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
-[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody) [![NuGet Status](https://img.shields.io/nuget/v/InfoOf.Fody.svg?style=flat&max-age=86400)](https://www.nuget.org/packages/InfoOf.Fody/)
+[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
+[![NuGet Status](https://img.shields.io/nuget/v/InfoOf.Fody.svg)](https://www.nuget.org/packages/InfoOf.Fody/)
 
 
 ## This is an add-in for [Fody](https://github.com/Fody/Home/)
@@ -65,7 +66,7 @@ var setPropertyTyped = Info.OfPropertySet<MyClass>("MyProperty");
 var field = Info.OfField("AssemblyName", "MyClass", "myField");
 var fieldTyped = Info.OfField<MyClass>("myField");
 ```
-<sup>[snippet source](/Tests/Snippets.cs#L5-L24) / [anchor](#snippet-usage)</sup>
+<sup><a href='/Tests/Snippets.cs#L5-L24' title='File snippet `usage` was extracted from'>snippet source</a> | <a href='#snippet-usage' title='Navigate to start of snippet `usage`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
@@ -91,7 +92,7 @@ var setPropertyTyped = methodof(MyClass.set_MyProperty);
 var field = fieldof(MyClass.myField);
 var fieldTyped = fieldof(MyClass.myField);
 ```
-<sup>[snippet source](/Tests/Snippets.cs#L27-L46) / [anchor](#snippet-usagecompiled)</sup>
+<sup><a href='/Tests/Snippets.cs#L27-L46' title='File snippet `usagecompiled` was extracted from'>snippet source</a> | <a href='#snippet-usagecompiled' title='Navigate to start of snippet `usagecompiled`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
