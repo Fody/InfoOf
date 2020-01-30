@@ -5,15 +5,17 @@ Source File: /readme.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
+# <img src="/package_icon.png" height="30px"> InfoOf.Fody
+
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
 [![NuGet Status](https://img.shields.io/nuget/v/InfoOf.Fody.svg)](https://www.nuget.org/packages/InfoOf.Fody/)
 
-
-## This is an add-in for [Fody](https://github.com/Fody/Home/)
-
-![Icon](https://raw.githubusercontent.com/Fody/InfoOf/master/package_icon.png)
-
 Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
+
+
+### This is an add-in for [Fody](https://github.com/Fody/Home/)
+
+**It is expected that all developers using Fody either [become a Patron on OpenCollective](https://opencollective.com/fody/), or have a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-fody?utm_source=nuget-fody&utm_medium=referral&utm_campaign=enterprise).**
 
 
 ## Usage
