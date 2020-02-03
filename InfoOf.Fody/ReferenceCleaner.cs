@@ -7,11 +7,11 @@ public partial class ModuleWeaver
         var referenceToRemove = ModuleDefinition.AssemblyReferences.FirstOrDefault(x => x.Name == "InfoOf");
         if (referenceToRemove == null)
         {
-            LogInfo("\tNo reference to 'InfoOf.dll' found. References not modified.");
+            WriteInfo("\tNo reference to 'InfoOf.dll' found. References not modified.");
             return;
         }
 
         ModuleDefinition.AssemblyReferences.Remove(referenceToRemove);
-        LogInfo("\tRemoving reference to 'InfoOf.dll'.");
+        WriteInfo("\tRemoving reference to 'InfoOf.dll'.");
     }
 }

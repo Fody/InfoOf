@@ -11,7 +11,7 @@ public partial class ModuleWeaver
 
     public void FindReferences()
     {
-        var methodBaseType = FindType("MethodBase");
+        var methodBaseType = FindTypeDefinition("MethodBase");
         getMethodFromHandle = methodBaseType.Methods
             .First(x => x.Name == "GetMethodFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -24,7 +24,7 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getMethodFromHandleGeneric = ModuleDefinition.ImportReference(getMethodFromHandleGeneric);
 
-        var fieldInfoType = FindType("FieldInfo");
+        var fieldInfoType = FindTypeDefinition("FieldInfo");
         getFieldFromHandle = fieldInfoType.Methods
             .First(x => x.Name == "GetFieldFromHandle" &&
                         x.Parameters.Count == 1 &&
@@ -37,16 +37,16 @@ public partial class ModuleWeaver
                         x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getFieldFromHandleGeneric = ModuleDefinition.ImportReference(getFieldFromHandleGeneric);
 
-        methodInfoType = FindType("MethodInfo");
+        methodInfoType = FindTypeDefinition("MethodInfo");
         methodInfoType = ModuleDefinition.ImportReference(methodInfoType);
 
-        constructorInfoType = FindType("ConstructorInfo");
+        constructorInfoType = FindTypeDefinition("ConstructorInfo");
         constructorInfoType = ModuleDefinition.ImportReference(constructorInfoType);
 
-        propertyInfoType = FindType("PropertyInfo");
+        propertyInfoType = FindTypeDefinition("PropertyInfo");
         propertyInfoType = ModuleDefinition.ImportReference(propertyInfoType);
 
-        var typeType = FindType("Type");
+        var typeType = FindTypeDefinition("Type");
         getTypeFromHandle = typeType.Methods
             .First(x => x.Name == "GetTypeFromHandle" &&
                         x.Parameters.Count == 1 &&

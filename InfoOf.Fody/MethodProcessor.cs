@@ -130,7 +130,7 @@ public partial class ModuleWeaver
     {
         if (previous.OpCode != OpCodes.Ldstr)
         {
-            LogError("Expected a string");
+            WriteError("Expected a string");
         }
 
         return (string) previous.Operand;

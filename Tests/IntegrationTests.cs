@@ -16,7 +16,7 @@ public partial class IntegrationTests :
     {
         var weavingTask = new ModuleWeaver();
 #if(NET46)
-        testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll",ignoreCodes:new []{ "0x80131869"});
+        testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", ignoreCodes:new []{ "0x80131869"});
 #else
         testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
 #endif
