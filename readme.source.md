@@ -39,7 +39,7 @@ Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pa
 ```
 
 
-### Your Code
+### Input Code
 
 snippet: usage
 
@@ -75,9 +75,9 @@ To specify a `Dictionary<int, string>`, the typeName would be `System.Collection
 
 ### Escape Sequences
 
-If the following chars are part of your typeName, they will need to be escaped with a "\\": `"\", "<", ">", "|", ","`.
+If the following chars are part of the typeName, they will need to be escaped with a "\\": `"\", "<", ">", "|", ","`.
 
-Also, whitespace is ignored by default, so they also need to be escaped with "\\" if they are part of your typeName.
+Also, whitespace is ignored by default, so they also need to be escaped with "\\" if part of the typeName.
 
 
 ## Why not use Expressions
@@ -91,7 +91,7 @@ It would also be possible to define members and types using a combination of gen
 
 ## But it is not strong typed
 
-**Actually it is strong typed**, it just does not have intellisense. If any of the strings passed into `Info` do not map to a type or member it will log a build error and stop the build.
+**Actually it is strong typed**, it does not have intellisense. If any of the strings passed into `Info` do not map to a type or member it will log a build error and stop the build.
 
 
 ## Security contact information
