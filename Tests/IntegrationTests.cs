@@ -397,6 +397,15 @@ public partial class IntegrationTests :
     }
 
     [Fact]
+    public void InstanceMethodWithParamsOmitted()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetMethodTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void InstanceMethodWithParamsTyped()
     {
         var type = assembly.GetType("InstanceClass");
