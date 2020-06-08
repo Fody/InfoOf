@@ -43,8 +43,6 @@ public class InstanceClass
         return Info.OfPropertySet("AssemblyToProcess", "InstanceClass", "StaticProperty");
     }
 
-
-
     // ReSharper disable UnusedParameter.Local
     static void MethodWithParams(string param1, int param2) { }
     // ReSharper restore UnusedParameter.Local
@@ -52,6 +50,11 @@ public class InstanceClass
     public MethodInfo GetMethodWithParams()
     {
         return Info.OfMethod("AssemblyToProcess", "InstanceClass", "MethodWithParams", "String, Int32");
+    }
+
+    public MethodInfo GetMethodTyped()
+    {
+        return Info.OfMethod<InstanceClass>(nameof(MethodWithParams));
     }
 
     public MethodInfo GetMethodWithParamsTyped()
