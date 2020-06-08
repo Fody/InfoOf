@@ -457,6 +457,7 @@ public partial class IntegrationTests :
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo constructorInfo = instance.GetConstructorInfo();
         Assert.NotNull(constructorInfo);
+        Assert.Empty(constructorInfo.GetParameters());
     }
 
     [Fact]

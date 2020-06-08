@@ -10,31 +10,31 @@ public class NestedClass
     public void Simple()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var methodDefinitions = target.FindMethodDefinitions("Method",null);
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("Method",null);
+        Assert.NotNull(method);
     }
     [Fact]
     public void SimpleParam()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var methodDefinitions = target.FindMethodDefinitions("Method", new List<string> { "Nested" });
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("Method", new List<string> { "Nested" });
+        Assert.NotNull(method);
     }
 
     [Fact]
     public void Full()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var methodDefinitions = target.FindMethodDefinitions("Method", new List<string> { "Root/Nested" });
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("Method", new List<string> { "Root/Nested" });
+        Assert.NotNull(method);
     }
 
     [Fact]
     public void FullWithNamespace()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var methodDefinitions = target.FindMethodDefinitions("Method", new List<string> { "MyNamespace.Root/Nested" });
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("Method", new List<string> { "MyNamespace.Root/Nested" });
+        Assert.NotNull(method);
     }
 
     // ReSharper disable once UnusedParameter.Local

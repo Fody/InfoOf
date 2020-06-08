@@ -34,18 +34,9 @@ public partial class ModuleWeaver
         var (typeReference, toReplace) = LoadTypeReference(ofMethodReference, ilProcessor, methodNameInstruction.Previous);
         var typeDefinition = typeReference.Resolve();
 
-        var methodDefinitions = typeDefinition.FindMethodDefinitions(methodName, parameters);
+        var method = typeDefinition.FindMethodDefinitions(methodName, parameters);
 
-        if (methodDefinitions.Count == 0)
-        {
-            throw new WeavingException($"Could not find method named '{methodName}'.");
-        }
-        if (methodDefinitions.Count > 1)
-        {
-            throw new WeavingException($"More than one method named '{methodName}' found.");
-        }
-
-        var methodReference = ModuleDefinition.ImportReference(methodDefinitions[0]);
+        var methodReference = ModuleDefinition.ImportReference(method);
 
         if (parametersInstruction != null)
         {

@@ -1,23 +1,43 @@
 using System.Collections.Generic;
 using System.Linq;
+using Fody;
 using Mono.Cecil;
 
 public static class ParamChecker
 {
-    public static List<MethodDefinition> FindMethodDefinitions(this TypeDefinition typeDefinition, string methodName, List<string> parameters)
+    public static MethodDefinition FindMethodDefinitions(this TypeDefinition typeDefinition, string methodName, List<string> parameters)
     {
-        if (parameters == null)
+        if (parameters != null && parameters.Any())
         {
-            return typeDefinition
+            var definitions = typeDefinition
+                .Methods
+                .Where(method => method.Name == methodName &&
+                                 method.HasSameParams(parameters))
+                .ToList();
+            if (definitions.Count == 0)
+            {
+                throw new WeavingException($"Could not find method named '{methodName}'.");
+            }
+
+            if (definitions.Count > 1)
+            {
+                throw new WeavingException($"More than one method named '{methodName}' found.");
+            }
+            return definitions.First();
+        }
+        else
+        {
+            var definitions = typeDefinition
                 .Methods
                 .Where(method => method.Name == methodName)
                 .ToList();
+            if (definitions.Count == 0)
+            {
+                throw new WeavingException($"Could not find method named '{methodName}'.");
+            }
+
+            return definitions.OrderBy(x => x.Parameters.Count).First();
         }
-        return typeDefinition
-            .Methods
-            .Where(method => method.Name == methodName &&
-                             method.HasSameParams(parameters))
-            .ToList();
     }
 
     public static bool HasSameParams(this MethodDefinition method, List<string> parameters)

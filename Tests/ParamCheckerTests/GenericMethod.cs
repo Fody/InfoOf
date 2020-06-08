@@ -8,8 +8,8 @@ public class GenericMethod
     public void Simple()
     {
         var target = TypeFinder.Find<GenericMethod>();
-        var methodDefinitions = target.FindMethodDefinitions("Method", null);
-        Assert.Single(methodDefinitions);
+        var methodDefinition = target.FindMethodDefinitions("Method", null);
+        Assert.NotNull(methodDefinition);
     }
 
     void Method<T>()

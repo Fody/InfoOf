@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Fody;
 using Xunit;
 
 // ReSharper disable UnusedMember.Local
@@ -9,23 +10,23 @@ public class SimpleMethod
     public void Simple()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        var methodDefinitions = target.FindMethodDefinitions("Method", null);
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("Method", null);
+        Assert.NotNull(method);
     }
 
     [Fact]
     public void SimpleParam()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        var methodDefinitions = target.FindMethodDefinitions("MethodWithParam", new List<string> { "System.Int32" });
-        Assert.Single(methodDefinitions);
+        var method = target.FindMethodDefinitions("MethodWithParam", new List<string> { "System.Int32" });
+        Assert.NotNull(method);
     }
+
     [Fact]
     public void BadNamespace()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        var methodDefinitions = target.FindMethodDefinitions("MethodWithParam", new List<string> { "System2.Int32" });
-        Assert.Empty(methodDefinitions);
+        Assert.Throws<WeavingException>(() => target.FindMethodDefinitions("MethodWithParam", new List<string> {"System2.Int32"}));
     }
 
     void Method()
@@ -35,8 +36,8 @@ public class SimpleMethod
     [Fact]
     public void WithParam()
     {
-        var methodDefinitions = TypeFinder.Find<SimpleMethod>().FindMethodDefinitions("MethodWithParam", null);
-        Assert.Single(methodDefinitions);
+        var method = TypeFinder.Find<SimpleMethod>().FindMethodDefinitions("MethodWithParam", null);
+        Assert.NotNull(method);
     }
 
     // ReSharper disable once UnusedParameter.Local

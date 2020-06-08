@@ -8,15 +8,13 @@
   <ItemGroup>
     <ProjectReference Include="..\AssemblyToReference\AssemblyToReference.csproj" />
     <ProjectReference Include="..\InfoOf\InfoOf.csproj" />
-
-    <None Update="WithBlocks.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WithBlocks.Generated.cs</LastGenOutput>
-    </None>
     <Compile Update="WithBlocks.Generated.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>WithBlocks.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>
