@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 // ReSharper disable UnusedMember.Local
 
@@ -16,5 +17,10 @@ public class Extra
             "Create",
             "T1");
 #endif
+    }
+
+    public FieldInfo GetListField()
+    {
+        return Info.OfField<List<int>>("_version");
     }
 }
