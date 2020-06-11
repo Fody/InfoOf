@@ -508,6 +508,33 @@ public partial class IntegrationTests :
         Assert.NotNull(constructorInfo);
     }
 
+    [Fact]
+    public void GetListField()
+    {
+        var type = assembly.GetType("Extra");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo info = instance.GetListField();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void GetListMethod()
+    {
+        var type = assembly.GetType("Extra");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetListMethod();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void GetListProperty()
+    {
+        var type = assembly.GetType("Extra");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetListProperty();
+        Assert.NotNull(info);
+    }
+
     public IntegrationTests(ITestOutputHelper output) :
         base(output)
     {

@@ -7,7 +7,9 @@ partial class ModuleWeaver
     {
         if (methodReference is GenericInstanceMethod genericReference)
         {
-            return (ModuleDefinition.ImportReference(genericReference.GenericArguments[0]), instruction);
+            var genericArgument = genericReference.GenericArguments[0].GetElementType();
+
+            return (ModuleDefinition.ImportReference(genericArgument), instruction);
         }
 
         var typeNameInstruction = instruction;
