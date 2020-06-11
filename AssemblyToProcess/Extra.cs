@@ -23,4 +23,14 @@ public class Extra
     {
         return Info.OfField<List<int>>("_version");
     }
+
+    public MethodInfo GetListMethod()
+    {
+        return Info.OfMethod<List<int>>("Add");
+    }
+
+    public MethodInfo GetListProperty()
+    {
+        return Info.OfPropertyGet<List<int>>("Count");
+    }
 }
