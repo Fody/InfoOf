@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Fody;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public partial class IntegrationTests :
-    VerifyBase
+public partial class IntegrationTests
 {
     static Assembly assembly;
     static TestResult testResult;
@@ -533,10 +530,5 @@ public partial class IntegrationTests :
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetListProperty();
         Assert.NotNull(info);
-    }
-
-    public IntegrationTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }
