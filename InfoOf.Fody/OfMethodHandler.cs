@@ -30,8 +30,8 @@ public partial class ModuleWeaver
 
         var methodName = GetLdString(methodNameInstruction);
 
-        var (typeReference, toReplace) = LoadTypeReference(ofMethodReference, ilProcessor, methodNameInstruction.Previous);
-        var typeDefinition = typeReference.Resolve();
+        var typeReferenceData = LoadTypeReference(ofMethodReference, ilProcessor, methodNameInstruction.Previous);
+        var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
         var method = typeDefinition.FindMethodDefinitions(methodName, parameters);
 
@@ -45,11 +45,11 @@ public partial class ModuleWeaver
         methodNameInstruction.OpCode = OpCodes.Ldtoken;
         methodNameInstruction.Operand = methodReference;
 
-        ilProcessor.Body.UpdateInstructions(toReplace, methodNameInstruction);
+        ilProcessor.Body.UpdateInstructions(typeReferenceData.Instruction, methodNameInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {
-            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReferenceData.TypeReference));
             instruction.Operand = getMethodFromHandleGeneric;
         }
         else

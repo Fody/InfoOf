@@ -11,8 +11,8 @@ public partial class ModuleWeaver
         var fieldNameInstruction = instruction.Previous;
         var fieldName = GetLdString(fieldNameInstruction);
 
-        var (typeReference, toReplace) = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
-        var typeDefinition = typeReference.Resolve();
+        var typeReferenceData = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
+        var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
         var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
         if (fieldDefinition == null)
@@ -22,7 +22,7 @@ public partial class ModuleWeaver
 
         FieldReference fieldReference;
         if (fieldDefinition.DeclaringType.HasGenericParameters &&
-            !typeReference.HasGenericParameters)
+            !typeReferenceData.TypeReference.HasGenericParameters)
         {
             var declaringType = new GenericInstanceType(fieldDefinition.DeclaringType);
             foreach (var parameter in fieldDefinition.DeclaringType.GenericParameters)
@@ -39,11 +39,11 @@ public partial class ModuleWeaver
         fieldNameInstruction.OpCode = OpCodes.Ldtoken;
         fieldNameInstruction.Operand = fieldReference;
 
-        ilProcessor.Body.UpdateInstructions(toReplace, fieldNameInstruction);
+        ilProcessor.Body.UpdateInstructions(typeReferenceData.Instruction, fieldNameInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {
-            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReferenceData.TypeReference));
             instruction.Operand = getFieldFromHandleGeneric;
         }
         else

@@ -38,8 +38,8 @@ public partial class ModuleWeaver
 
         const string methodName = ".ctor";
 
-        var (typeReference, toReplace) = LoadTypeReference(ofConstructorReference, ilProcessor, typeNameInstruction);
-        var typeDefinition = typeReference.Resolve();
+        var typeReferenceData = LoadTypeReference(ofConstructorReference, ilProcessor, typeNameInstruction);
+        var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
         var method = typeDefinition.FindMethodDefinitions(methodName, parameters);
 
@@ -53,11 +53,11 @@ public partial class ModuleWeaver
         var tokenInstruction = Instruction.Create(OpCodes.Ldtoken, methodReference);
         ilProcessor.InsertBefore(instruction, tokenInstruction);
 
-        ilProcessor.Body.UpdateInstructions(toReplace, tokenInstruction);
+        ilProcessor.Body.UpdateInstructions(typeReferenceData.Instruction, tokenInstruction);
 
         if (typeDefinition.HasGenericParameters)
         {
-            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReference));
+            ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReferenceData.TypeReference));
             instruction.Operand = getMethodFromHandleGeneric;
         }
         else
