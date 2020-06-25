@@ -11,7 +11,15 @@
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <PackageIconUrl>https://raw.githubusercontent.com/Fody/InfoOf/master/package_icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/Fody/InfoOf</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Fody" Version="6.2.0" PrivateAssets="none" />
     <PackageReference Include="FodyPackaging" Version="6.2.0" PrivateAssets="All" />
