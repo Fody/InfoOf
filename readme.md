@@ -49,7 +49,7 @@ Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pa
 ### Input Code
 
 <!-- snippet: usage -->
-<a id='snippet-usage'/></a>
+<a id='snippet-usage'></a>
 ```cs
 var type = Info.OfType("AssemblyName", "MyClass");
 
@@ -75,7 +75,7 @@ var fieldTyped = Info.OfField<MyClass>("myField");
 ### What gets compiled
 
 <!-- snippet: UsageCompiled -->
-<a id='snippet-usagecompiled'/></a>
+<a id='snippet-usagecompiled'></a>
 ```cs
 var type = typeof(MyClass);
 
