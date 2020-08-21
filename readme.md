@@ -69,7 +69,7 @@ var field = Info.OfField("AssemblyName", "MyClass", "myField");
 var fieldTyped = Info.OfField<MyClass>("myField");
 ```
 <sup><a href='/Tests/Snippets.cs#L5-L24' title='File snippet `usage` was extracted from'>snippet source</a> | <a href='#snippet-usage' title='Navigate to start of snippet `usage`'>anchor</a></sup>
-<!-- endsnippet -->
+<!-- endSnippet -->
 
 
 ### What gets compiled
@@ -95,7 +95,7 @@ var field = fieldof(MyClass.myField);
 var fieldTyped = fieldof(MyClass.myField);
 ```
 <sup><a href='/Tests/Snippets.cs#L27-L46' title='File snippet `usagecompiled` was extracted from'>snippet source</a> | <a href='#snippet-usagecompiled' title='Navigate to start of snippet `usagecompiled`'>anchor</a></sup>
-<!-- endsnippet -->
+<!-- endSnippet -->
 
 
 ## Specifying Generic Types
