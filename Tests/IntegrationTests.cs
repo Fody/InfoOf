@@ -465,6 +465,14 @@ public partial class IntegrationTests
         ConstructorInfo constructorInfo = instance.GetConstructorInfoWithParam();
         Assert.NotNull(constructorInfo);
     }
+    [Fact]
+    public void GetConstructorInfoWithMultipleParam()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo constructorInfo = instance.GetConstructorInfoWithMultipleParam();
+        Assert.NotNull(constructorInfo);
+    }
 
     [Fact]
     public void InstanceConstructorWithParamTyped()

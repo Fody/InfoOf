@@ -12,6 +12,10 @@ public class InstanceClass
     {
     }
 
+    public InstanceClass(string y, int x)
+    {
+    }
+
     string instanceField;
 
     public FieldInfo GetInstanceField()
@@ -107,6 +111,11 @@ public class InstanceClass
     public ConstructorInfo GetConstructorInfoWithParam()
     {
         return Info.OfConstructor("AssemblyToProcess", "InstanceClass", "String");
+    }
+
+    public ConstructorInfo GetConstructorInfoWithMultipleParam()
+    {
+        return Info.OfConstructor("AssemblyToProcess", "InstanceClass", "String, Int32");
     }
 
     public ConstructorInfo GetConstructorInfoWithParamTyped()
