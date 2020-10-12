@@ -49,7 +49,7 @@ Add `<InfoOf/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pa
 ### Input Code
 
 <!-- snippet: usage -->
-<a id='usage'></a>
+<a id='snippet-usage'></a>
 ```cs
 var type = Info.OfType("AssemblyName", "MyClass");
 
@@ -68,14 +68,14 @@ var setPropertyTyped = Info.OfPropertySet<MyClass>("MyProperty");
 var field = Info.OfField("AssemblyName", "MyClass", "myField");
 var fieldTyped = Info.OfField<MyClass>("myField");
 ```
-<sup><a href='/Tests/Snippets.cs#L5-L24' title='Snippet source file'>snippet source</a> | <a href='#usage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/Tests/Snippets.cs#L5-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-usage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 ### What gets compiled
 
 <!-- snippet: UsageCompiled -->
-<a id='usagecompiled'></a>
+<a id='snippet-usagecompiled'></a>
 ```cs
 var type = typeof(MyClass);
 
@@ -94,7 +94,7 @@ var setPropertyTyped = methodof(MyClass.set_MyProperty);
 var field = fieldof(MyClass.myField);
 var fieldTyped = fieldof(MyClass.myField);
 ```
-<sup><a href='/Tests/Snippets.cs#L27-L46' title='Snippet source file'>snippet source</a> | <a href='#usagecompiled' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/Tests/Snippets.cs#L27-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-usagecompiled' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
