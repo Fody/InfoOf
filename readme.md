@@ -143,10 +143,6 @@ It would also be possible to define members and types using a combination of gen
 **Actually it is strong typed**, it does not have intellisense. If any of the strings passed into `Info` do not map to a type or member it will log a build error and stop the build.
 
 
-## Security contact information
-
-To report a security vulnerability, use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
-
 
 ## Icon
 
