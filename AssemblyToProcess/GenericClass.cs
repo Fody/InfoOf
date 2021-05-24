@@ -166,4 +166,56 @@ public class GenericClass<T>
     {
         return Info.OfConstructor<GenericClass<int>>();
     }
+
+    public object this[string index]
+    {
+        get => null;
+        set => throw new NotImplementedException();
+    }
+
+    public double this[int index]
+    {
+        get => default;
+        set => throw new NotImplementedException();
+    }
+
+    public MethodInfo GetStringIndexerGet()
+    {
+        return Info.OfIndexerGet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "String");
+    }
+
+    public MethodInfo GetIntIndexerGet()
+    {
+        return Info.OfIndexerGet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "Int32");
+    }
+
+    public MethodInfo GetStringIndexerSet()
+    {
+        return Info.OfIndexerSet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "String");
+    }
+
+    public MethodInfo GetIntIndexerSet()
+    {
+        return Info.OfIndexerSet("AssemblyToProcess", "GenericClass`1<mscorlib|System.Int32>", "Int32");
+    }
+
+    public MethodInfo GetStringIndexerGetTyped()
+    {
+        return Info.OfIndexerGet<GenericClass<int>>("String");
+    }
+
+    public MethodInfo GetIntIndexerGetTyped()
+    {
+        return Info.OfIndexerGet<GenericClass<int>>("Int32");
+    }
+
+    public MethodInfo GetStringIndexerSetTyped()
+    {
+        return Info.OfIndexerSet<GenericClass<int>>("String");
+    }
+
+    public MethodInfo GetIntIndexerSetTyped()
+    {
+        return Info.OfIndexerSet<GenericClass<int>>("Int32");
+    }
 }

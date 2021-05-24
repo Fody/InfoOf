@@ -130,4 +130,36 @@ public static class Info
     {
         throw BuildException();
     }
+
+    /// <summary>
+    /// Inject a MethodOf for an indexer get.
+    /// </summary>
+    public static MethodInfo OfIndexerGet(string assemblyName, string typeName, string parameters)
+    {
+        throw BuildException();
+    }
+
+    /// <summary>
+    /// Inject a MethodOf for an indexer get.
+    /// </summary>
+    public static MethodInfo OfIndexerGet<T>(string parameters)
+    {
+        throw BuildException();
+    }
+
+    /// <summary>
+    /// Inject a MethodOf for an indexer set.
+    /// </summary>
+    public static MethodInfo OfIndexerSet(string assemblyName, string typeName, string parameters)
+    {
+        throw BuildException();
+    }
+
+    /// <summary>
+    /// Inject a MethodOf for an indexer set.
+    /// </summary>
+    public static MethodInfo OfIndexerSet<T>(string parameters)
+    {
+        throw BuildException();
+    }
 }
