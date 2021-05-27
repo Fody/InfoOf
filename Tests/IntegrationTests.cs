@@ -484,6 +484,150 @@ public partial class IntegrationTests
     }
 
     [Fact]
+    public void GetStringIndexerGet()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerGet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerGet()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerGet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerSet()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerSet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerSet()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerSet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerGetTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerGetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerGetTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerGetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerSetTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerSetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerSetTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerSetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerGet_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerGet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerGet_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerGet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerSet_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerSet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerSet_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerSet();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerGetTyped_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerGetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerGetTyped_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerGetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetStringIndexerSetTyped_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetStringIndexerSetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
+    public void GetIntIndexerSetTyped_Generic()
+    {
+        var type = assembly.GetType("GenericClass`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetIntIndexerSetTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void GenericConstructor()
     {
         var type = assembly.GetType("GenericClass`1");

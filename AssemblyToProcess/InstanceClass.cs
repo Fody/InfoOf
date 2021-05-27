@@ -122,4 +122,56 @@ public class InstanceClass
     {
         return Info.OfConstructor<InstanceClass>("String");
     }
+
+    public object this[string index]
+    {
+        get => null;
+        set => throw new NotImplementedException();
+    }
+
+    public double this[int index]
+    {
+        get => default;
+        set => throw new NotImplementedException();
+    }
+
+    public MethodInfo GetStringIndexerGet()
+    {
+        return Info.OfIndexerGet("AssemblyToProcess", "InstanceClass", "String");
+    }
+
+    public MethodInfo GetIntIndexerGet()
+    {
+        return Info.OfIndexerGet("AssemblyToProcess", "InstanceClass", "Int32");
+    }
+
+    public MethodInfo GetStringIndexerSet()
+    {
+        return Info.OfIndexerSet("AssemblyToProcess", "InstanceClass", "String");
+    }
+
+    public MethodInfo GetIntIndexerSet()
+    {
+        return Info.OfIndexerSet("AssemblyToProcess", "InstanceClass", "Int32");
+    }
+
+    public MethodInfo GetStringIndexerGetTyped()
+    {
+        return Info.OfIndexerGet<InstanceClass>("String");
+    }
+
+    public MethodInfo GetIntIndexerGetTyped()
+    {
+        return Info.OfIndexerGet<InstanceClass>("Int32");
+    }
+
+    public MethodInfo GetStringIndexerSetTyped()
+    {
+        return Info.OfIndexerSet<InstanceClass>("String");
+    }
+
+    public MethodInfo GetIntIndexerSetTyped()
+    {
+        return Info.OfIndexerSet<InstanceClass>("Int32");
+    }
 }

@@ -45,6 +45,12 @@ public partial class ModuleWeaver
                 case "OfConstructor":
                     actions.Add(x => HandleOfConstructor(copy, x, methodReference));
                     break;
+                case "OfIndexerGet":
+                    actions.Add(x => HandleOfIndexerGet(copy, x, methodReference));
+                    break;
+                case "OfIndexerSet":
+                    actions.Add(x => HandleOfIndexerSet(copy, x, methodReference));
+                    break;
             }
         }
 
