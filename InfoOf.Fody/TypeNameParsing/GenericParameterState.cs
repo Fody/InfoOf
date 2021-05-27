@@ -60,7 +60,7 @@ class GenericParameterState : IState
     }
 
     public ParsedTypeName Build() =>
-        new ParsedTypeName
+        new()
         {
             Assembly = Token,
             TypeName = parentState.Token,

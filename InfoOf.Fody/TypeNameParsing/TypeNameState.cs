@@ -53,7 +53,5 @@ class TypeNameState : IState
         throw new WeavingException($"Unbalanced type specification, are you missing a {TypeNameParser.GenericTypeEnd}?");
     }
 
-    public ParsedTypeName Build() =>
-        new ParsedTypeName
-            {TypeName = Token};
+    public ParsedTypeName Build() => new() {TypeName = Token};
 }

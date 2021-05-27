@@ -8,7 +8,7 @@ public static class Info
 {
     static Exception BuildException()
     {
-        return new Exception();
+        return new();
     }
 
     /// <summary>
