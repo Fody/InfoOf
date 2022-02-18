@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 
 public class WithBlocks
 {
@@ -6,6 +7,7 @@ public class WithBlocks
     public WithBlocks(int _) {}
 
     int instanceField = 0;
+    Stream nullStream = null;
 
     int InstanceMethod() => 0;
     int InstanceMethodWithParam(int i) => i;
@@ -55,6 +57,13 @@ public class WithBlocks
         return Info.OfConstructor("AssemblyToProcess", "WithBlocks");
     }
 
+    public ConstructorInfo GetOfConstructor_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfConstructor("AssemblyToProcess", "WithBlocks");
+    }
+
     public ConstructorInfo GetOfConstructorTyped_ForBlock()
     {
         ConstructorInfo info = null;
@@ -94,6 +103,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfConstructor<WithBlocks>();
+    }
+
+    public ConstructorInfo GetOfConstructorTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfConstructor<WithBlocks>();
     }
@@ -141,6 +157,13 @@ public class WithBlocks
         return Info.OfConstructor("AssemblyToProcess", "WithBlocks", "Int32");
     }
 
+    public ConstructorInfo GetOfConstructorWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfConstructor("AssemblyToProcess", "WithBlocks", "Int32");
+    }
+
     public ConstructorInfo GetOfConstructorTypedWithParam_ForBlock()
     {
         ConstructorInfo info = null;
@@ -180,6 +203,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfConstructor<WithBlocks>("Int32");
+    }
+
+    public ConstructorInfo GetOfConstructorTypedWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfConstructor<WithBlocks>("Int32");
     }
@@ -227,6 +257,13 @@ public class WithBlocks
         return Info.OfField("AssemblyToProcess", "WithBlocks", nameof(instanceField));
     }
 
+    public FieldInfo GetOfField_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfField("AssemblyToProcess", "WithBlocks", nameof(instanceField));
+    }
+
     public FieldInfo GetOfFieldTyped_ForBlock()
     {
         FieldInfo info = null;
@@ -266,6 +303,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfField<WithBlocks>(nameof(instanceField));
+    }
+
+    public FieldInfo GetOfFieldTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfField<WithBlocks>(nameof(instanceField));
     }
@@ -313,6 +357,13 @@ public class WithBlocks
         return Info.OfMethod("AssemblyToProcess", "WithBlocks", nameof(InstanceMethod));
     }
 
+    public MethodInfo GetOfMethod_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfMethod("AssemblyToProcess", "WithBlocks", nameof(InstanceMethod));
+    }
+
     public MethodInfo GetOfMethodTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -352,6 +403,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfMethod<WithBlocks>(nameof(InstanceMethod));
+    }
+
+    public MethodInfo GetOfMethodTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfMethod<WithBlocks>(nameof(InstanceMethod));
     }
@@ -399,6 +457,13 @@ public class WithBlocks
         return Info.OfMethod("AssemblyToProcess", "WithBlocks", nameof(InstanceMethodWithParam), "Int32");
     }
 
+    public MethodInfo GetOfMethodWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfMethod("AssemblyToProcess", "WithBlocks", nameof(InstanceMethodWithParam), "Int32");
+    }
+
     public MethodInfo GetOfMethodTypedWithParam_ForBlock()
     {
         MethodInfo info = null;
@@ -438,6 +503,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfMethod<WithBlocks>(nameof(InstanceMethodWithParam), "Int32");
+    }
+
+    public MethodInfo GetOfMethodTypedWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfMethod<WithBlocks>(nameof(InstanceMethodWithParam), "Int32");
     }
@@ -485,6 +557,13 @@ public class WithBlocks
         return Info.OfPropertyGet("AssemblyToProcess", "WithBlocks", nameof(InstanceProperty));
     }
 
+    public MethodInfo GetOfPropertyGet_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfPropertyGet("AssemblyToProcess", "WithBlocks", nameof(InstanceProperty));
+    }
+
     public MethodInfo GetOfPropertyGetTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -524,6 +603,13 @@ public class WithBlocks
         {
             throw;
         }
+
+        return Info.OfPropertyGet<WithBlocks>(nameof(InstanceProperty));
+    }
+
+    public MethodInfo GetOfPropertyGetTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfPropertyGet<WithBlocks>(nameof(InstanceProperty));
     }
@@ -571,6 +657,13 @@ public class WithBlocks
         return Info.OfPropertySet("AssemblyToProcess", "WithBlocks", nameof(InstanceProperty));
     }
 
+    public MethodInfo GetOfPropertySet_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfPropertySet("AssemblyToProcess", "WithBlocks", nameof(InstanceProperty));
+    }
+
     public MethodInfo GetOfPropertySetTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -613,6 +706,13 @@ public class WithBlocks
 
         return Info.OfPropertySet<WithBlocks>(nameof(InstanceProperty));
     }
+
+    public MethodInfo GetOfPropertySetTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfPropertySet<WithBlocks>(nameof(InstanceProperty));
+    }
 }
 
 public class WithBlocksGeneric<T>
@@ -621,6 +721,7 @@ public class WithBlocksGeneric<T>
     public WithBlocksGeneric(int _) {}
 
     int instanceField = 0;
+    Stream nullStream = null;
 
     int InstanceMethod() => 0;
     int InstanceMethodWithParam(int i) => i;
@@ -670,6 +771,13 @@ public class WithBlocksGeneric<T>
         return Info.OfConstructor("AssemblyToProcess", "WithBlocksGeneric`1");
     }
 
+    public ConstructorInfo GetOfConstructor_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfConstructor("AssemblyToProcess", "WithBlocksGeneric`1");
+    }
+
     public ConstructorInfo GetOfConstructorTyped_ForBlock()
     {
         ConstructorInfo info = null;
@@ -709,6 +817,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfConstructor<WithBlocksGeneric<int>>();
+    }
+
+    public ConstructorInfo GetOfConstructorTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfConstructor<WithBlocksGeneric<int>>();
     }
@@ -756,6 +871,13 @@ public class WithBlocksGeneric<T>
         return Info.OfConstructor("AssemblyToProcess", "WithBlocksGeneric`1", "Int32");
     }
 
+    public ConstructorInfo GetOfConstructorWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfConstructor("AssemblyToProcess", "WithBlocksGeneric`1", "Int32");
+    }
+
     public ConstructorInfo GetOfConstructorTypedWithParam_ForBlock()
     {
         ConstructorInfo info = null;
@@ -795,6 +917,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfConstructor<WithBlocksGeneric<int>>("Int32");
+    }
+
+    public ConstructorInfo GetOfConstructorTypedWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfConstructor<WithBlocksGeneric<int>>("Int32");
     }
@@ -842,6 +971,13 @@ public class WithBlocksGeneric<T>
         return Info.OfField("AssemblyToProcess", "WithBlocksGeneric`1", nameof(instanceField));
     }
 
+    public FieldInfo GetOfField_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfField("AssemblyToProcess", "WithBlocksGeneric`1", nameof(instanceField));
+    }
+
     public FieldInfo GetOfFieldTyped_ForBlock()
     {
         FieldInfo info = null;
@@ -881,6 +1017,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfField<WithBlocksGeneric<int>>(nameof(instanceField));
+    }
+
+    public FieldInfo GetOfFieldTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfField<WithBlocksGeneric<int>>(nameof(instanceField));
     }
@@ -928,6 +1071,13 @@ public class WithBlocksGeneric<T>
         return Info.OfMethod("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceMethod));
     }
 
+    public MethodInfo GetOfMethod_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfMethod("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceMethod));
+    }
+
     public MethodInfo GetOfMethodTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -967,6 +1117,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfMethod<WithBlocksGeneric<int>>(nameof(InstanceMethod));
+    }
+
+    public MethodInfo GetOfMethodTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfMethod<WithBlocksGeneric<int>>(nameof(InstanceMethod));
     }
@@ -1014,6 +1171,13 @@ public class WithBlocksGeneric<T>
         return Info.OfMethod("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceMethodWithParam), "Int32");
     }
 
+    public MethodInfo GetOfMethodWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfMethod("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceMethodWithParam), "Int32");
+    }
+
     public MethodInfo GetOfMethodTypedWithParam_ForBlock()
     {
         MethodInfo info = null;
@@ -1053,6 +1217,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfMethod<WithBlocksGeneric<int>>(nameof(InstanceMethodWithParam), "Int32");
+    }
+
+    public MethodInfo GetOfMethodTypedWithParam_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfMethod<WithBlocksGeneric<int>>(nameof(InstanceMethodWithParam), "Int32");
     }
@@ -1100,6 +1271,13 @@ public class WithBlocksGeneric<T>
         return Info.OfPropertyGet("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceProperty));
     }
 
+    public MethodInfo GetOfPropertyGet_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfPropertyGet("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceProperty));
+    }
+
     public MethodInfo GetOfPropertyGetTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -1139,6 +1317,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfPropertyGet<WithBlocksGeneric<int>>(nameof(InstanceProperty));
+    }
+
+    public MethodInfo GetOfPropertyGetTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfPropertyGet<WithBlocksGeneric<int>>(nameof(InstanceProperty));
     }
@@ -1186,6 +1371,13 @@ public class WithBlocksGeneric<T>
         return Info.OfPropertySet("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceProperty));
     }
 
+    public MethodInfo GetOfPropertySet_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
+
+        return Info.OfPropertySet("AssemblyToProcess", "WithBlocksGeneric`1", nameof(InstanceProperty));
+    }
+
     public MethodInfo GetOfPropertySetTyped_ForBlock()
     {
         MethodInfo info = null;
@@ -1225,6 +1417,13 @@ public class WithBlocksGeneric<T>
         {
             throw;
         }
+
+        return Info.OfPropertySet<WithBlocksGeneric<int>>(nameof(InstanceProperty));
+    }
+
+    public MethodInfo GetOfPropertySetTyped_UsingBlock()
+    {
+        using var _ = nullStream ?? Stream.Null;
 
         return Info.OfPropertySet<WithBlocksGeneric<int>>(nameof(InstanceProperty));
     }

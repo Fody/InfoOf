@@ -62,6 +62,15 @@ string GenerateTestsCore(string infoType, string infoOf, string withModifier, bo
         var instance = (dynamic) Activator.CreateInstance(type);
         {infoType} info = instance.Get{infoOf}{withModifier}_TryBlock();
         Assert.NotNull(info);
+    }}
+
+    [Fact]
+    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_UsingBlock()
+    {{
+        var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
+        var instance = (dynamic) Activator.CreateInstance(type);
+        {infoType} info = instance.Get{infoOf}{withModifier}_UsingBlock();
+        Assert.NotNull(info);
     }}";
 }
 #>

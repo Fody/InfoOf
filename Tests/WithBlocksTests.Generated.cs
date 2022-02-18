@@ -32,6 +32,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfConstructor_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructor_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfConstructorTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -55,6 +64,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo info = instance.GetOfConstructorTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfConstructorTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -86,6 +104,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfConstructor_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructor_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfConstructorTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -109,6 +136,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo info = instance.GetOfConstructorTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfConstructorTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -140,6 +176,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfConstructorWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorWithParam_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfConstructorTypedWithParam_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -163,6 +208,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo info = instance.GetOfConstructorTypedWithParam_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfConstructorTypedWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorTypedWithParam_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -194,6 +248,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfConstructorWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorWithParam_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfConstructorTypedWithParam_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -217,6 +280,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         ConstructorInfo info = instance.GetOfConstructorTypedWithParam_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfConstructorTypedWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        ConstructorInfo info = instance.GetOfConstructorTypedWithParam_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -248,6 +320,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfField_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo info = instance.GetOfField_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfFieldTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -271,6 +352,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         FieldInfo info = instance.GetOfFieldTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfFieldTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo info = instance.GetOfFieldTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -302,6 +392,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfField_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo info = instance.GetOfField_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfFieldTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -325,6 +424,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         FieldInfo info = instance.GetOfFieldTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfFieldTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        FieldInfo info = instance.GetOfFieldTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -356,6 +464,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfMethod_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethod_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfMethodTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -379,6 +496,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfMethodTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfMethodTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -410,6 +536,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfMethod_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethod_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfMethodTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -433,6 +568,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfMethodTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfMethodTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -464,6 +608,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfMethodWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodWithParam_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfMethodTypedWithParam_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -487,6 +640,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfMethodTypedWithParam_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfMethodTypedWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodTypedWithParam_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -518,6 +680,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfMethodWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodWithParam_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfMethodTypedWithParam_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -541,6 +712,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfMethodTypedWithParam_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfMethodTypedWithParam_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfMethodTypedWithParam_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -572,6 +752,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfPropertyGet_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertyGet_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfPropertyGetTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -595,6 +784,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfPropertyGetTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfPropertyGetTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertyGetTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -626,6 +824,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfPropertyGet_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertyGet_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfPropertyGetTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -649,6 +856,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfPropertyGetTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfPropertyGetTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertyGetTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -680,6 +896,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocks_GetOfPropertySet_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertySet_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocks_GetOfPropertySetTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocks");
@@ -703,6 +928,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocks");
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfPropertySetTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocks_GetOfPropertySetTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocks");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertySetTyped_UsingBlock();
         Assert.NotNull(info);
     }
 
@@ -734,6 +968,15 @@ partial class IntegrationTests
     }
 
     [Fact]
+    public void WithBlocksGeneric_GetOfPropertySet_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertySet_UsingBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
     public void WithBlocksGeneric_GetOfPropertySetTyped_ForBlock()
     {
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
@@ -757,6 +1000,15 @@ partial class IntegrationTests
         var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
         var instance = (dynamic) Activator.CreateInstance(type);
         MethodInfo info = instance.GetOfPropertySetTyped_TryBlock();
+        Assert.NotNull(info);
+    }
+
+    [Fact]
+    public void WithBlocksGeneric_GetOfPropertySetTyped_UsingBlock()
+    {
+        var type = assembly.GetType("WithBlocksGeneric`1").MakeGenericType(typeof(int));
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo info = instance.GetOfPropertySetTyped_UsingBlock();
         Assert.NotNull(info);
     }
 }
