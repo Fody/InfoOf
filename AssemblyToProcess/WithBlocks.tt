@@ -1,6 +1,7 @@
 ﻿<#@ template debug="true" language="C#" #>
 <#@ output extension="Generated.cs" #>
 <#@ assembly name="System.Core" #>
+using System.IO;
 using System.Reflection;
 <#= GenerateClass("WithBlocks", "WithBlocks", "WithBlocks") #>
 <#= GenerateClass("WithBlocksGeneric<T>", "WithBlocksGeneric", "WithBlocksGeneric`1") #>
@@ -12,6 +13,7 @@ public class {classDefinition}
     public {className}(int _) {{}}
 
     int instanceField = 0;
+    Stream nullStream = null;
 
     int InstanceMethod() => 0;
     int InstanceMethodWithParam(int i) => i;
@@ -86,6 +88,13 @@ string GenerateBlocksCore(string infoType, string methodName, string infoCall) =
         {{
             throw;
         }}
+
+        return {infoCall}
+    }}
+
+    public {infoType} Get{methodName}_UsingBlock()
+    {{
+        using var _ = nullStream ?? Stream.Null;
 
         return {infoCall}
     }}";
