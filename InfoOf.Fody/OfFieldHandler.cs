@@ -39,8 +39,6 @@ public partial class ModuleWeaver
         fieldNameInstruction.OpCode = OpCodes.Ldtoken;
         fieldNameInstruction.Operand = fieldReference;
 
-        ilProcessor.Body.UpdateInstructions(typeReferenceData.Instruction, fieldNameInstruction);
-
         if (typeDefinition.HasGenericParameters)
         {
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReferenceData.TypeReference));

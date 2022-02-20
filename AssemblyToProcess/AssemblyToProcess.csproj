@@ -4,6 +4,8 @@
     <TargetFrameworks>net48;netcoreapp2.0</TargetFrameworks>
     <NoWarn>CS0169</NoWarn>
     <DisableFody>true</DisableFody>
+    <DebugType>embedded</DebugType>
+    <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssemblyToReference\AssemblyToReference.csproj" />
