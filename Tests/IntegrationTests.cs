@@ -12,7 +12,7 @@ public partial class IntegrationTests
     static IntegrationTests()
     {
         var weavingTask = new ModuleWeaver();
-#if(NET46)
+#if(NETFRAMEWORK)
         testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", ignoreCodes:new []{ "0x80131869"});
 #else
         testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);

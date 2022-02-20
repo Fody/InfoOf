@@ -53,8 +53,6 @@ public partial class ModuleWeaver
         var tokenInstruction = Instruction.Create(OpCodes.Ldtoken, methodReference);
         ilProcessor.InsertBefore(instruction, tokenInstruction);
 
-        ilProcessor.Body.UpdateInstructions(typeReferenceData.Instruction, tokenInstruction);
-
         if (typeDefinition.HasGenericParameters)
         {
             ilProcessor.InsertBefore(instruction, Instruction.Create(OpCodes.Ldtoken, typeReferenceData.TypeReference));

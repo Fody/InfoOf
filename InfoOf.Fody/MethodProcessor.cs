@@ -59,13 +59,12 @@ public partial class ModuleWeaver
             return;
         }
 
-        method.Body.SimplifyMacros();
+        using var ilProcessor = new ILProcessor(method.Body);
+
         foreach (var action in actions)
         {
-            action(method.Body.GetILProcessor());
+            action(ilProcessor);
         }
-
-        method.Body.OptimizeMacros();
     }
 
     TypeReference GetTypeReference(string assemblyName, string typeName)
