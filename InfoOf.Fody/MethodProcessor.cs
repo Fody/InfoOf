@@ -14,7 +14,7 @@ public partial class ModuleWeaver
         foreach (var instruction in method.Body.Instructions
             .Where(i => i.OpCode == OpCodes.Call))
         {
-            if (!(instruction.Operand is MethodReference methodReference))
+            if (instruction.Operand is not MethodReference methodReference)
             {
                 continue;
             }

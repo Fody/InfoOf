@@ -13,7 +13,7 @@ public partial class ModuleWeaver
         Instruction methodNameInstruction;
         List<string> parameters;
         Instruction parametersInstruction = null;
-        if (ofMethodReference.Parameters.Count == 2 || ofMethodReference.Parameters.Count == 4)
+        if (ofMethodReference.Parameters.Count is 2 or 4)
         {
             parametersInstruction = instruction.Previous;
             parameters = GetLdString(parametersInstruction)

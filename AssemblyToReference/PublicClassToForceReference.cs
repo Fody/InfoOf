@@ -1,5 +1,3 @@
-﻿
-    public class PublicClassToForceReference
+﻿public class PublicClassToForceReference
 {
-    
 }
