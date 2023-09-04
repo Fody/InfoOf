@@ -43,7 +43,7 @@ public class TypeNameParserTests
         var parameters = parsedTypeName.GenericParameters;
         Assert.NotNull(parameters);
         Assert.NotEmpty(parameters);
-        Assert.Equal(1, parameters.Count);
+        Assert.Single(parameters);
         Assert.Equal("b", parameters[0].Assembly);
         Assert.Equal("c", parameters[0].TypeName);
         Assert.Null(parameters[0].GenericParameters);
@@ -78,12 +78,12 @@ public class TypeNameParserTests
         var parameters = parsedTypeName.GenericParameters;
         Assert.NotNull(parameters);
         Assert.NotEmpty(parameters);
-        Assert.Equal(1, parameters.Count);
+        Assert.Single(parameters);
         Assert.Equal("b", parameters[0].Assembly);
         Assert.Equal("c", parameters[0].TypeName);
         Assert.NotNull(parameters[0].GenericParameters);
         Assert.NotEmpty(parameters[0].GenericParameters);
-        Assert.Equal(1, parameters[0].GenericParameters.Count);
+        Assert.Single(parameters[0].GenericParameters);
         Assert.Equal("d", parameters[0].GenericParameters[0].Assembly);
         Assert.Equal("e", parameters[0].GenericParameters[0].TypeName);
         Assert.Null(parameters[0].GenericParameters[0].GenericParameters);
@@ -104,7 +104,7 @@ public class TypeNameParserTests
         Assert.Equal("c", parameters[0].TypeName);
         Assert.NotNull(parameters[0].GenericParameters);
         Assert.NotEmpty(parameters[0].GenericParameters);
-        Assert.Equal(1, parameters[0].GenericParameters.Count);
+        Assert.Single(parameters[0].GenericParameters);
         Assert.Equal("d", parameters[0].GenericParameters[0].Assembly);
         Assert.Equal("e", parameters[0].GenericParameters[0].TypeName);
         Assert.Null(parameters[0].GenericParameters[0].GenericParameters);
