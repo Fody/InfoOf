@@ -14,6 +14,6 @@ public class ParsedTypeName
             return TypeName;
         }
 
-        return $"{TypeName}<{string.Join(", ", GenericParameters.Select(p => p.ToString()))}>";
+        return $"{TypeName}<{string.Join(", ", GenericParameters.Select(_ => _.ToString()))}>";
     }
 }

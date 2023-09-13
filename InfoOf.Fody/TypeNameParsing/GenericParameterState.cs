@@ -64,6 +64,6 @@ class GenericParameterState : IState
         {
             Assembly = Token,
             TypeName = parentState.Token,
-            GenericParameters = genericParameters.Select(p => p.Build()).ToList()
+            GenericParameters = genericParameters.Select(_ => _.Build()).ToList()
         };
 }

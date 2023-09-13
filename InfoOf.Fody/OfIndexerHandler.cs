@@ -9,12 +9,12 @@ public partial class ModuleWeaver
 {
     void HandleOfIndexerGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerGetReference)
     {
-        HandleOfIndexer(instruction, ilProcessor, ofIndexerGetReference, x => x.GetMethod, (_, p) => p);
+        HandleOfIndexer(instruction, ilProcessor, ofIndexerGetReference, _ => _.GetMethod, (_, p) => p);
     }
 
     void HandleOfIndexerSet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerSetReference)
     {
-        HandleOfIndexer(instruction, ilProcessor, ofIndexerSetReference, x => x.SetMethod, (d, p) => p.Append(d.PropertyType.Name).ToList());
+        HandleOfIndexer(instruction, ilProcessor, ofIndexerSetReference, _ => _.SetMethod, (d, p) => p.Append(d.PropertyType.Name).ToList());
     }
 
     void HandleOfIndexer(Instruction instruction, ILProcessor ilProcessor, MethodReference propertyReference,
@@ -23,7 +23,7 @@ public partial class ModuleWeaver
         var parametersInstruction = instruction.Previous;
         var parameters = GetLdString(parametersInstruction)
             .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(x => x.Trim())
+            .Select(_ => _.Trim())
             .ToList();
 
         const string propertyName = "Item";
@@ -31,8 +31,8 @@ public partial class ModuleWeaver
         var typeReferenceData = LoadTypeReference(propertyReference, ilProcessor, parametersInstruction.Previous);
         var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
-        var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName &&
-            (func(x)?.HasSameParams(getParameters(x, parameters)) ?? false));
+        var property = typeDefinition.Properties.FirstOrDefault(_ => _.Name == propertyName &&
+            (func(_)?.HasSameParams(getParameters(_, parameters)) ?? false));
 
         if (property == null)
         {

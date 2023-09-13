@@ -13,28 +13,28 @@ public partial class ModuleWeaver
     {
         var methodBaseType = FindTypeDefinition("MethodBase");
         getMethodFromHandle = methodBaseType.Methods
-            .First(x => x.Name == "GetMethodFromHandle" &&
-                        x.Parameters.Count == 1 &&
-                        x.Parameters[0].ParameterType.Name == "RuntimeMethodHandle");
+            .First(_ => _.Name == "GetMethodFromHandle" &&
+                        _.Parameters.Count == 1 &&
+                        _.Parameters[0].ParameterType.Name == "RuntimeMethodHandle");
         getMethodFromHandle = ModuleDefinition.ImportReference(getMethodFromHandle);
         getMethodFromHandleGeneric = methodBaseType.Methods
-            .First(x => x.Name == "GetMethodFromHandle" &&
-                        x.Parameters.Count == 2 &&
-                        x.Parameters[0].ParameterType.Name == "RuntimeMethodHandle" &&
-                        x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
+            .First(_ => _.Name == "GetMethodFromHandle" &&
+                        _.Parameters.Count == 2 &&
+                        _.Parameters[0].ParameterType.Name == "RuntimeMethodHandle" &&
+                        _.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getMethodFromHandleGeneric = ModuleDefinition.ImportReference(getMethodFromHandleGeneric);
 
         var fieldInfoType = FindTypeDefinition("FieldInfo");
         getFieldFromHandle = fieldInfoType.Methods
-            .First(x => x.Name == "GetFieldFromHandle" &&
-                        x.Parameters.Count == 1 &&
-                        x.Parameters[0].ParameterType.Name == "RuntimeFieldHandle");
+            .First(_ => _.Name == "GetFieldFromHandle" &&
+                        _.Parameters.Count == 1 &&
+                        _.Parameters[0].ParameterType.Name == "RuntimeFieldHandle");
         getFieldFromHandle = ModuleDefinition.ImportReference(getFieldFromHandle);
         getFieldFromHandleGeneric = fieldInfoType.Methods
-            .First(x => x.Name == "GetFieldFromHandle" &&
-                        x.Parameters.Count == 2 &&
-                        x.Parameters[0].ParameterType.Name == "RuntimeFieldHandle" &&
-                        x.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
+            .First(_ => _.Name == "GetFieldFromHandle" &&
+                        _.Parameters.Count == 2 &&
+                        _.Parameters[0].ParameterType.Name == "RuntimeFieldHandle" &&
+                        _.Parameters[1].ParameterType.Name == "RuntimeTypeHandle");
         getFieldFromHandleGeneric = ModuleDefinition.ImportReference(getFieldFromHandleGeneric);
 
         methodInfoType = FindTypeDefinition("MethodInfo");
@@ -48,9 +48,9 @@ public partial class ModuleWeaver
 
         var typeType = FindTypeDefinition("Type");
         getTypeFromHandle = typeType.Methods
-            .First(x => x.Name == "GetTypeFromHandle" &&
-                        x.Parameters.Count == 1 &&
-                        x.Parameters[0].ParameterType.Name == "RuntimeTypeHandle");
+            .First(_ => _.Name == "GetTypeFromHandle" &&
+                        _.Parameters.Count == 1 &&
+                        _.Parameters[0].ParameterType.Name == "RuntimeTypeHandle");
         getTypeFromHandle = ModuleDefinition.ImportReference(getTypeFromHandle);
     }
 

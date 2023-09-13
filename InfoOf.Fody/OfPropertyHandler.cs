@@ -8,12 +8,12 @@ public partial class ModuleWeaver
 {
     void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertyGetReference)
     {
-        HandleOfProperty(instruction, ilProcessor, ofPropertyGetReference, x => x.GetMethod);
+        HandleOfProperty(instruction, ilProcessor, ofPropertyGetReference, _ => _.GetMethod);
     }
 
     void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertySetReference)
     {
-        HandleOfProperty(instruction, ilProcessor, ofPropertySetReference, x => x.SetMethod);
+        HandleOfProperty(instruction, ilProcessor, ofPropertySetReference, _ => _.SetMethod);
     }
 
     void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, MethodReference propertyReference, Func<PropertyDefinition, MethodDefinition> func)
@@ -24,7 +24,7 @@ public partial class ModuleWeaver
         var typeReferenceData = LoadTypeReference(propertyReference, ilProcessor, propertyNameInstruction.Previous);
         var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
-        var property = typeDefinition.Properties.FirstOrDefault(x => x.Name == propertyName);
+        var property = typeDefinition.Properties.FirstOrDefault(_ => _.Name == propertyName);
 
         if (property == null)
         {

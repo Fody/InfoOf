@@ -36,7 +36,7 @@ public static class ParamChecker
                 throw new WeavingException($"Could not find method named '{methodName}'.");
             }
 
-            return definitions.OrderBy(x => x.Parameters.Count).First();
+            return definitions.OrderBy(_ => _.Parameters.Count).First();
         }
     }
 

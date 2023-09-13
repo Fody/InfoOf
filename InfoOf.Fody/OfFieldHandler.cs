@@ -14,7 +14,7 @@ public partial class ModuleWeaver
         var typeReferenceData = LoadTypeReference(ofFieldReference, ilProcessor, fieldNameInstruction.Previous);
         var typeDefinition = typeReferenceData.TypeReference.Resolve();
 
-        var fieldDefinition = typeDefinition.Fields.FirstOrDefault(x => x.Name == fieldName);
+        var fieldDefinition = typeDefinition.Fields.FirstOrDefault(_ => _.Name == fieldName);
         if (fieldDefinition == null)
         {
             throw new WeavingException($"Could not find field named '{fieldName}'.");

@@ -3,6 +3,6 @@
   <PropertyGroup>
     <Version>2.1.1</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 </Project>

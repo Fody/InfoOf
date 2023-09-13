@@ -9,6 +9,6 @@ public static class TypeFinder
 
         return ModuleDefinition.ReadModule(location)
             .GetTypes()
-            .First(x => x.Name == typeof(T).Name);
+            .First(_ => _.Name == typeof(T).Name);
     }
 }

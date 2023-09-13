@@ -64,7 +64,7 @@ public sealed class ILProcessor : IDisposable
 
     private void UpdateReferences(Instruction oldInstruction, Instruction newInstruction)
     {
-        foreach (var updateInstruction in _body.Instructions.Where(i => i.Operand == oldInstruction))
+        foreach (var updateInstruction in _body.Instructions.Where(_ => _.Operand == oldInstruction))
             updateInstruction.Operand = newInstruction;
 
         foreach (var handler in _body.ExceptionHandlers)

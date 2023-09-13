@@ -12,7 +12,7 @@ public partial class ModuleWeaver
     {
         var actions = new List<Action<ILProcessor>>();
         foreach (var instruction in method.Body.Instructions
-            .Where(i => i.OpCode == OpCodes.Call))
+            .Where(_ => _.OpCode == OpCodes.Call))
         {
             if (instruction.Operand is not MethodReference methodReference)
             {
@@ -96,14 +96,14 @@ public partial class ModuleWeaver
             moduleDefinition = assemblyDefinition.MainModule;
         }
 
-        var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(x => x.FullName == typeName);
+        var typeDefinition = moduleDefinition.GetTypes().FirstOrDefault(_ => _.FullName == typeName);
         if (typeDefinition != null)
         {
             return MakeGeneric(typeDefinition);
         }
 
         var exportedType = moduleDefinition.ExportedTypes
-            .FirstOrDefault(x => x.FullName == typeName)?.Resolve();
+            .FirstOrDefault(_ => _.FullName == typeName)?.Resolve();
         if (exportedType != null)
         {
             return MakeGeneric(exportedType);
