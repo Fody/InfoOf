@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using MyNamespace;
-using Xunit;
 
 // ReSharper disable UnusedMember.Local
 

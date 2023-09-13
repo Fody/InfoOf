@@ -1,4 +1,3 @@
-using System;
 using Fody;
 
 class AssemblyNameState : IState

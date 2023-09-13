@@ -1,5 +1,3 @@
-using Mono.Cecil;
-
 public static class TypeReferenceExtensions
 {
     public static bool IsNamed(this TypeReference type, string typeName)

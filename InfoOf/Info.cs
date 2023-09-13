@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 /// <summary>
 /// Used as a type safe abstraction for injecting InfoOf IL into an assembly.

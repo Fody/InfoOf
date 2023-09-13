@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using Fody;
-using Xunit;
 
 public partial class IntegrationTests
 {

@@ -1,5 +1,3 @@
-using System.Linq;
-
 public partial class ModuleWeaver
 {
     public void CleanReferences()

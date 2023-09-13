@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Xunit;
-
 // ReSharper disable UnusedMember.Local
 
 public class MultiLayerNestedClass

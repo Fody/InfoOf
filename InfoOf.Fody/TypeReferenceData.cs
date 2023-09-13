@@ -1,7 +1,4 @@
-﻿using Mono.Cecil;
-using Mono.Cecil.Cil;
-
-class TypeReferenceData
+﻿class TypeReferenceData
 {
     public TypeReference TypeReference { get; }
     public Instruction Instruction { get; }

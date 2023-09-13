@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Mono.Cecil.Cil;
-using Mono.Cecil.Rocks;
+﻿using Mono.Cecil.Rocks;
 using Mono.Collections.Generic;
 
 #nullable enable

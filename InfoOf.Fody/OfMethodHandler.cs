@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
-
 public partial class ModuleWeaver
 {
     void HandleOfMethod(Instruction instruction, ILProcessor ilProcessor, MethodReference ofMethodReference)

@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Mono.Cecil;
-
 public partial class ModuleWeaver
 {
     public override IEnumerable<string> GetAssembliesForScanning()

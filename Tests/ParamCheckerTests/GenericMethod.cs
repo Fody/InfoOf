@@ -1,5 +1,3 @@
-using Xunit;
-
 // ReSharper disable UnusedMember.Local
 
 public class GenericMethod

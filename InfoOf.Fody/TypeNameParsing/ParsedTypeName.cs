@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-public class ParsedTypeName
+﻿public class ParsedTypeName
 {
     public string Assembly;
     public string TypeName ;

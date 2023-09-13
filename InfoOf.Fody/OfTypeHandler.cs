@@ -1,5 +1,3 @@
-using Mono.Cecil.Cil;
-
 public partial class ModuleWeaver
 {
     void HandleOfType(Instruction instruction, ILProcessor ilProcessor)

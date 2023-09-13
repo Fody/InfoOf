@@ -1,7 +1,4 @@
-﻿using Mono.Cecil;
-using Mono.Cecil.Cil;
-
-partial class ModuleWeaver
+﻿partial class ModuleWeaver
 {
     TypeReferenceData LoadTypeReference(MethodReference methodReference, ILProcessor processor, Instruction instruction)
     {

@@ -1,4 +1,3 @@
-using System.Linq;
 using Mono.Cecil;
 
 public static class TypeFinder
