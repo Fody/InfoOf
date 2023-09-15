@@ -6,7 +6,7 @@
         {
             var genericArgument = genericReference.GenericArguments[0].GetElementType();
 
-            return new TypeReferenceData(ModuleDefinition.ImportReference(genericArgument), instruction);
+            return new(ModuleDefinition.ImportReference(genericArgument), instruction);
         }
 
         var typeNameInstruction = instruction;
@@ -18,6 +18,6 @@
         processor.Remove(typeNameInstruction);
         processor.Remove(assemblyNameInstruction);
 
-        return new TypeReferenceData(GetTypeReference(assemblyName, typeName), assemblyNameInstruction);
+        return new(GetTypeReference(assemblyName, typeName), assemblyNameInstruction);
     }
 }

@@ -1,12 +1,7 @@
 using Fody;
 
-class TokenReadState : IState
+class TokenReadState(IState parentState) : IState
 {
-    IState parentState;
-
-    public TokenReadState(IState parentState) =>
-        this.parentState = parentState;
-
     public IState OnGenericTypeStart() =>
         throw new WeavingException($"Expected a name, got {TypeNameParser.GenericTypeStart}");
 

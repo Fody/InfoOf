@@ -1,12 +1,8 @@
 using Fody;
 
-class AssemblyNameState : IState
+class AssemblyNameState(GenericParameterState parentState) : IState
 {
-    GenericParameterState parentState;
     IState childState;
-
-    public AssemblyNameState(GenericParameterState parentState) =>
-        this.parentState = parentState;
 
     public IState OnGenericTypeStart() =>
         throw new WeavingException($"Expected assembly name separator, got {TypeNameParser.GenericTypeStart}");
@@ -54,7 +50,7 @@ class AssemblyNameState : IState
             return childState.Build();
         }
 
-        return new ParsedTypeName
+        return new()
         {
             Assembly = Token,
             TypeName = childState.Token

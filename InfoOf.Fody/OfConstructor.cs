@@ -13,7 +13,7 @@ public partial class ModuleWeaver
         {
             case 0:
                 typeNameInstruction = instruction;
-                parameters = new List<string>();
+                parameters = new();
                 break;
             case 1:
             case 3:
@@ -26,7 +26,7 @@ public partial class ModuleWeaver
                 break;
             default:
                 typeNameInstruction = instruction.Previous;
-                parameters = new List<string>();
+                parameters = new();
                 break;
         }
 

@@ -92,7 +92,7 @@ public sealed class ILProcessor : IDisposable
             return;
 
         debugInformation.SequencePoints.Remove(sequencePoint);
-        debugInformation.SequencePoints.Add(new SequencePoint(newInstruction, sequencePoint.Document));
+        debugInformation.SequencePoints.Add(new(newInstruction, sequencePoint.Document));
 
         if (newInstruction != _instructions.First())
             return;

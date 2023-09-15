@@ -82,7 +82,7 @@ public partial class ModuleWeaver
         }
         else
         {
-            var assemblyDefinition = ModuleDefinition.AssemblyResolver.Resolve(new AssemblyNameReference(assemblyName, null));
+            var assemblyDefinition = ModuleDefinition.AssemblyResolver.Resolve(new(assemblyName, null));
             if (assemblyDefinition == null)
             {
                 throw new WeavingException($"Could not find assembly named '{assemblyName}'.");

@@ -1,3 +1,1 @@
-class InternalClass
-{
-}
+class InternalClass;

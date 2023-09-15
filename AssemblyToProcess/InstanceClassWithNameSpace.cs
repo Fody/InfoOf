@@ -1,34 +1,33 @@
 using System.Reflection;
 
-namespace MyNamespace
+namespace MyNamespace;
+
+public class InstanceClassWithNameSpace
 {
-    public class InstanceClassWithNameSpace
+    string field;
+    public FieldInfo GetField()
     {
-        string field;
-        public FieldInfo GetField()
-        {
-            return Info.OfField("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "field");
-        }
-        public void Method()
-        {
-        }
+        return Info.OfField("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "field");
+    }
+    public void Method()
+    {
+    }
 
-        public MethodInfo GetInstanceMethod()
-        {
-            return Info.OfMethod("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "Method");
-        }
+    public MethodInfo GetInstanceMethod()
+    {
+        return Info.OfMethod("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "Method");
+    }
 
 
-        public string InstanceProperty { get; set; }
+    public string InstanceProperty { get; set; }
 
-        public MethodInfo GetGetProperty()
-        {
-            return Info.OfPropertyGet("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "InstanceProperty");
-        }
+    public MethodInfo GetGetProperty()
+    {
+        return Info.OfPropertyGet("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "InstanceProperty");
+    }
 
-        public MethodInfo GetSetProperty()
-        {
-            return Info.OfPropertySet("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "InstanceProperty");
-        }
+    public MethodInfo GetSetProperty()
+    {
+        return Info.OfPropertySet("AssemblyToProcess", "MyNamespace.InstanceClassWithNameSpace", "InstanceProperty");
     }
 }

@@ -1,15 +1,8 @@
 using Fody;
 
-class GenericParameterState : IState
+class GenericParameterState(TypeNameState parentState) : IState
 {
-    TypeNameState parentState;
-    IList<AssemblyNameState> genericParameters;
-
-    public GenericParameterState(TypeNameState parentState)
-    {
-        this.parentState = parentState;
-        genericParameters = new List<AssemblyNameState>();
-    }
+    IList<AssemblyNameState> genericParameters = new List<AssemblyNameState>();
 
     public IState OnGenericTypeStart()
     {

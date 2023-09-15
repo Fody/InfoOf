@@ -16,7 +16,7 @@ public class SimpleMethod
     public void SimpleParam()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        var method = target.FindMethodDefinitions("MethodWithParam", new List<string> { "System.Int32" });
+        var method = target.FindMethodDefinitions("MethodWithParam", new() { "System.Int32" });
         Assert.NotNull(method);
     }
 
@@ -24,7 +24,7 @@ public class SimpleMethod
     public void BadNamespace()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        Assert.Throws<WeavingException>(() => target.FindMethodDefinitions("MethodWithParam", new List<string> {"System2.Int32"}));
+        Assert.Throws<WeavingException>(() => target.FindMethodDefinitions("MethodWithParam", new() {"System2.Int32"}));
     }
 
     void Method()

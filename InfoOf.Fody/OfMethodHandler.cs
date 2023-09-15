@@ -19,7 +19,7 @@ public partial class ModuleWeaver
         else
         {
             methodNameInstruction = instruction.Previous;
-            parameters = new List<string>();
+            parameters = new();
         }
 
         var methodName = GetLdString(methodNameInstruction);

@@ -1,1 +1,1 @@
-public class ChildClassToForceReference:PublicClassToForceReference{}
+public class ChildClassToForceReference:PublicClassToForceReference;

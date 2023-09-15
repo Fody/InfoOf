@@ -14,7 +14,7 @@ public class MultiLayerNestedClass
     public void SimpleWithParam()
     {
         var target = TypeFinder.Find<MultiLayerNestedClass>();
-        var method = target.FindMethodDefinitions("Method", new List<string> { "Nested2" });
+        var method = target.FindMethodDefinitions("Method", new() { "Nested2" });
         Assert.NotNull(method);
     }
 
@@ -22,15 +22,13 @@ public class MultiLayerNestedClass
     public void Full()
     {
         var target = TypeFinder.Find<MultiLayerNestedClass>();
-        var method = target.FindMethodDefinitions("Method", new List<string> { "MultiLayerNestedClass/Nested/Nested2" });
+        var method = target.FindMethodDefinitions("Method", new() { "MultiLayerNestedClass/Nested/Nested2" });
         Assert.NotNull(method);
     }
 
     public class Nested
     {
-        public class Nested2
-        {
-        }
+        public class Nested2;
     }
 
     // ReSharper disable once UnusedParameter.Local

@@ -26,7 +26,7 @@ public partial class ModuleWeaver
             {
                 declaringType.GenericArguments.Add(parameter);
             }
-            fieldReference = new FieldReference(fieldDefinition.Name, fieldDefinition.FieldType, declaringType);
+            fieldReference = new(fieldDefinition.Name, fieldDefinition.FieldType, declaringType);
         }
         else
         {

@@ -15,7 +15,7 @@ public class NestedClass
     public void SimpleParam()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var method = target.FindMethodDefinitions("Method", new List<string> { "Nested" });
+        var method = target.FindMethodDefinitions("Method", new() { "Nested" });
         Assert.NotNull(method);
     }
 
@@ -23,7 +23,7 @@ public class NestedClass
     public void Full()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var method = target.FindMethodDefinitions("Method", new List<string> { "Root/Nested" });
+        var method = target.FindMethodDefinitions("Method", new() { "Root/Nested" });
         Assert.NotNull(method);
     }
 
@@ -31,7 +31,7 @@ public class NestedClass
     public void FullWithNamespace()
     {
         var target = TypeFinder.Find<NestedClass>();
-        var method = target.FindMethodDefinitions("Method", new List<string> { "MyNamespace.Root/Nested" });
+        var method = target.FindMethodDefinitions("Method", new() { "MyNamespace.Root/Nested" });
         Assert.NotNull(method);
     }
 
@@ -46,8 +46,6 @@ namespace MyNamespace
 {
     public class Root
     {
-        public class Nested
-        {
-        }
+        public class Nested;
     }
 }
