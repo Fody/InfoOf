@@ -9,8 +9,7 @@ class AssemblyNameState(GenericParameterState parentState) : IState
 
     public IState OnGenericTypeEnd(IState currentState)
     {
-        if (currentState is AssemblyNameState assemblyNameState &&
-            assemblyNameState.childState == null)
+        if (currentState is AssemblyNameState {childState: null})
         {
             throw new WeavingException($"Expected assembly name separator, got {TypeNameParser.GenericTypeEnd}");
         }
@@ -24,8 +23,7 @@ class AssemblyNameState(GenericParameterState parentState) : IState
 
     public IState OnGenericParamSeparator(IState currentState)
     {
-        if (currentState is AssemblyNameState assemblyNameState &&
-            assemblyNameState.childState == null)
+        if (currentState is AssemblyNameState {childState: null})
         {
             throw new WeavingException($"Expected assembly name separator, got {TypeNameParser.GenericParamSeparator}");
         }
