@@ -8,11 +8,11 @@ public partial class IntegrationTests
 
     static IntegrationTests()
     {
-        var weavingTask = new ModuleWeaver();
+        var weaver = new ModuleWeaver();
 #if(NETFRAMEWORK)
-        testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", ignoreCodes:new []{ "0x80131869"});
+        testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll", ignoreCodes:new []{ "0x80131869"});
 #else
-        testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
+        testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
 #endif
         assembly = testResult.Assembly;
     }
