@@ -51,7 +51,7 @@ snippet: usage
 snippet: UsageCompiled
 
 
-## Specifying Generic Types
+## Specifying Generic Types in method parameters
 
 The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 
@@ -59,7 +59,7 @@ The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 <fullTypeSpec> ::= <typeName> [<genericSpec>]
 <genericSpec>  ::= "<" <genericTypes> ">"
 <genericTypes> ::= <genericType> ["," <genericTypes>]
-<genericType>  ::= <assemblyName> "|" <fullTypeSpec>
+<genericType>  ::= <fullTypeSpec>
 <name>         ::= <identifier> [<name>]
 <typeName>     ::= <name>
 <assemblyName> ::= <name>
@@ -72,7 +72,7 @@ The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 <specialChar>  ::= "." | "`"
 ```
 
-To specify a `Dictionary<int, string>`, the typeName would be `System.Collections.Generic.Dictionary``2<mscorlib|System.Int32,mscorlib|System.String>`.
+To specify a `Dictionary<int, string>`, the typeName would be ```System.Collections.Generic.Dictionary`2<System.Int32,System.String>```.
 
 
 ### Escape Sequences
