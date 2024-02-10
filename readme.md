@@ -112,7 +112,7 @@ var setIndexerTyped = methodof(MyClass.set_Item);
 <!-- endSnippet -->
 
 
-## Specifying Generic Types in method parameters
+## Specifying Generic Types in Method Parameters
 
 The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 
@@ -135,8 +135,19 @@ The `typeName` parameter of the Info.Of* methods use the following BNF grammar:
 
 To specify a `Dictionary<int, string>`, the typeName would be ```System.Collections.Generic.Dictionary`2<System.Int32,System.String>```.
 
+## Specifying Generic Parameter Types in Generic Methods
+To find a method with the following signature
 
-### Escape Sequences
+```c#
+MyMethod<T>(T param)
+```
+use
+```c#
+Info.OfMethod<MyClass>("MyMethod", "T")
+```
+
+
+## Escape Sequences
 
 If the following chars are part of the typeName, they will need to be escaped with a "\\": `"\", "<", ">", "|", ","`.
 
