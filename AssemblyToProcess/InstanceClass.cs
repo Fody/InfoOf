@@ -57,6 +57,15 @@ public class InstanceClass
     static void MethodWithParams(string param1, int param2)
     {
     }
+
+    static void MethodWithSimpleGenericParams(string param1, List<int> param2)
+    {
+    }
+
+    static void MethodWithComplexGenericParams(string param1, Dictionary<int, string> param2)
+    {
+    }
+
     // ReSharper restore UnusedParameter.Local
 
     public MethodInfo GetMethodWithParams()
@@ -72,6 +81,16 @@ public class InstanceClass
     public MethodInfo GetMethodWithParamsTyped()
     {
         return Info.OfMethod<InstanceClass>(nameof(MethodWithParams), "String, Int32");
+    }
+
+    public MethodInfo GetMethodWithSimpleGenericParamsTyped()
+    {
+        return Info.OfMethod<InstanceClass>(nameof(MethodWithSimpleGenericParams), "String, System.Collections.Generic.List`1<System.Int32>");
+    }
+
+    public MethodInfo GetMethodWithComplexGenericParamsTyped()
+    {
+        return Info.OfMethod<InstanceClass>(nameof(MethodWithComplexGenericParams), "String, System.Collections.Generic.Dictionary`2<System.Int32, System.String>");
     }
 
     void InstanceMethod()
