@@ -124,7 +124,7 @@ var setIndexerTyped = methodof(MyClass.set_Item);
 
 Actually ther is no specific support for generic methods. Both `"Method()"` and `"Method<T>()"` will be found by the name `Method`.
 
-If ther is a non-generic method and a generic overload with the same parameters, only the first of both will be returned.
+If there is a non-generic method and a generic overload with the same parameter signature, only the first of both will be returned.
 
 ## Specifying Generic Types
 
