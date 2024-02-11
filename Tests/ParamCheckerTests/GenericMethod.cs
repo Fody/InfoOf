@@ -26,7 +26,7 @@ public class GenericMethod
     public void MethodWithOverloadParam()
     {
         var target = TypeFinder.Find<GenericMethod>();
-        var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", new() { "System.Int32" });
+        var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", ["System.Int32"]);
         Assert.NotNull(methodDefinition);
         Assert.Equal("System.Void GenericMethod::MethodWithOverload(System.Int32)", methodDefinition.FullName);
         Assert.False(methodDefinition.HasGenericParameters);
@@ -36,33 +36,20 @@ public class GenericMethod
     public void MethodWithOverloadGenericParam()
     {
         var target = TypeFinder.Find<GenericMethod>();
-        var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", new() { "T" });
+        var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", ["T"]);
         Assert.NotNull(methodDefinition);
         Assert.Equal("System.Void GenericMethod::MethodWithOverload(T)", methodDefinition.FullName);
         Assert.True(methodDefinition.HasGenericParameters);
     }
 
 
-    void Method<T>()
-    {
-    }
-
-    void MethodWithOverload<T>()
-    {
-
-    }
-    void MethodWithOverload()
-    {
-
-    }
-
-    void MethodWithOverload(int param)
-    {
-
-    }
-
-    void MethodWithOverload<T>(T param)
-    {
-
-    }
+    void Method<T>() => throw new NotImplementedException();
+    
+    void MethodWithOverload<T>() => throw new NotImplementedException();
+    
+    void MethodWithOverload() => throw new NotImplementedException();
+    
+    void MethodWithOverload(int param) => throw new NotImplementedException();
+    
+    void MethodWithOverload<T>(T param) => throw new NotImplementedException();
 }

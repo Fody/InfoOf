@@ -1,6 +1,7 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 16.0.29201.188
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoOf.Fody", "InfoOf.Fody\InfoOf.Fody.csproj", "{C3578A7B-09A6-4444-9383-0DEAFA4958BD}"
 EndProject
@@ -18,6 +19,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D16BC4B8-BDFB-442F-87DD-DA34230BF490}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		mdsnippets.json = mdsnippets.json
+		readme.md = readme.md
+		readme.source.md = readme.source.md
 	EndProjectSection
 EndProject
 Global
