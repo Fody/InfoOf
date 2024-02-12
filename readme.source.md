@@ -55,13 +55,13 @@ snippet: UsageCompiled
 - Parameters are specified with their full type name
 - For methods, when no parameters are specified, the method with the least number of parameters will be returned.
 - Parameters are specified as comma separated list, e.g. `"System.String, System.Int32"`.
-- For every parameter, the first namepsace part can be omitted, so `"String, Int32"` works, too.
+- For every parameter, the first namespace part can be omitted, so `"String, Int32"` works, too.
 - Nested namespaces are not handled, only `"Regex"` won't work, but `"System.Text.RegularExpressions.Regex"` or `"Text.RegularExpressions.Regex"`.
-- Generic types with more than one type param are not supported in parameters. ```"System.Collections.Generic.List`1<System.Int32>"``` works, but ```"System.Collections.Generic.Dictionary`2<System.Int32, System.String>"``` does not. (see #583)
+- Generic types with more than one type param are not supported in method parameters. ```"System.Collections.Generic.List`1<System.Int32>"``` works, but ```"System.Collections.Generic.Dictionary`2<System.Int32, System.String>"``` does not. (see #583)
 
 ## Finding Generic Methods
 
-Actually ther is no specific support for generic methods. Both `"Method()"` and `"Method<T>()"` will be found by the name `Method`.
+Actually there is no specific support for generic methods. Both `"Method()"` and `"Method<T>()"` will be found by the name `Method`.
 
 If there is a non-generic method and a generic overload with the same parameter signature, only the first of both will be returned.
 
