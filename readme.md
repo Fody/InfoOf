@@ -83,7 +83,7 @@ var setIndexerTyped = Info.OfIndexerSet<MyClass>("Int32");
 ### What gets compiled
 
 <!-- snippet: UsageCompiled -->
-<a id='snippet-usagecompiled'></a>
+<a id='snippet-UsageCompiled'></a>
 ```cs
 var type = typeof(MyClass);
 
@@ -108,7 +108,7 @@ var getIndexerTyped = methodof(MyClass.get_Item);
 var setIndexer = methodof(MyClass.set_Item);
 var setIndexerTyped = methodof(MyClass.set_Item);
 ```
-<sup><a href='/Tests/Snippets.cs#L33-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-usagecompiled' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/Tests/Snippets.cs#L33-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-UsageCompiled' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Specifying Parameters
