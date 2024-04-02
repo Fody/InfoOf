@@ -44,12 +44,12 @@ public class GenericMethod
 
 
     void Method<T>() => throw new NotImplementedException();
-    
+
     void MethodWithOverload<T>() => throw new NotImplementedException();
-    
+
     void MethodWithOverload() => throw new NotImplementedException();
-    
+
     void MethodWithOverload(int param) => throw new NotImplementedException();
-    
+
     void MethodWithOverload<T>(T param) => throw new NotImplementedException();
 }

@@ -19,7 +19,7 @@ public partial class ModuleWeaver
             case 3:
                 parametersInstruction = instruction.Previous;
                 parameters = GetLdString(parametersInstruction)
-                    .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split([","], StringSplitOptions.RemoveEmptyEntries)
                     .Select(_ => _.Trim())
                     .ToList();
                 typeNameInstruction = parametersInstruction.Previous;

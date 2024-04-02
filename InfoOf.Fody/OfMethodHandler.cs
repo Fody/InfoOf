@@ -11,7 +11,7 @@ public partial class ModuleWeaver
         {
             parametersInstruction = instruction.Previous;
             parameters = GetLdString(parametersInstruction)
-                .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Split([","], StringSplitOptions.RemoveEmptyEntries)
                 .Select(_ => _.Trim())
                 .ToList();
             methodNameInstruction = parametersInstruction.Previous;
