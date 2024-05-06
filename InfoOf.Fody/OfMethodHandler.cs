@@ -10,10 +10,7 @@ public partial class ModuleWeaver
         if (ofMethodReference.Parameters.Count is 2 or 4)
         {
             parametersInstruction = instruction.Previous;
-            parameters = GetLdString(parametersInstruction)
-                .Split([","], StringSplitOptions.RemoveEmptyEntries)
-                .Select(_ => _.Trim())
-                .ToList();
+            parameters = GetLdString(parametersInstruction).GetParameters();
             methodNameInstruction = parametersInstruction.Previous;
         }
         else

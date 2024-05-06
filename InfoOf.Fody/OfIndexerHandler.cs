@@ -16,10 +16,7 @@ public partial class ModuleWeaver
         Func<PropertyDefinition, MethodDefinition> func, Func<PropertyDefinition, List<string>, List<string>> getParameters)
     {
         var parametersInstruction = instruction.Previous;
-        var parameters = GetLdString(parametersInstruction)
-            .Split([","], StringSplitOptions.RemoveEmptyEntries)
-            .Select(_ => _.Trim())
-            .ToList();
+        var parameters = GetLdString(parametersInstruction).GetParameters();
 
         const string propertyName = "Item";
 
