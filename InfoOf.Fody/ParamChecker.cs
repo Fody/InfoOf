@@ -55,4 +55,24 @@ public static class ParamChecker
         }
         return true;
     }
+
+    public static List<string> GetParameters(this string parameters) =>
+        parameters
+            .Aggregate(
+                (0, "", Array.Empty<string>()),
+                (acc, c) => (acc.Item1, c) switch
+                {
+                    (0, ',') => (0, "", [.. acc.Item3, acc.Item2]),
+                    (_, '<') => (acc.Item1 + 1, $"{acc.Item2}{c}", acc.Item3),
+                    (_, '>') => (acc.Item1 - 1, $"{acc.Item2}{c}", acc.Item3),
+                    (_, ' ') => acc,
+                    (_, _) => (acc.Item1, $"{acc.Item2}{c}", acc.Item3)
+                },
+                acc => acc.Item2 switch
+                {
+                    "" => acc.Item3,
+                    _ => [.. acc.Item3, acc.Item2]
+                })
+            .Select(_ => _.Trim())
+            .ToList();
 }

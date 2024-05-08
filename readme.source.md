@@ -57,7 +57,6 @@ snippet: UsageCompiled
 - Parameters are specified as comma separated list, e.g. `"System.String, System.Int32"`.
 - For every parameter, the first namespace part can be omitted, so `"String, Int32"` works, too.
 - Nested namespaces are not handled, only `"Regex"` won't work, but `"System.Text.RegularExpressions.Regex"` or `"Text.RegularExpressions.Regex"`.
-- Generic types with more than one type param are not supported in method parameters. ```"System.Collections.Generic.List`1<System.Int32>"``` works, but ```"System.Collections.Generic.Dictionary`2<System.Int32, System.String>"``` does not. (see #583)
 
 ## Finding Generic Methods
 

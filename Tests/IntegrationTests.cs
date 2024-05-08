@@ -409,6 +409,24 @@ public partial class IntegrationTests
     }
 
     [Fact]
+    public void InstanceMethodWithSimpleGenericParamsTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetMethodWithSimpleGenericParamsTyped();
+        Assert.NotNull(methodInfo);
+    }
+    
+    [Fact]
+    public void InstanceMethodWithComplexGenericParamsTyped()
+    {
+        var type = assembly.GetType("InstanceClass");
+        var instance = (dynamic) Activator.CreateInstance(type);
+        MethodInfo methodInfo = instance.GetMethodWithComplexGenericParamsTyped();
+        Assert.NotNull(methodInfo);
+    }
+
+    [Fact]
     public void StaticMethod()
     {
         var type = assembly.GetType("InstanceClass");
