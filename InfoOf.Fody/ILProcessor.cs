@@ -1,7 +1,4 @@
-﻿using Mono.Cecil.Rocks;
-using Mono.Collections.Generic;
-
-#nullable enable
+﻿#nullable enable
 
 public sealed class ILProcessor : IDisposable
 {

@@ -1,16 +1,10 @@
-using Fody;
-
 public partial class ModuleWeaver
 {
-    void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertyGetReference)
-    {
+    void HandleOfPropertyGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertyGetReference) =>
         HandleOfProperty(instruction, ilProcessor, ofPropertyGetReference, _ => _.GetMethod);
-    }
 
-    void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertySetReference)
-    {
+    void HandleOfPropertySet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofPropertySetReference) =>
         HandleOfProperty(instruction, ilProcessor, ofPropertySetReference, _ => _.SetMethod);
-    }
 
     void HandleOfProperty(Instruction instruction, ILProcessor ilProcessor, MethodReference propertyReference, Func<PropertyDefinition, MethodDefinition> func)
     {

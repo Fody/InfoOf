@@ -1,10 +1,8 @@
-using Fody;
-
 public partial class ModuleWeaver
 {
+    //Info.OfField("AssemblyToProcess","MethodClass","Field");
     void HandleOfField(Instruction instruction, ILProcessor ilProcessor, MethodReference ofFieldReference)
     {
-        //Info.OfField("AssemblyToProcess","MethodClass","Field");
         var fieldNameInstruction = instruction.Previous;
         var fieldName = GetLdString(fieldNameInstruction);
 

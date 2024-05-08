@@ -1,5 +1,3 @@
-using Fody;
-
 public static class ParamChecker
 {
     public static MethodDefinition FindMethodDefinitions(this TypeDefinition typeDefinition, string methodName, List<string> parameters)

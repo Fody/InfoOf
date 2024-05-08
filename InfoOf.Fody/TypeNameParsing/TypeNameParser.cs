@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Fody;
 
 public static class TypeNameParser
 {

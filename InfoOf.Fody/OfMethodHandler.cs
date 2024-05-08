@@ -1,9 +1,8 @@
 public partial class ModuleWeaver
 {
+    //Info.OfMethod("AssemblyToProcess","MethodClass","InstanceMethod");
     void HandleOfMethod(Instruction instruction, ILProcessor ilProcessor, MethodReference ofMethodReference)
     {
-        //Info.OfMethod("AssemblyToProcess","MethodClass","InstanceMethod");
-
         Instruction methodNameInstruction;
         List<string> parameters;
         Instruction parametersInstruction = null;

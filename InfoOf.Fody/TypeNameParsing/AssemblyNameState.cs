@@ -1,5 +1,3 @@
-using Fody;
-
 class AssemblyNameState(GenericParameterState parentState) : IState
 {
     IState childState;

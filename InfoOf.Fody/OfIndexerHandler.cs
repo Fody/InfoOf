@@ -1,19 +1,17 @@
-﻿using Fody;
-
-public partial class ModuleWeaver
+﻿public partial class ModuleWeaver
 {
-    void HandleOfIndexerGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerGetReference)
-    {
+    void HandleOfIndexerGet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerGetReference) =>
         HandleOfIndexer(instruction, ilProcessor, ofIndexerGetReference, _ => _.GetMethod, (_, p) => p);
-    }
 
-    void HandleOfIndexerSet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerSetReference)
-    {
+    void HandleOfIndexerSet(Instruction instruction, ILProcessor ilProcessor, MethodReference ofIndexerSetReference) =>
         HandleOfIndexer(instruction, ilProcessor, ofIndexerSetReference, _ => _.SetMethod, (d, p) => p.Append(d.PropertyType.Name).ToList());
-    }
 
-    void HandleOfIndexer(Instruction instruction, ILProcessor ilProcessor, MethodReference propertyReference,
-        Func<PropertyDefinition, MethodDefinition> func, Func<PropertyDefinition, List<string>, List<string>> getParameters)
+    void HandleOfIndexer(
+        Instruction instruction,
+        ILProcessor ilProcessor,
+        MethodReference propertyReference,
+        Func<PropertyDefinition, MethodDefinition> func,
+        Func<PropertyDefinition, List<string>, List<string>> getParameters)
     {
         var parametersInstruction = instruction.Previous;
         var parameters = GetLdString(parametersInstruction).GetParameters();

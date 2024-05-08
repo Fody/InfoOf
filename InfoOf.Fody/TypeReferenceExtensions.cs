@@ -7,10 +7,12 @@ public static class TypeReferenceExtensions
         {
             return true;
         }
+
         if (typeName == type.Name)
         {
             return true;
         }
+
         var dotIndex = fullName.IndexOf('.');
         if (dotIndex > 0)
         {
@@ -21,6 +23,7 @@ public static class TypeReferenceExtensions
                 return true;
             }
         }
+
         return false;
     }
 }

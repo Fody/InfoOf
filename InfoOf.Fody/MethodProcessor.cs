@@ -1,6 +1,3 @@
-using Fody;
-using Mono.Cecil.Rocks;
-
 public partial class ModuleWeaver
 {
     void ProcessMethod(MethodDefinition method)

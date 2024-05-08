@@ -1,5 +1,3 @@
-using Fody;
-
 class GenericParameterState(TypeNameState parentState) : IState
 {
     IList<AssemblyNameState> genericParameters = new List<AssemblyNameState>();

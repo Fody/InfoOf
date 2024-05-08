@@ -1,9 +1,8 @@
 public partial class ModuleWeaver
 {
+    //Info.OfType("AssemblyToProcess","TypeClass");
     void HandleOfType(Instruction instruction, ILProcessor ilProcessor)
     {
-        //Info.OfType("AssemblyToProcess","TypeClass");
-
         var typeNameInstruction = instruction.Previous;
         var typeName = GetLdString(typeNameInstruction);
 

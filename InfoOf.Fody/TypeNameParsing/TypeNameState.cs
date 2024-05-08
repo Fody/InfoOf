@@ -1,5 +1,3 @@
-using Fody;
-
 class TypeNameState : IState
 {
     AssemblyNameState parentState;

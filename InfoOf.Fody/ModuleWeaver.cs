@@ -1,6 +1,4 @@
-﻿using Fody;
-
-public partial class ModuleWeaver:BaseModuleWeaver
+﻿public partial class ModuleWeaver:BaseModuleWeaver
 {
     List<TypeDefinition> allTypes;
 

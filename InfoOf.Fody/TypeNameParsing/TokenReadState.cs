@@ -1,5 +1,3 @@
-using Fody;
-
 class TokenReadState(IState parentState) : IState
 {
     public IState OnGenericTypeStart() =>

@@ -1,10 +1,8 @@
 public partial class ModuleWeaver
 {
-    void HandleOfConstructor(Instruction instruction, ILProcessor ilProcessor,
-        MethodReference ofConstructorReference)
+    //Info.OfConstructor("AssemblyToProcess","MethodClass");
+    void HandleOfConstructor(Instruction instruction, ILProcessor ilProcessor, MethodReference ofConstructorReference)
     {
-        //Info.OfConstructor("AssemblyToProcess","MethodClass");
-
         Instruction typeNameInstruction;
         List<string> parameters;
         Instruction parametersInstruction = null;
