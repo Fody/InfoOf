@@ -416,7 +416,7 @@ public partial class IntegrationTests
         MethodInfo methodInfo = instance.GetMethodWithSimpleGenericParamsTyped();
         Assert.NotNull(methodInfo);
     }
-    
+
     [Fact]
     public void InstanceMethodWithComplexGenericParamsTyped()
     {
