@@ -7,7 +7,6 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 # <img src="/package_icon.png" height="30px"> InfoOf.Fody
 
-[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
 [![NuGet Status](https://img.shields.io/nuget/v/InfoOf.Fody.svg)](https://www.nuget.org/packages/InfoOf.Fody/)
 
 Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
