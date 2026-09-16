@@ -18,8 +18,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "Doco changes" -a || echo "nothing to commit"
+        git commit -m "Doco changes" -a || { echo "nothing to commit"; exit 0; }
         remote="https://${GITHUB_ACTOR}:${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git"
         branch="${GITHUB_REF:11}"
-        git push "${remote}" ${branch} || echo "nothing to push"
+        # Not masked. The ruleset on the default branch requires the CI check, and this token cannot
+        # bypass it, so a rejected push fails the job rather than losing the docs changes silently.
+        git push "${remote}" ${branch}
       shell: bash
