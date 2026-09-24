@@ -2,28 +2,28 @@
 
 public class MultiLayerNestedClass
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var target = TypeFinder.Find<MultiLayerNestedClass>();
         var method = target.FindMethodDefinitions("Method",null);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
-    [Fact]
-    public void SimpleWithParam()
+    [Test]
+    public async Task SimpleWithParam()
     {
         var target = TypeFinder.Find<MultiLayerNestedClass>();
         var method = target.FindMethodDefinitions("Method", ["Nested2"]);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
-    [Fact]
-    public void Full()
+    [Test]
+    public async Task Full()
     {
         var target = TypeFinder.Find<MultiLayerNestedClass>();
         var method = target.FindMethodDefinitions("Method", ["MultiLayerNestedClass/Nested/Nested2"]);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
     public class Nested

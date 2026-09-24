@@ -4,38 +4,38 @@ using Fody;
 
 public class SimpleMethod
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var target = TypeFinder.Find<SimpleMethod>();
         var method = target.FindMethodDefinitions("Method", null);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
-    [Fact]
-    public void SimpleParam()
+    [Test]
+    public async Task SimpleParam()
     {
         var target = TypeFinder.Find<SimpleMethod>();
         var method = target.FindMethodDefinitions("MethodWithParam", ["System.Int32"]);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
-    [Fact]
-    public void BadNamespace()
+    [Test]
+    public async Task BadNamespace()
     {
         var target = TypeFinder.Find<SimpleMethod>();
-        Assert.Throws<WeavingException>(() => target.FindMethodDefinitions("MethodWithParam", ["System2.Int32"]));
+        await Assert.That(() => target.FindMethodDefinitions("MethodWithParam", ["System2.Int32"])).Throws<WeavingException>();
     }
 
     void Method()
     {
     }
 
-    [Fact]
-    public void WithParam()
+    [Test]
+    public async Task WithParam()
     {
         var method = TypeFinder.Find<SimpleMethod>().FindMethodDefinitions("MethodWithParam", null);
-        Assert.NotNull(method);
+        await Assert.That(method).IsNotNull();
     }
 
     // ReSharper disable once UnusedParameter.Local

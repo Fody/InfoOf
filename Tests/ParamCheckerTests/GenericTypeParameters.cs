@@ -1,12 +1,12 @@
-﻿public class GenericTypeParameters
+public class GenericTypeParameters
 {
-    [Fact]
-    public void FindMethodWithGenericParameters()
+    [Test]
+    public async Task FindMethodWithGenericParameters()
     {
         var target = TypeFinder.Find<GenericTypeParameters>();
         var methodDefinition = target.FindMethodDefinitions("Method", ["System.Collections.Generic.Dictionary`2<System.Int32,System.String>"]);
-        Assert.NotNull(methodDefinition);
-        Assert.Equal("System.Void GenericTypeParameters::Method(System.Collections.Generic.Dictionary`2<System.Int32,System.String>)", methodDefinition.FullName);
+        await Assert.That(methodDefinition).IsNotNull();
+        await Assert.That(methodDefinition.FullName).IsEqualTo("System.Void GenericTypeParameters::Method(System.Collections.Generic.Dictionary`2<System.Int32,System.String>)");
     }
 
     void Method() => throw new NotImplementedException();

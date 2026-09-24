@@ -2,255 +2,255 @@ using Fody;
 
 public class TypeNameParserTests
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var parsedTypeName = TypeNameParser.Parse("a");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
-        Assert.Null(parsedTypeName.GenericParameters);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
+        await Assert.That(parsedTypeName.GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void SimpleWithSpecialChars()
+    [Test]
+    public async Task SimpleWithSpecialChars()
     {
         var parsedTypeName = TypeNameParser.Parse(@"\<\>\|\,\\\ ");
 
-        Assert.Equal(@"<>|,\ ", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
-        Assert.Null(parsedTypeName.GenericParameters);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo(@"<>|,\ ");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
+        await Assert.That(parsedTypeName.GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void SimpleIgnoresWhiteSpace()
+    [Test]
+    public async Task SimpleIgnoresWhiteSpace()
     {
         var parsedTypeName = TypeNameParser.Parse(" \ta\r\n");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
-        Assert.Null(parsedTypeName.GenericParameters);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
+        await Assert.That(parsedTypeName.GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void Generic()
+    [Test]
+    public async Task Generic()
     {
         var parsedTypeName = TypeNameParser.Parse("a<b|c>");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
         var parameters = parsedTypeName.GenericParameters;
-        Assert.NotNull(parameters);
-        Assert.NotEmpty(parameters);
-        Assert.Single(parameters);
-        Assert.Equal("b", parameters[0].Assembly);
-        Assert.Equal("c", parameters[0].TypeName);
-        Assert.Null(parameters[0].GenericParameters);
+        await Assert.That(parameters).IsNotNull();
+        await Assert.That(parameters).IsNotEmpty();
+        await Assert.That(parameters).HasSingleItem();
+        await Assert.That(parameters[0].Assembly).IsEqualTo("b");
+        await Assert.That(parameters[0].TypeName).IsEqualTo("c");
+        await Assert.That(parameters[0].GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void MultipleGeneric()
+    [Test]
+    public async Task MultipleGeneric()
     {
         var parsedTypeName = TypeNameParser.Parse("a<b|c,d|e>");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
         var parameters = parsedTypeName.GenericParameters;
-        Assert.NotNull(parameters);
-        Assert.NotEmpty(parameters);
-        Assert.Equal(2, parameters.Count);
-        Assert.Equal("b", parameters[0].Assembly);
-        Assert.Equal("c", parameters[0].TypeName);
-        Assert.Null(parameters[0].GenericParameters);
-        Assert.Equal("d", parameters[1].Assembly);
-        Assert.Equal("e", parameters[1].TypeName);
-        Assert.Null(parameters[1].GenericParameters);
+        await Assert.That(parameters).IsNotNull();
+        await Assert.That(parameters).IsNotEmpty();
+        await Assert.That(parameters.Count).IsEqualTo(2);
+        await Assert.That(parameters[0].Assembly).IsEqualTo("b");
+        await Assert.That(parameters[0].TypeName).IsEqualTo("c");
+        await Assert.That(parameters[0].GenericParameters).IsNull();
+        await Assert.That(parameters[1].Assembly).IsEqualTo("d");
+        await Assert.That(parameters[1].TypeName).IsEqualTo("e");
+        await Assert.That(parameters[1].GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void TwoLevelsDeep()
+    [Test]
+    public async Task TwoLevelsDeep()
     {
         var parsedTypeName = TypeNameParser.Parse("a<b|c<d|e>>");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
         var parameters = parsedTypeName.GenericParameters;
-        Assert.NotNull(parameters);
-        Assert.NotEmpty(parameters);
-        Assert.Single(parameters);
-        Assert.Equal("b", parameters[0].Assembly);
-        Assert.Equal("c", parameters[0].TypeName);
-        Assert.NotNull(parameters[0].GenericParameters);
-        Assert.NotEmpty(parameters[0].GenericParameters);
-        Assert.Single(parameters[0].GenericParameters);
-        Assert.Equal("d", parameters[0].GenericParameters[0].Assembly);
-        Assert.Equal("e", parameters[0].GenericParameters[0].TypeName);
-        Assert.Null(parameters[0].GenericParameters[0].GenericParameters);
+        await Assert.That(parameters).IsNotNull();
+        await Assert.That(parameters).IsNotEmpty();
+        await Assert.That(parameters).HasSingleItem();
+        await Assert.That(parameters[0].Assembly).IsEqualTo("b");
+        await Assert.That(parameters[0].TypeName).IsEqualTo("c");
+        await Assert.That(parameters[0].GenericParameters).IsNotNull();
+        await Assert.That(parameters[0].GenericParameters).IsNotEmpty();
+        await Assert.That(parameters[0].GenericParameters).HasSingleItem();
+        await Assert.That(parameters[0].GenericParameters[0].Assembly).IsEqualTo("d");
+        await Assert.That(parameters[0].GenericParameters[0].TypeName).IsEqualTo("e");
+        await Assert.That(parameters[0].GenericParameters[0].GenericParameters).IsNull();
     }
 
-    [Fact]
-    public void DoubleGeneric()
+    [Test]
+    public async Task DoubleGeneric()
     {
         var parsedTypeName = TypeNameParser.Parse("a<b|c<d|e>,f|g>");
 
-        Assert.Equal("a", parsedTypeName.TypeName);
-        Assert.Null(parsedTypeName.Assembly);
+        await Assert.That(parsedTypeName.TypeName).IsEqualTo("a");
+        await Assert.That(parsedTypeName.Assembly).IsNull();
         var parameters = parsedTypeName.GenericParameters;
-        Assert.NotNull(parameters);
-        Assert.NotEmpty(parameters);
-        Assert.Equal(2, parameters.Count);
-        Assert.Equal("b", parameters[0].Assembly);
-        Assert.Equal("c", parameters[0].TypeName);
-        Assert.NotNull(parameters[0].GenericParameters);
-        Assert.NotEmpty(parameters[0].GenericParameters);
-        Assert.Single(parameters[0].GenericParameters);
-        Assert.Equal("d", parameters[0].GenericParameters[0].Assembly);
-        Assert.Equal("e", parameters[0].GenericParameters[0].TypeName);
-        Assert.Null(parameters[0].GenericParameters[0].GenericParameters);
-        Assert.Equal("f", parameters[1].Assembly);
-        Assert.Equal("g", parameters[1].TypeName);
-        Assert.Null(parameters[1].GenericParameters);
+        await Assert.That(parameters).IsNotNull();
+        await Assert.That(parameters).IsNotEmpty();
+        await Assert.That(parameters.Count).IsEqualTo(2);
+        await Assert.That(parameters[0].Assembly).IsEqualTo("b");
+        await Assert.That(parameters[0].TypeName).IsEqualTo("c");
+        await Assert.That(parameters[0].GenericParameters).IsNotNull();
+        await Assert.That(parameters[0].GenericParameters).IsNotEmpty();
+        await Assert.That(parameters[0].GenericParameters).HasSingleItem();
+        await Assert.That(parameters[0].GenericParameters[0].Assembly).IsEqualTo("d");
+        await Assert.That(parameters[0].GenericParameters[0].TypeName).IsEqualTo("e");
+        await Assert.That(parameters[0].GenericParameters[0].GenericParameters).IsNull();
+        await Assert.That(parameters[1].Assembly).IsEqualTo("f");
+        await Assert.That(parameters[1].TypeName).IsEqualTo("g");
+        await Assert.That(parameters[1].GenericParameters).IsNull();
     }
 
-    [Theory]
-    [InlineData("<")]
-    [InlineData("a<<")]
-    [InlineData("a<b|<")]
-    [InlineData("a<b|c,<")]
-    public void GenericStartWithoutTypeName(string typeName)
+    [Test]
+    [Arguments("<")]
+    [Arguments("a<<")]
+    [Arguments("a<b|<")]
+    [Arguments("a<b|c,<")]
+    public async Task GenericStartWithoutTypeName(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Expected a name, got <", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected a name, got <");
     }
 
-    [Theory]
-    [InlineData(">")]
-    [InlineData("a<>")]
-    [InlineData("a<b|>")]
-    [InlineData("a<b|c,>")]
-    public void GenericEndWithoutTypeName(string typeName)
+    [Test]
+    [Arguments(">")]
+    [Arguments("a<>")]
+    [Arguments("a<b|>")]
+    [Arguments("a<b|c,>")]
+    public async Task GenericEndWithoutTypeName(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Expected a name, got >", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected a name, got >");
     }
 
-    [Theory]
-    [InlineData("|")]
-    [InlineData("a<|")]
-    [InlineData("a<b||")]
-    [InlineData("a<b|c,|")]
-    public void AssemblySeparatorWithoutTypeName(string typeName)
+    [Test]
+    [Arguments("|")]
+    [Arguments("a<|")]
+    [Arguments("a<b||")]
+    [Arguments("a<b|c,|")]
+    public async Task AssemblySeparatorWithoutTypeName(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Expected a name, got |", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected a name, got |");
     }
 
-    [Theory]
-    [InlineData(",")]
-    [InlineData("a<,")]
-    [InlineData("a<b|,")]
-    [InlineData("a<b|c,,")]
-    public void GenericParamSeparatorWithoutTypeName(string typeName)
+    [Test]
+    [Arguments(",")]
+    [Arguments("a<,")]
+    [Arguments("a<b|,")]
+    [Arguments("a<b|c,,")]
+    public async Task GenericParamSeparatorWithoutTypeName(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Expected a name, got ,", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected a name, got ,");
     }
 
-    [Fact]
-    public void UnrecognizedEscapeSequence()
+    [Test]
+    public async Task UnrecognizedEscapeSequence()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("\\a"));
-        Assert.Equal("Unrecognized escape sequence '\\a'", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("\\a")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unrecognized escape sequence '\\a'");
     }
 
-    [Theory]
-    [InlineData("")]
-    [InlineData("a<")]
-    [InlineData("a<b|")]
-    public void EmptyTypeName(string typeName)
+    [Test]
+    [Arguments("")]
+    [Arguments("a<")]
+    [Arguments("a<b|")]
+    public async Task EmptyTypeName(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Expected a name, got <end of type>", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected a name, got <end of type>");
     }
 
-    [Fact]
-    public void UnbalancedTypeSpec_AssemblyName()
+    [Test]
+    public async Task UnbalancedTypeSpec_AssemblyName()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("a<b"));
-        Assert.Equal("Expected assembly name separator, got <end of type>", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("a<b")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected assembly name separator, got <end of type>");
     }
 
-    [Fact]
-    public void UnbalancedTypeSpec_TypeName()
+    [Test]
+    public async Task UnbalancedTypeSpec_TypeName()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("a<b|c"));
-        Assert.Equal("Unbalanced type specification, are you missing a >?", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("a<b|c")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unbalanced type specification, are you missing a >?");
     }
 
-    [Theory]
-    [InlineData("a|b")]
-    [InlineData("a<b|c>|")]
-    [InlineData("a<b|c<d|e>|")]
-    public void UnexpectedAssemblyNameSeparator(string typeName)
+    [Test]
+    [Arguments("a|b")]
+    [Arguments("a<b|c>|")]
+    [Arguments("a<b|c<d|e>|")]
+    public async Task UnexpectedAssemblyNameSeparator(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Unexpected assembly name separator", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unexpected assembly name separator");
     }
 
-    [Fact]
-    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeStart()
+    [Test]
+    public async Task GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeStart()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("a<b<"));
-        Assert.Equal("Expected assembly name separator, got <", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("a<b<")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected assembly name separator, got <");
     }
 
-    [Fact]
-    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeEnd()
+    [Test]
+    public async Task GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeEnd()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("a<b>"));
-        Assert.Equal("Expected assembly name separator, got >", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("a<b>")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected assembly name separator, got >");
     }
 
-    [Fact]
-    public void GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeSeparator()
+    [Test]
+    public async Task GenericTypeMissingAssemblyNameSeparator_UnexpectedGenericTypeSeparator()
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse("a<b,"));
-        Assert.Equal("Expected assembly name separator, got ,", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse("a<b,")).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Expected assembly name separator, got ,");
     }
 
-    [Theory]
-    [InlineData("a<b|c>d")]
-    [InlineData("a<b|c<d|e>f")]
-    public void UnexpectedNameToken(string typeName)
+    [Test]
+    [Arguments("a<b|c>d")]
+    [Arguments("a<b|c<d|e>f")]
+    public async Task UnexpectedNameToken(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Unexpected name token", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unexpected name token");
     }
 
-    [Theory]
-    [InlineData("a<b|c>,")]
-    [InlineData("a<b|c<d|e>>,")]
-    public void UnexpectedGenericTypeSeparator(string typeName)
+    [Test]
+    [Arguments("a<b|c>,")]
+    [Arguments("a<b|c<d|e>>,")]
+    public async Task UnexpectedGenericTypeSeparator(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Unexpected generic param separator", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unexpected generic param separator");
     }
 
-    [Theory]
-    [InlineData("a<b|c>>")]
-    [InlineData("a<b|c<d|e>>>")]
-    public void UnexpectedGenericTypeEnd(string typeName)
+    [Test]
+    [Arguments("a<b|c>>")]
+    [Arguments("a<b|c<d|e>>>")]
+    public async Task UnexpectedGenericTypeEnd(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Unexpected generic type end", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unexpected generic type end");
     }
 
-    [Theory]
-    [InlineData("a<b|c><")]
-    [InlineData("a<b|c<d|e><")]
-    public void UnexpectedGenericTypeStart(string typeName)
+    [Test]
+    [Arguments("a<b|c><")]
+    [Arguments("a<b|c<d|e><")]
+    public async Task UnexpectedGenericTypeStart(string typeName)
     {
-        var exception = Assert.Throws<WeavingException>(() => TypeNameParser.Parse(typeName));
-        Assert.Equal("Unexpected generic type start", exception.Message);
+        var exception = await Assert.That(() => TypeNameParser.Parse(typeName)).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("Unexpected generic type start");
     }
 }

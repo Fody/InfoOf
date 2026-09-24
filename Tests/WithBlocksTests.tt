@@ -1,9 +1,8 @@
-﻿<#@ template debug="true" language="C#" #>
+<#@ template debug="true" language="C#" #>
 <#@ output extension="Generated.cs" #>
 <#@ assembly name="System.Core" #>
 using System;
 using System.Reflection;
-using Xunit;
 
 partial class IntegrationTests
 {
@@ -37,40 +36,40 @@ string GenerateTestsCore(string infoType, string infoOf, string withModifier, bo
     var classRefModifier = generic ? "Generic`1" : "";
     var typeModifier = generic ? ".MakeGenericType(typeof(int))" : "";
 
-    return $@"[Fact]
-    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_ForBlock()
+    return $@"[Test]
+    public async Task WithBlocks{classModifier}_Get{infoOf}{withModifier}_ForBlock()
     {{
         var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
         var instance = (dynamic) Activator.CreateInstance(type);
         {infoType} info = instance.Get{infoOf}{withModifier}_ForBlock();
-        Assert.NotNull(info);
+        await Assert.That(info).IsNotNull();
     }}
 
-    [Fact]
-    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_SwitchBlock()
+    [Test]
+    public async Task WithBlocks{classModifier}_Get{infoOf}{withModifier}_SwitchBlock()
     {{
         var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
         var instance = (dynamic) Activator.CreateInstance(type);
         {infoType} info = instance.Get{infoOf}{withModifier}_SwitchBlock();
-        Assert.NotNull(info);
+        await Assert.That(info).IsNotNull();
     }}
 
-    [Fact]
-    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_TryBlock()
+    [Test]
+    public async Task WithBlocks{classModifier}_Get{infoOf}{withModifier}_TryBlock()
     {{
         var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
         var instance = (dynamic) Activator.CreateInstance(type);
         {infoType} info = instance.Get{infoOf}{withModifier}_TryBlock();
-        Assert.NotNull(info);
+        await Assert.That(info).IsNotNull();
     }}
 
-    [Fact]
-    public void WithBlocks{classModifier}_Get{infoOf}{withModifier}_UsingBlock()
+    [Test]
+    public async Task WithBlocks{classModifier}_Get{infoOf}{withModifier}_UsingBlock()
     {{
         var type = assembly.GetType(""WithBlocks{classRefModifier}""){typeModifier};
         var instance = (dynamic) Activator.CreateInstance(type);
         {infoType} info = instance.Get{infoOf}{withModifier}_UsingBlock();
-        Assert.NotNull(info);
+        await Assert.That(info).IsNotNull();
     }}";
 }
 #>
