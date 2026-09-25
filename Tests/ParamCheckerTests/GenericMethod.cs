@@ -2,44 +2,44 @@
 
 public class GenericMethod
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var target = TypeFinder.Find<GenericMethod>();
         var methodDefinition = target.FindMethodDefinitions("Method", null);
-        Assert.NotNull(methodDefinition);
+        await Assert.That(methodDefinition).IsNotNull();
     }
 
-    [Fact]
-    public void MethodWithOverloadBasic()
+    [Test]
+    public async Task MethodWithOverloadBasic()
     {
         var target = TypeFinder.Find<GenericMethod>();
         var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", null);
-        Assert.NotNull(methodDefinition);
-        Assert.Equal("System.Void GenericMethod::MethodWithOverload()", methodDefinition.FullName);
+        await Assert.That(methodDefinition).IsNotNull();
+        await Assert.That(methodDefinition.FullName).IsEqualTo("System.Void GenericMethod::MethodWithOverload()");
         // This will find the generic method first, as it's the first in the class definition.
         // There is no way distinguishing generic and non generic methods with the same parameters.
-        Assert.True(methodDefinition.HasGenericParameters);
+        await Assert.That(methodDefinition.HasGenericParameters).IsTrue();
     }
 
-    [Fact]
-    public void MethodWithOverloadParam()
+    [Test]
+    public async Task MethodWithOverloadParam()
     {
         var target = TypeFinder.Find<GenericMethod>();
         var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", ["System.Int32"]);
-        Assert.NotNull(methodDefinition);
-        Assert.Equal("System.Void GenericMethod::MethodWithOverload(System.Int32)", methodDefinition.FullName);
-        Assert.False(methodDefinition.HasGenericParameters);
+        await Assert.That(methodDefinition).IsNotNull();
+        await Assert.That(methodDefinition.FullName).IsEqualTo("System.Void GenericMethod::MethodWithOverload(System.Int32)");
+        await Assert.That(methodDefinition.HasGenericParameters).IsFalse();
     }
 
-    [Fact]
-    public void MethodWithOverloadGenericParam()
+    [Test]
+    public async Task MethodWithOverloadGenericParam()
     {
         var target = TypeFinder.Find<GenericMethod>();
         var methodDefinition = target.FindMethodDefinitions("MethodWithOverload", ["T"]);
-        Assert.NotNull(methodDefinition);
-        Assert.Equal("System.Void GenericMethod::MethodWithOverload(T)", methodDefinition.FullName);
-        Assert.True(methodDefinition.HasGenericParameters);
+        await Assert.That(methodDefinition).IsNotNull();
+        await Assert.That(methodDefinition.FullName).IsEqualTo("System.Void GenericMethod::MethodWithOverload(T)");
+        await Assert.That(methodDefinition.HasGenericParameters).IsTrue();
     }
 
 
