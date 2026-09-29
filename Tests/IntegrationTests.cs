@@ -1,5 +1,7 @@
 using System.Reflection;
 using Fody;
+using Mono.Cecil;
+using VerifyTests.Cecil;
 
 public partial class IntegrationTests
 {
@@ -9,12 +11,16 @@ public partial class IntegrationTests
     static IntegrationTests()
     {
         var weaver = new ModuleWeaver();
-#if(NETFRAMEWORK)
-        testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll", ignoreCodes:new []{ "0x80131869"});
-#else
+        // PEVerify is replaced by the WovenAssemblyIsValid test
         testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
-#endif
         assembly = testResult.Assembly;
+    }
+
+    [Test]
+    public async Task WovenAssemblyIsValid()
+    {
+        using var module = ModuleDefinition.ReadModule(testResult.AssemblyPath);
+        await Assert.That(CecilValidator.Validate(module)).IsEmpty();
     }
 
     [Test]
